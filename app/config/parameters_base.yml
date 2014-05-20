@@ -1,0 +1,15 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_pgsql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: ito_base_s2
+    database_user: ito_base_s2
+    database_password: '1t0s0ftw4r3*'
+    mailer_transport: smtp
+    mailer_host: smtp.gmail.com
+    mailer_user: soporte@ito-software.com
+    mailer_password: 14142135
+    locale: en
+    secret: '1t0s0ftw4r32013*'
+    project_name: 'ITO Base S2'

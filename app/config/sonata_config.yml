@@ -1,0 +1,32 @@
+sonata_block:
+    default_contexts: [ito_base_s2]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+
+        sonata.block.service.text: ~
+        sonata.block.service.action: ~
+        sonata.block.service.rss: ~
+
+
+sonata_admin:
+    title: 'Ito Base S2'
+    title_logo: /bundles/itoadmin/images/logo_ito.png
+    templates:
+        # default global templates
+        layout:    ItoAdminBundle:Sonata:standard_layout.html.twig
+        ajax:      SonataAdminBundle::ajax_layout.html.twig
+        list_block: ItoAdminBundle:Sonata:Block/block_admin_list.html.twig
+
+        # default values of actions templates, they should extend global templates
+        list:    SonataAdminBundle:CRUD:list.html.twig
+        show:    SonataAdminBundle:CRUD:show.html.twig
+        edit:    SonataAdminBundle:CRUD:edit.html.twig
+        history: SonataAdminBundle:CRUD:history.html.twig
+        preview: SonataAdminBundle:CRUD:preview.html.twig
+        # default values of helper templates
+        short_object_description: SonataAdminBundle:Helper:short-object-description.html
+    dashboard:
+        blocks:
+            - { position: right, type: sonata.block.service.text, settings: { content: "<h2>ITO SOFTWARE - BASE PROJECT</h2> <img src='/bundles/itoadmin/images/logoito.jpg' width='100px' alt'Ito Software - Proyecto Base'/><br/><br/>"} }
+            - { position: left,  type: sonata.admin.block.admin_list, settings: { groups: [User, group] } }

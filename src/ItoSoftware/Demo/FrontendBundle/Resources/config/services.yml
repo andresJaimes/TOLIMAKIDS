@@ -1,0 +1,7 @@
+parameters:
+#    demo_frontend.example.class: ItoSoftware\Demo\FrontendBundle\Example
+
+services:
+#    demo_frontend.example:
+#        class: %demo_frontend.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

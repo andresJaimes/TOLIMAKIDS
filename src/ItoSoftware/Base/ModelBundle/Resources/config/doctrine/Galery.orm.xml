@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="ItoSoftware\Base\ModelBundle\Entity\GaleryRepository" name="ItoSoftware\Base\ModelBundle\Entity\Galery">
+    <id name="id" type="integer" column="id">
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="file" type="string" column="file" length="255"/>
+    <field name="name" type="string" column="name" length="255"/>
+    <field name="active" type="smallint" column="active"/>
+    
+    <many-to-one field="places" target-entity="Galery">
+        <join-column name="places_id" referenced-column-name="id" />
+    </many-to-one>
+    
+    <many-to-one field="activity" target-entity="Galery">
+        <join-column name="activity_id" referenced-column-name="id" />
+    </many-to-one>
+    
+    
+  </entity>
+</doctrine-mapping>

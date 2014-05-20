@@ -1,0 +1,126 @@
+INSTURUCCIONES DE INSTALACIÓN.
+
+En caso de que se esté instalando un proyecto, basado en una copia completa del ItoBaseS2, continuar desde el punto 8
+
+
+1.
+-Añadir en el archivo composer.json la siguiente línea:
+"friendsofsymfony/user-bundle": "~2.0@dev",
+"doctrine/doctrine-fixtures-bundle": "2.1.*@dev",
+"doctrine/data-fixtures": "1.0.*@dev"
+
+
+
+2.
+-Ejecutar desde la terminal
+composer update
+
+
+
+3.
+-Añadir en el archvi app/AppKernel.php la siguiente línea entre el array de bundles a configurar
+new FOS\UserBundle\FOSUserBundle(),
+new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+
+
+
+
+4.
+-Reemplazar el contenido del archivo app/config/security.yml por el siguiente contenido:
+#------------------------------------------------------------------------------------------------
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    role_hierarchy:
+        ROLE_USER:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_SUPER_ADMIN]
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+            logout:       true
+            anonymous:    true
+
+    access_control:
+        - { path: ^/admin/, role: ROLE_ADMIN }
+
+#------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+5.
+-En el archivo app/config.yml añadir el siguiente contenido
+#------------------------------------------------------------------------------------------------
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: ItoSoftware\Base\ModelBundle\Entity\User
+
+#------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+6.
+-Añadir en el archivo config/routing.yml el siguiente contenido:
+#------------------------------------------------------------------------------------------------
+ito_admin:
+    resource: "@ItoAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin/{_locale}
+    defaults:  { _locale: en }
+    requirements:
+        _locale: en|es|fr
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+#------------------------------------------------------------------------------------------------
+
+
+7.
+-Añadir en el archivo config/config.yml
+imports:
+    - { resource: "@ItoUserBundle/Resources/config/services.yml" }
+
+
+8.
+-Ejecutar los comandos
+mkdir app/caches
+mkdir app/logs
+chmod -R 777 app/caches app/logs
+composer update
+php app/consola assets:install
+php app/console doctrine:generate:entities ItoModelBundle
+php app/console doctrine:schema:drop --force
+php app/console doctrine:schema:create
+php app/console doctrine:fixtures:load
+php app/consola ca:cl --env=prod
+php app/consola ca:cl --env=dev
