@@ -13,10 +13,9 @@ class ActivityAdmin extends Admin
 {
     
     public function configureRoutes(RouteCollection $collection) {
-        $collection->add('places');
+        $collection->add('galery');
         parent::configureRoutes($collection);
     }
-
      
     /**
      * 
@@ -28,6 +27,7 @@ class ActivityAdmin extends Admin
            ->add('name', null , array('label'=>'Nombre'))
            ->add('description', null , array('label'=>'Descripción'))
            ->add('active', 'checkbox', array('label'=>'Activo'))
+           ->add('places', null, array('attr'=>array('rel'=>'Places'), 'label'=>'Lugar'))
            ->add('date', 'datetime', array( 'input'  => 'datetime', 'widget' => 'choice', 'label'=>'fecha'));       
     }
     
@@ -41,6 +41,7 @@ class ActivityAdmin extends Admin
         $list
                 ->addIdentifier('name', null, array('label'=>'Nombre'))
                 ->add('active', null , array('label'=>'estado'))
+                ->add('places', null, array('label'=>'Lugares'))
                 ->add('registred_date', 'datetime' , array('input'  => 'datetime', 'widget' => 'choice','label'=>'Fecha de registro'))
                 ->add('_action', 'actions', array(
                     'label'=>'Acciones',

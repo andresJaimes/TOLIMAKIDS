@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 class MunicipalityAdmin extends Admin
 {
  
-    public function configureFormFields(FormMapper $form) {
+    public function configureFormFields(FormMapper $form) { 
         $form
                 ->add('name', null , array('label'=>'Nombre'))
                 ->add('description', null , array('label'=>'Descripción'))
@@ -46,7 +46,7 @@ class MunicipalityAdmin extends Admin
         if(!$value)
             return;
         
-        if($value['value']&& $value['value']!=''){
+        if($value['value']&& $value['value']!=' '){
             $querybuilder->andWhere("lower($alias.name) LIKE: value");
             $querybuilder->setParameter('value', '%'. strtolower($value['value'].'%'));            
         }

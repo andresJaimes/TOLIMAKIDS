@@ -194,7 +194,20 @@ class Places
         return $this->length;
     }
     
-    /**
+    
+    public function  setCost($cost){
+        $this->cost = $cost;
+        
+        return $this;
+    }
+    
+    
+    public function  getCost(){
+        
+        return $this->cost;
+    }
+
+        /**
      * Get municipality_id
      * @return type
      */
@@ -244,4 +257,12 @@ class Places
     {
         $this->municipality->removeElement($municipality);
     }
+    
+    
+    
+    public function __toString() {
+        return $this->getName() ? $this->getName() : 'Nuevo lugar';
+    }  
+    
+    
 }

@@ -30,3 +30,9 @@ services:
        tags:
          - { name: sonata.admin, manager_type: orm, group: municipios, label: 'Municipios' ,   label_translator_strategy: 'sonata.admin.label.strategy.underscore'}
        arguments: [null, ItoSoftware\Base\ModelBundle\Entity\Municipality, ItoAdminBundle:MunicipalityAdmin] 
+
+ sonata.places.admin:
+       class: ItoSoftware\Base\AdminBundle\Admin\PlacesAdmin
+       tags:
+         - { name: sonata.admin, manager_type: orm, group: lugares, label: 'Lugares' ,   label_translator_strategy: 'sonata.admin.label.strategy.underscore'}
+       arguments: [null, ItoSoftware\Base\ModelBundle\Entity\Places, ItoAdminBundle:PlacesAdmin] 
