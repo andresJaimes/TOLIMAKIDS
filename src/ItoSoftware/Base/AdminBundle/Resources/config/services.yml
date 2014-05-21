@@ -22,5 +22,11 @@ services:
  sonata.activity.admin.activity:
        class: ItoSoftware\Base\AdminBundle\Admin\ActivityAdmin
        tags:
-         - { name: sonata.admin, manager_type: orm, group: group, label: 'activities' ,   label_translator_strategy: 'sonata.admin.label.strategy.underscore'}
+         - { name: sonata.admin, manager_type: orm, group: actividades, label: 'Actividades' ,   label_translator_strategy: 'sonata.admin.label.strategy.underscore'}
        arguments: [null, ItoSoftware\Base\ModelBundle\Entity\Activity, ItoAdminBundle:ActivityAdmin] 
+
+ sonata.municipality.admin.municipality:
+       class: ItoSoftware\Base\AdminBundle\Admin\MunicipalityAdmin
+       tags:
+         - { name: sonata.admin, manager_type: orm, group: municipios, label: 'Municipios' ,   label_translator_strategy: 'sonata.admin.label.strategy.underscore'}
+       arguments: [null, ItoSoftware\Base\ModelBundle\Entity\Municipality, ItoAdminBundle:MunicipalityAdmin] 

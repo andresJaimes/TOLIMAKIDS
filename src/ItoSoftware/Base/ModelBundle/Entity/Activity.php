@@ -43,13 +43,13 @@ class Activity
     /**
      * @ORM\OneToMany(targetEntity="Places", mappedBy="activity")
      */
-    protected $places;
+    private $places;
 
 
     /**
      * @ORM\OneToMany(targetEntity="Plan", mappedBy="activity")
      */
-    protected $plan;
+   private $plan;
     
 
      /**
@@ -229,7 +229,7 @@ class Activity
      */
     public function __construct()
     {
-        $this->places = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->places = new \Doctrine\Common\Collections\ArrayCollection();
         $this->plan = new \Doctrine\Common\Collections\ArrayCollection();
     }
     

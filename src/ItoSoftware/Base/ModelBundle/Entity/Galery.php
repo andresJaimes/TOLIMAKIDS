@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Galery
 {
+     static $UPLOAD_DIR = "uploads/galery/activity";
+     
     /**
      * @var integer
      */
@@ -34,11 +36,6 @@ class Galery
      */
     protected $activity;
 
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Places", mappedBy="galery")
-     */
-    private $places;
     
     /**
      * Get id
@@ -137,6 +134,50 @@ class Galery
         return $this;
     }
 
+     public function getWebPathFile() {
+        return null === $this->archivo ? null : 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->getUploadDir() . '/' . $this->getArchivo();
+    }
+
+    protected function getUploadDir() {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return self::$UPLOAD_DIR;
+    }
+
+     public function uploadFile($file) {
+        if (null === $file) {
+            return;
+        }
+        if ($file instanceof UploadedFile) {
+            $directorio_destino = ApplicationBoot::getContainer()->get('kernel')->getRootDir() . '/../web/' . $this->getUploadDir();
+            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $nombre_archivo_logo = uniqid(date('YmdHis')) . '.' . $ext;
+            $image_size = 256729;
+            if ($file->getSize() > $image_size) {
+                if (!file_exists($file->getPathname() . '/' . $file->getClientOriginalName())) {
+                    $image = imagecreatefromjpeg($file);
+
+                    $quality = round(($image_size * 100) / $file->getSize());
+
+                    switch ($file->getMimeType()) {
+                        case "image/jpeg":
+                            imagejpeg($image, $directorio_destino . '/' . $nombre_archivo_logo, $quality);
+                            break;
+                        case "image/png" :
+                            imagepng($image, $directorio_destino . '/' . $nombre_archivo_logo, $quality);
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    $file->move($directorio_destino, $nombre_archivo_logo);
+                }
+            } else {
+                $file->move($directorio_destino, $nombre_archivo_logo);
+            }
+            $this->setArchivo($nombre_archivo_logo);
+        }
+    }
+
 
     
     /**
@@ -145,7 +186,6 @@ class Galery
     public function __construct()
     {
         $this->activity = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->places = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -170,40 +210,5 @@ class Galery
     {
         $this->activity->removeElement($activity);
     }
-    
- 
 
-
-    /**
-     * Add places
-     *
-     * @param \ItoSoftware\Base\ModelBundle\Entity\Places $places
-     * @return Galery
-     */
-    public function addPlace(\ItoSoftware\Base\ModelBundle\Entity\Places $places)
-    {
-        $this->places[] = $places;
-    
-        return $this;
-    }
-
-    /**
-     * Remove places
-     *
-     * @param \ItoSoftware\Base\ModelBundle\Entity\Places $places
-     */
-    public function removePlace(\ItoSoftware\Base\ModelBundle\Entity\Places $places)
-    {
-        $this->places->removeElement($places);
-    }
-
-    /**
-     * Get places
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getPlaces()
-    {
-        return $this->places;
-    }
 }

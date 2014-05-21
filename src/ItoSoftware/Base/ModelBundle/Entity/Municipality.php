@@ -29,21 +29,12 @@ class Municipality
      */
     private $registrationDate;
 
-   /**
-     * @var double
-     */
-    private $latitude;
 
-    /**
-     * @var double
-     */
-    private $length;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Places", inversedBy="municipality")
-     * @ORM\JoinColumn(name="places_id", referencedColumnName="id")
-     */
+    
     protected $pĺaces;
+    
+    
+    
     
     /**
      * Get id
@@ -124,39 +115,29 @@ class Municipality
         return $this->registrationDate;
     }
     
-    /**
-     * @param double $latitude
-     * @return double
-     */
-    public function setLatitude($latitude) {
-        $this->latitude = $latitude;
+
+    
+      public function addplaces(\WebApp\ModeloBundle\Entity\Places $places) {
+        $this->plcaes[] = $places;
+
+        return $this;
     }
 
     /**
-     * @param double $length
-     * @return double
-     */
-    public function setLength($length) {
-        $this->length = $length;
-    }
-
-    /**
-     * Get latitude
+     * Remove lugar_municipios
      *
-     * @return float 
+     * @param \WebApp\ModeloBundle\Entity\Lugar $lugarMunicipios
      */
-    public function getLatitude()
-    {
-        return $this->latitude;
+    public function removePlaces(\WebApp\ModeloBundle\Entity\Place $places) {
+        $this->places->removeElement($places);
     }
 
     /**
-     * Get length
+     * Get lugar_municipios
      *
-     * @return float 
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getLength()
-    {
-        return $this->length;
+    public function getPlaces() {
+        return $this->places;
     }
 }

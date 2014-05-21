@@ -4,14 +4,18 @@ namespace ItoSoftware\Base\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
 
-
-use Base\ModelBundle\Entity\Activity;
 
 class ActivityAdmin extends Admin
 {
+    
+    public function configureRoutes(RouteCollection $collection) {
+        $collection->add('places');
+        parent::configureRoutes($collection);
+    }
 
      
     /**
@@ -21,28 +25,13 @@ class ActivityAdmin extends Admin
     protected function configureFormFields(FormMapper $form) {
        
         $form
-           ->add('name')
-           ->add('description')
-           ->add('registred_date','datetime', array( 'input'  => 'datetime', 'widget' => 'choice'))
-           ->add('active', null, array('type'=> 'Checkbox'))
-           ->add('date', 'datetime', array( 'input'  => 'datetime', 'widget' => 'choice'))
-           ->add('places_id', array($choices => array()))
-           ->add('plan_id');       
+           ->add('name', null , array('label'=>'Nombre'))
+           ->add('description', null , array('label'=>'Descripción'))
+           ->add('active', 'checkbox', array('label'=>'Activo'))
+           ->add('date', 'datetime', array( 'input'  => 'datetime', 'widget' => 'choice', 'label'=>'fecha'));       
     }
     
-    /**
-     * 
-     * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
-     */
-    protected function configureDatagridFilters(DatagridMapper $filter) {
-        
-        $filter
-                ->add('id')
-                ->add('name')
-                ->add('date',  date, array( 'input'  => 'datetime', 'widget' => 'choice'));
-    }
-    
-    
+
     /**
      * 
      * @param \Sonata\AdminBundle\Datagrid\ListMapper $list
@@ -50,14 +39,36 @@ class ActivityAdmin extends Admin
     protected function configureListFields(ListMapper $list) {
         
         $list
-                ->addIdentifier('id')
-                ->addIdentifier('name')
-                ->add('registred_date', null , array('type'=> date('dd/mm/yyyy')))
-                ->add('places_id')
-                ->add('plan_id');
+                ->addIdentifier('name', null, array('label'=>'Nombre'))
+                ->add('active', null , array('label'=>'estado'))
+                ->add('registred_date', 'datetime' , array('input'  => 'datetime', 'widget' => 'choice','label'=>'Fecha de registro'))
+                ->add('_action', 'actions', array(
+                    'label'=>'Acciones',
+                    'actions'=>array(
+                        'imagenes' => array('template' => 'ItoAdminBundle:Activity:list_actions.html.twig'),
+                        'edit'=>array(),
+                        'show'=>array(),
+                    )
+                ));
+  
     }
     
     
+    protected function configureShowFields(ShowMapper $show) {
+      $show
+           ->add('name')
+           ->add('description')
+           ->add('registred_date','datetime', array( 'input'  => 'datetime', 'widget' => 'choice'))
+           ->add('active', null, array('type'=> 'Checkbox'))
+           ->add('date', 'datetime', array( 'input'  => 'datetime', 'widget' => 'choice'));    
+    }
+    
+    
+      public function getExportFormats() {
+        return array();
+    }
+    
+ 
 }
 
 ?>

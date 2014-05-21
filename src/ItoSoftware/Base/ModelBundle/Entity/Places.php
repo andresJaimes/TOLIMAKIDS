@@ -39,12 +39,17 @@ class Places
      */
     private $length;
 
-
+    /**
+     *
+     * @var double
+     */
+    private $cost;
+    
     /**
      * @ORM\OneToMany(targetEntity="Municipatily", mappedBy="places")
      * 
      */
-    protected $municipality;
+    private $municipality;
    
     
     /**

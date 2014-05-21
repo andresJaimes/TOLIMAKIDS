@@ -7,10 +7,7 @@
     <field name="file" type="string" column="file" length="255"/>
     <field name="name" type="string" column="name" length="255"/>
     <field name="active" type="smallint" column="active"/>
-    
-    <many-to-one field="places" target-entity="Galery">
-        <join-column name="places_id" referenced-column-name="id" />
-    </many-to-one>
+
     
     <many-to-one field="activity" target-entity="Galery">
         <join-column name="activity_id" referenced-column-name="id" />
