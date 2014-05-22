@@ -135,7 +135,7 @@ class Galery
     }
 
      public function getWebPathFile() {
-        return null === $this->archivo ? null : 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->getUploadDir() . '/' . $this->getArchivo();
+        return null === $this->file ? null : 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->getUploadDir() . '/' . $this->getFile();
     }
 
     protected function getUploadDir() {

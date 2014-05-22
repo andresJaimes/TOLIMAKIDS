@@ -29,4 +29,4 @@ sonata_admin:
     dashboard:
         blocks:
             - { position: right, type: sonata.block.service.text, settings: { content: "<h2>ITO SOFTWARE - BASE PROJECT</h2> <img src='/bundles/itoadmin/images/logoito.jpg' width='100px' alt'Ito Software - Proyecto Base'/><br/><br/>"} }
-            - { position: left,  type: sonata.admin.block.admin_list, settings: { groups: [User, actividades, municipios, lugares] } }
+            - { position: left,  type: sonata.admin.block.admin_list, settings: { groups: [User, actividades, municipios, lugares, galeria] } }

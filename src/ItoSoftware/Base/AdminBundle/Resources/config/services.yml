@@ -36,3 +36,9 @@ services:
        tags:
          - { name: sonata.admin, manager_type: orm, group: lugares, label: 'Lugares' ,   label_translator_strategy: 'sonata.admin.label.strategy.underscore'}
        arguments: [null, ItoSoftware\Base\ModelBundle\Entity\Places, ItoAdminBundle:PlacesAdmin] 
+ 
+ sonata.galery.admin.galery:
+       class: ItoSoftware\Base\AdminBundle\Admin\GaleryAdmin
+       tags:
+         - { name: sonata.admin, manager_type: orm, group: galeria, label: 'Galeria' ,   label_translator_strategy: 'sonata.admin.label.strategy.underscore'}
+       arguments: [null, ItoSoftware\Base\ModelBundle\Entity\Galery, ItoAdminBundle:GaleryAdmin] 
