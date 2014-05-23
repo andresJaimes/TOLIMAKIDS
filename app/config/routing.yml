@@ -1,5 +1,6 @@
-demo_frontend:
-    resource: "@DemoFrontendBundle/Resources/config/routing.yml"
+
+front_frontend:
+    resource: "@FrontFrontendBundle/Resources/config/routing.yml"
     prefix:   /{_locale}
     defaults:  { _locale: en }
     requirements:
@@ -63,7 +64,47 @@ _sonata_admin:
 sonata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
     prefix:   /admin
+    
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /login
+
+hwi_oauth:
+    resource_owners:
+        any_name:
+            type:                facebook
+            client_id:           406153069523025
+            client_secret:       929ad8d54a9b24aabbd9e8958151a0eb
+            
+            
 
 
+hwi_oauth:
+    # name of the firewall in which this bundle is active, this setting MUST be set
+    firewall_name: secured_area
+
+    # an optional setting to configure a query string parameter which can be used to redirect
+    # the user after authentication, e.g. /connect/facebook?_destination=/my/destination will
+    # redirect the user to /my/destination after facebook authenticates them.  If this is not
+    # set then the user will be redirected to the original resource that they requested, or
+    # the base address if no resource was requested.  This is similar to the behaviour of
+    # [target_path_parameter for form login](http://symfony.com/doc/2.0/cookbook/security/form_login.html).
+    # target_path_parameter: _destination
+
+    # an optional setting to use the HTTP REFERER header to be used in case no
+    # previous URL was stored in the session (i.e. no resource was requested).
+    # This is similar to the behaviour of
+    # [using the referring URL for form login](http://symfony.com/doc/2.0/cookbook/security/form_login.html#using-the-referring-url).
+    # use_referer: true
+
+    # here you will add one (or more) configurations for resource owners
+    # and other settings you want to adjust in this bundle, just checkout the list below!
+    
+    
+ 
     
   

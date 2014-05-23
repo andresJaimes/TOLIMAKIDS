@@ -1,0 +1,44 @@
+parameters:
+#    ito_admin.example.class: ItoSoftware\Base\AdminBundle\Example
+
+services:
+#    ito_admin.example:
+#        class: %ito_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+   sonata.user.admin.user:
+       class: ItoSoftware\Components\AdminBundle\Admin\ItoUserAdmin
+       tags:
+           - { name: sonata.admin, manager_type: orm, group: '%sonata.user.admin.groupname%', label: 'users',   label_translator_strategy: 'sonata.admin.label.strategy.underscore' }
+       arguments:
+           - null
+           - %sonata.user.admin.user.entity%
+           - %sonata.user.admin.user.controller%
+       calls:
+            - [setUserManager, ["@fos_user.user_manager"]]
+            - [setTranslationDomain, [%sonata_user.admin.user.translation%, ItoAdminBundle]]
+            
+services:
+ sonata.activity.admin.activity:
+       class: ItoSoftware\Components\AdminBundle\Admin\ActivityAdmin
+       tags:
+         - { name: sonata.admin, manager_type: orm, group: actividades, label: 'Actividades' ,   label_translator_strategy: 'sonata.admin.label.strategy.underscore'}
+       arguments: [null, ItoSoftware\Components\ModelBundle\Entity\Activity, ItoAdminBundle:ActivityAdmin] 
+
+ sonata.municipality.admin.municipality:
+       class: ItoSoftware\Components\AdminBundle\Admin\MunicipalityAdmin
+       tags:
+         - { name: sonata.admin, manager_type: orm, group: municipios, label: 'Municipios' ,   label_translator_strategy: 'sonata.admin.label.strategy.underscore'}
+       arguments: [null, ItoSoftware\Components\ModelBundle\Entity\Municipality, ItoAdminBundle:MunicipalityAdmin] 
+
+ sonata.places.admin:
+       class: ItoSoftware\Components\AdminBundle\Admin\PlacesAdmin
+       tags:
+         - { name: sonata.admin, manager_type: orm, group: lugares, label: 'Lugares' ,   label_translator_strategy: 'sonata.admin.label.strategy.underscore'}
+       arguments: [null, ItoSoftware\Components\ModelBundle\Entity\Places, ItoAdminBundle:PlacesAdmin] 
+ 
+ sonata.galery.admin.galery:
+       class: ItoSoftware\Components\AdminBundle\Admin\GaleryAdmin
+       tags:
+         - { name: sonata.admin, manager_type: orm, group: galeria, label: 'Galeria' ,   label_translator_strategy: 'sonata.admin.label.strategy.underscore'}
+       arguments: [null, ItoSoftware\Components\ModelBundle\Entity\Galery, ItoAdminBundle:GaleryAdmin] 

@@ -1,4 +1,6 @@
 security:
+  
+  
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
 
@@ -10,6 +12,7 @@ security:
         fos_userbundle:
             id: fos_user.user_manager
 
+  
         
     firewalls:
       
@@ -46,6 +49,23 @@ security:
                 path:     /
                 domain:   ~ # Defaults to the current domain from $_SERVER
                 
+        secured_area:
+            anonymous: ~
+            oauth:
+                resource_owners:
+                    facebook:           "/login/check-facebook"
+                    google:             "/login/check-google"
+                    twitter:            "/login/check-twitter"
+                    my_custom_provider: "/login/check-custom"
+                    my_github:          "/login/check-github"
+                login_path:        /login
+                use_forward:       false
+                failure_path:      /login
+
+                oauth_user_provider:
+                    service: my.oauth_aware.user_provider.service
+
+                
                 
 
     access_control:
@@ -53,6 +73,7 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        
 
         # Admin login page needs to be access without credential
         - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -64,3 +85,6 @@ security:
         # Change these rules to adapt them to your needs
         - { path: ^/admin/, role: [ROLE_SUPER_ADMIN] }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+   

@@ -16,22 +16,22 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new ItoSoftware\Base\AdminBundle\ItoAdminBundle(),
-            new ItoSoftware\Base\ModelBundle\ItoModelBundle(),
+            new ItoSoftware\Components\AdminBundle\ItoAdminBundle(),
+            new ItoSoftware\Components\ModelBundle\ItoModelBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            //BUNDLES DE SONATA PARA ADMIN GENERATOR
-            new Sonata\jQueryBundle\SonatajQueryBundle(),
+            //BUNDLES DE SONATA PARA ADMIN GENERATOR          
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             //BUNDLES PARA GESTIONAR USUARIOS
             new FOS\UserBundle\FOSUserBundle(),
+            new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
-            new ItoSoftware\Base\UserBundle\ItoUserBundle(),
-            new ItoSoftware\Demo\FrontendBundle\DemoFrontendBundle(),
-//            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new ItoSoftware\Components\UserBundle\ItoUserBundle(),
+            new ItoSoftware\Front\FrontendBundle\FrontFrontendBundle(),
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,0 +1,10 @@
+{% extends '::frontend.html.twig' %}
+{% block title %}{{project_name}}{% endblock %}
+{% block body %}
+    {% include('FrontFrontendBundle:Components:languages.html.twig') %}
+    <h1>
+        Tolima Kids
+    </h1>
+    {{translated_hello}}
+    {% trans %}World{% endtrans %}
+{% endblock %}

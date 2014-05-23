@@ -14,7 +14,7 @@ sonata_admin:
     title_logo: /bundles/itoadmin/images/logo_ito.png
     templates:
         # default global templates
-        layout:    ItoAdminBundle:Sonata:standard_layout.html.twig
+        layout:    SonataAdminBundle::standard_layout.html.twig
         ajax:      SonataAdminBundle::ajax_layout.html.twig
         list_block: ItoAdminBundle:Sonata:Block/block_admin_list.html.twig
 
