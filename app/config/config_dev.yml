@@ -26,6 +26,18 @@ monolog:
 
 assetic:
     use_controller: true
+    
+    
+hwi_oauth:
+    # name of the firewall in which this bundle is active, this setting MUST be set
+    firewall_name: secured_area
+    resource_owners:
+        any_name:
+            type:                facebook
+            client_id:           406153069523025
+            client_secret:       929ad8d54a9b24aabbd9e8958151a0eb
+            scope:               "https://graph.facebook.com/me?fields=username,name,email,picture.type(square)"
+            
 
 #swiftmailer:
 #    delivery_address: me@example.com

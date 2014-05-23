@@ -22,6 +22,8 @@ use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
  */
 interface UserResponseInterface extends ResponseInterface
 {
+   
+    
     /**
      * Get the unique user identifier.
      *
@@ -71,7 +73,7 @@ interface UserResponseInterface extends ResponseInterface
     /**
      * Get the access token used for the request.
      *
-     * @return null|string
+     * @return null|stringloadUserByOAuthUserResponse(UserResponseInterface $response):
      */
     public function getRefreshToken();
 
@@ -95,4 +97,8 @@ interface UserResponseInterface extends ResponseInterface
      * @param OAuthToken $token
      */
     public function setOAuthToken(OAuthToken $token);
+    
+    
+    
+    
 }

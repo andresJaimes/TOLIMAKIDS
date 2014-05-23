@@ -1,8 +1,17 @@
-services:
+
+  
+services: 
+    my.oauth_aware.user_provider.service:
+        class: HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider
+        arguments:
+            userManager: "@fos_user.user_manager"
+            properties: ["pass properties as array"]
+
     twig.extension.intl:
        class: Twig_Extensions_Extension_Intl
        tags:
            - { name: twig.extension }
+      
     
             
      

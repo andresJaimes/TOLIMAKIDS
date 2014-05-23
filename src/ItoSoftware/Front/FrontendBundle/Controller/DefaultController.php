@@ -18,4 +18,6 @@ class DefaultController extends Controller
         $translated_hello = $this->get('translator')->trans('Hello');
         return $this->render('FrontFrontendBundle:Default:index.html.twig', array('translated_hello'=>$translated_hello));
     }
+    
+
 }

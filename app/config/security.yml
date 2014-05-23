@@ -54,8 +54,6 @@ security:
             oauth:
                 resource_owners:
                     facebook:           "/login/check-facebook"
-                    google:             "/login/check-google"
-                    twitter:            "/login/check-twitter"
                     my_custom_provider: "/login/check-custom"
                     my_github:          "/login/check-github"
                 login_path:        /login
@@ -65,7 +63,8 @@ security:
                 oauth_user_provider:
                     service: my.oauth_aware.user_provider.service
 
-                
+        
+             
                 
 
     access_control:
@@ -85,6 +84,5 @@ security:
         # Change these rules to adapt them to your needs
         - { path: ^/admin/, role: [ROLE_SUPER_ADMIN] }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
    
