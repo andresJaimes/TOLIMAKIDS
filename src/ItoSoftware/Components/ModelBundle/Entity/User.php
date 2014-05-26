@@ -2,8 +2,9 @@
 
 namespace ItoSoftware\Components\ModelBundle\Entity;
 
-use Sonata\UserBundle\Entity\BaseUser as BaseUser;
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User
@@ -114,7 +115,33 @@ class User extends BaseUser{
      */
     private $plan;
     
+    
+    private $facebookid;
+    
+    
+    protected $facebookaccesstoken;
 
+    
+    
+    public function setFacebookid($facebookid) {
+        $this->facebookid = $facebookid;
+    }
+
+    public function setFacebookaccesstoken($facebookaccesstoken) {
+        $this->facebookaccesstoken = $facebookaccesstoken;
+    }
+
+    
+    public function getFacebookid() {
+        return $this->facebookid;
+    }
+
+    public function getFacebookaccesstoken() {
+        return $this->facebookaccesstoken;
+    }
+
+    
+        
     /**
      * Get id
      *

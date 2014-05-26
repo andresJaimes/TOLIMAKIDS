@@ -5,8 +5,10 @@
             <generator strategy="IDENTITY"/>
         </id>
         <field name="picture" type="string" column="picture" length="255" nullable="1"/>
-     
-         <one-to-many field="plan" target-entity="Plan" mapped-by="user" />
-         
+        <field name="facebookid" type="string" column="facebookid"  length="255" nullable="1" />
+        <field name="facebookaccesstoken" type="string" column="facebookaccesstoken" length="255" nullable="1" />
+       
+        <one-to-many field="plan" target-entity="Plan" mapped-by="user" />
+    
     </entity>
 </doctrine-mapping>

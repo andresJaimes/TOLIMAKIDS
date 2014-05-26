@@ -1,52 +1,39 @@
-{% block content %}
-    <div id="fb-root"></div>
-    <script>
-        window.fbAsyncInit = function() {
-            // init the FB JS SDK
-            FB.init({
-                appId      : '406153069523025',       // Channel file for x-domain comms
-                status     : true,                                 // Check Facebook Login status
-                xfbml      : true                                  // Look for social plugins on the page
-            });
-        };
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+ {% block stylesheets %}
+    <link href="{{ asset('../assets/ico/favicon.ico') }}" type="text/css" rel="shortcut icon">
+    <title>Signin Template for Bootstrap</title>
+    <link href="{{ asset('../public/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
+ {% endblock %}
+  </head>
 
-        // Load the SDK asynchronously
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/all.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+  <body>
 
-        function fb_login() {
-            FB.getLoginStatus(function(response) {
-                if (response.status === 'connected') {
-                    // connected
-                    alert('Already connected, redirect to login page to create token.');
-                    document.location = "{{ url("hwi_oauth_service_redirect", {service: "facebook"}) }}";
-                } else {
-                    // not_authorized
-                    FB.login(function(response) {
-                        if (response.authResponse) {
-                            document.location = "{{ url("hwi_oauth_service_redirect", {service: "facebook"}) }}";
-                        } else {
-                            alert('Cancelled.');
-                        }
-                    }, {scope: 'email'});
-                }
-            });
-        }
-    </script>
+    <div class="container">
 
-    <h1 class="title">Hello!</h1>
+      <form class="form-signin" role="form">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <div class="input-group">
+            <span class="input-group-addon">username</span>
+            <input type="text" class="form-control" placeholder="Username">
+        </div>
+        
+       <div class="input-group">
+            <span class="input-group-addon">*</span>
+            <input type="text" class="form-control" placeholder="Password">
+       </div>
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
 
-    <a>Hello resource secured for <strong>admin</strong> only.</a>
+    </div> <!-- /container -->
 
-    <p>
-        <a href="#" onclick="fb_login();">Facebook Connect Button (Dialog)</a>
-    </p>
 
-    {# Bonus: Show all available login link in HWIOAuthBundle #}
-    {% render(controller('HWIOAuthBundle:Connect:connect')) %}
-{% endblock %}
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>

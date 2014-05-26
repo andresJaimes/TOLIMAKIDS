@@ -10,12 +10,23 @@ security:
 
     providers:
         fos_userbundle:
-            id: fos_user.user_manager
+            id: fos_user.user_provider.username
 
   
         
     firewalls:
       
+        secured_area:
+            anonymous: ~
+            oauth:
+                resource_owners:
+                    facebook:           "/checkfacebook"
+                login_path:        /loginface
+                use_forward:       false
+                failure_path:      /loginface
+
+                oauth_user_provider:
+                    service: my.oauth_aware.user_provider.service
  
         admin:
             pattern:            /admin(.*)
@@ -49,19 +60,7 @@ security:
                 path:     /
                 domain:   ~ # Defaults to the current domain from $_SERVER
                 
-        secured_area:
-            anonymous: ~
-            oauth:
-                resource_owners:
-                    facebook:           "/login/check-facebook"
-                    my_custom_provider: "/login/check-custom"
-                    my_github:          "/login/check-github"
-                login_path:        /login
-                use_forward:       false
-                failure_path:      /login
-
-                oauth_user_provider:
-                    service: my.oauth_aware.user_provider.service
+        
 
         
              
@@ -69,6 +68,8 @@ security:
 
     access_control:
         # URL of FOSUserBundle which need to be available to anonymous users
+        - { path: ^/loginface, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }

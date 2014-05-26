@@ -29,7 +29,7 @@ twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
     globals:
-        project_name: 'ITO Base S2'
+        project_name: 'Tolima Kids'
 
 # Assetic Configuration
 assetic:
@@ -72,6 +72,8 @@ swiftmailer:
     host:       smtp.gmail.com
     username:   soporte@ito-software.com
     password:   1r1r2q3t
+     
+    
 
 
 hwi_oauth:
@@ -79,14 +81,18 @@ hwi_oauth:
     resource_owners:
         facebook:
             type:          facebook
-            client_id:     406153069523025
-            client_secret: 929ad8d54a9b24aabbd9e8958151a0eb
-            scope:         "email"
-            infos_url:     "https://graph.facebook.com/me?fields=username,name,email,picture.type(square)"
-            paths:
-                email:          email
-                profilepicture: picture.data.url
-                
+            client_id:     %facebook_app_id%
+            client_secret: %facebook_app_secret%
+            scope: ""
+
+    fosub:
+        properties:
+            facebook: facebookid
 
 
-          
+#            scope:         "email"
+#            infos_url:     "https://graph.facebook.com/me?fields=username,name,email,picture.type(square)"
+#            paths:
+#                email:          email
+#                profilepicture: picture.data.url
+        
