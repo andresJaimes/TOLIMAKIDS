@@ -1,5 +1,4 @@
 
-  
 services: 
     my.oauth_aware.user_provider.service:
         class: ItoSoftware\Components\UserBundle\Security\Core\User\FOSUBUserProvider
@@ -11,7 +10,15 @@ services:
        class: Twig_Extensions_Extension_Intl
        tags:
            - { name: twig.extension }
-      
-    
-            
+           
+           
+    my.sitemap.listener:
+        class:  %acme_demo.sitemap.listener.class%
+        arguments: [@router]
+        tags: [{name: "presta.sitemap.listener"}]          
      
+
+      
+
+
+    

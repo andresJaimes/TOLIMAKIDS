@@ -1,25 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/home/TOLIMAKIDS/src/ItoSoftware/Base/ModelBundle/DataFixtures/ORM/010_Users.php</file>
-        <file>file:/home/TOLIMAKIDS/src/ItoSoftware/Base/ModelBundle/DependencyInjection/ItoModelExtension.php</file>
-        <file>file:/home/TOLIMAKIDS/src/ItoSoftware/Base/ModelBundle/DependencyInjection/Configuration.php</file>
-        <file>file:/home/TOLIMAKIDS/src/ItoSoftware/Base/AdminBundle/Admin/ActivityAdmin.php</file>
-        <file>file:/home/TOLIMAKIDS/src/ItoSoftware/Base/AdminBundle/Admin/ItoGroupAdmin.php</file>
-        <file>file:/home/TOLIMAKIDS/src/ItoSoftware/Base/AdminBundle/Resources/config/services.yml</file>
-        <file>file:/home/TOLIMAKIDS/app/config/sonata_config.yml</file>
-        <file>file:/home/TOLIMAKIDS/app/config/config.yml</file>
-        <file>file:/home/TOLIMAKIDS/app/config/parameters.yml</file>
-        <file>file:/home/TOLIMAKIDS/app/config/parameters_base.yml</file>
-        <file>file:/home/TOLIMAKIDS/app/config/routing.yml</file>
-        <file>file:/home/TOLIMAKIDS/app/config/routing_dev.yml</file>
-        <file>file:/home/TOLIMAKIDS/app/config/security.yml</file>
-        <file>file:/home/TOLIMAKIDS/app/config/services.yml</file>
-        <file>file:/home/TOLIMAKIDS/composer.json</file>
-        <file>file:/home/TOLIMAKIDS/composer.lock</file>
-        <file>file:/home/TOLIMAKIDS/app/SymfonyRequirements.php</file>
-        <file>file:/home/TOLIMAKIDS/app/AppCache.php</file>
-        <file>file:/home/TOLIMAKIDS/app/AppKernel.php</file>
-    </open-files>
 </project-private>

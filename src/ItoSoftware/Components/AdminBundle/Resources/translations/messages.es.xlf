@@ -46,6 +46,24 @@
                 <source>Edit</source>
                 <target>Editar</target>
             </trans-unit>
+            <trans-unit id="12">
+                <source>breadcrumb.link_municipality_list</source>
+                <target>Lista de municipios</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>breadcrumb.link_activity_list</source>
+                <target>Lista de actividades</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>breadcrumb.link_places_list</source>
+                <target>Lista de lugares</target>
+            </trans-unit>
+             <trans-unit id="15">
+                <source>breadcrumb.link_galery_list</source>
+                <target>Lista de fotos</target>
+            </trans-unit>
+
+             
         </body>
     </file>
 </xliff>

@@ -38,8 +38,8 @@ class ActivityAdmin extends Admin
            ->add('name', null , array('label'=>'Nombre'))
            ->add('description', 'textarea' , array('label'=>'Descripción'))
            ->add('active', null, array('label'=>'Activo'))
-           ->add('places',null , array('attr'=>array('rel'=>'Places')))
-           ->add('registred_date', 'datetime') 
+           ->add('places',null , array('attr'=>array('rel'=>'Places'), 'label'=> 'Lugares'))
+           ->add('registred_date', 'datetime', array('label'=>'fecha de registro')) 
             ->add('cost', null, array('label'=>'Valor'));
     }
     
@@ -80,6 +80,28 @@ class ActivityAdmin extends Admin
       public function getExportFormats() {
         return array();
     }
+    
+      public function configureDatagridFilters(\Sonata\AdminBundle\Datagrid\DatagridMapper $filter) {
+        $filter
+                 ->add('name', 'doctrine_orm_callback', array(
+                    'callback'=>array($this, 'getNameFilter'),'label'=>'Nombre'
+                ));
+    }
+    
+    
+    public function getNameFilter($queryBuilder, $alias, $field, $value){
+        
+        if(!$value)
+            return;
+        
+        if($value['value']&& $value['value']!=''){
+            $queryBuilder->andWhere("lower($alias.name) LIKE :value");
+            $queryBuilder->setParameter('value', '%'. strtolower($value['value'].'%'));            
+        }
+        
+        return true;
+    }
+    
     
  
 }

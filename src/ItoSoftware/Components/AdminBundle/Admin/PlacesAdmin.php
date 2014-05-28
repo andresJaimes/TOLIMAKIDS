@@ -21,9 +21,9 @@ class PlacesAdmin extends Admin
                 ->add('name', null, array('label'=>'Nombre'))
                 ->add('address', null, array('label'=>'Dirección'))
                 ->add('description', 'textarea', array('label'=>'Descripción'))
-                ->add('latitude', null, array('attr'=>array('rel'=>'latitude')))
-                ->add('length', null, array('attr'=>array('rel'=> 'length')))
-                ->add('municipality', null , array('attr' => array('rel'=>'Municipality'), 'label'=>'Municipio'));
+                ->add('latitude', null, array('attr'=>array('rel'=>'latitude'), 'label'=>'Latitud'))
+                ->add('length', null, array('attr'=>array('rel'=> 'length'), 'label'=>'Longitud'))
+                ->add('municipality', null , array('attr' => array('rel'=>'Municipality'), 'label'=>'Municipios'));
     }
     
     
@@ -31,8 +31,8 @@ class PlacesAdmin extends Admin
     {
        $list
                ->addIdentifier('name', null , array('label'=>'Nombre'))
-               ->add('cost', null, array('label'=>'Valor'))
                ->add('municipality', null , array('label'=>'Municipio'))
+               ->add('address', null, array('label'=>'Dirección'))
                ->add('_action', 'actions', array(
                    'label'=>'Accion',
                    'actions'=>array(
@@ -68,10 +68,9 @@ class PlacesAdmin extends Admin
     public function configureShowFields(ShowMapper $show) {
         $show
                 ->add('name', null , array('label'=>'Nombre'))
+                ->add('address', null, array('label'=>'Dirección'))
                 ->add('description', null,array('label'=>'Descripción'))
                 ->add('municipality', null , array('label'=>'Municipio'))
-                ->add('latitude', null , array('label'=>'Latitud'))
-                ->add('length', null , array('label'=>'Longitud'))
                 ->add('Mapa', null, array('template'=>'ItoAdminBundle:Places:show_map.html.twig'));
     }
     

@@ -15,19 +15,7 @@ security:
   
         
     firewalls:
-      
-        secured_area:
-            anonymous: ~
-            oauth:
-                resource_owners:
-                    facebook:           "/checkfacebook"
-                login_path:        /loginface
-                use_forward:       false
-                failure_path:      /loginface
 
-                oauth_user_provider:
-                    service: my.oauth_aware.user_provider.service
- 
         admin:
             pattern:            /admin(.*)
             context:            user
@@ -42,7 +30,8 @@ security:
                 path:           /admin/logout
                 target:         /admin/login
                 success_handler: logout_admin_handler
-            anonymous:          true
+            anonymous:          null
+ 
         main:
             pattern:             .*
             context:             user
@@ -54,22 +43,28 @@ security:
                 failure_path:   null
             logout:             true
             anonymous:          true
+            oauth:
+                resource_owners:
+                    facebook:           "/checkfacebook"
+                login_path:        /loginface
+                use_forward:       false
+                failure_path:      /loginface
+                oauth_user_provider:
+                    service: my.oauth_aware.user_provider.service
             remember_me:
                 key:      "%secret%"
                 lifetime: 31536000 # 365 days in seconds
                 path:     /
                 domain:   ~ # Defaults to the current domain from $_SERVER
-                
+                                
         
-
+            
+                             
         
-             
                 
 
     access_control:
         # URL of FOSUserBundle which need to be available to anonymous users
-        - { path: ^/loginface, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }

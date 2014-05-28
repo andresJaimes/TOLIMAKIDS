@@ -30,12 +30,6 @@ class MunicipalityAdmin extends Admin
         $list
                 ->addIdentifier('name', null, array('label'=>'Nombre'))
                 ->add('registration_date', 'datetime', array('label'=>'Fecha de registro'))
-                ->add('_action', 'actions', array(
-                    'label'=>'Accion',
-                    'actions'=> array(
-                        'edit'=>array(),
-                    )
-                ))
                 ;
     }
    

@@ -24,6 +24,18 @@ framework:
     session:         ~
     fragments:       ~
 
+hwi_oauth:
+    firewall_name:         main
+    resource_owners:
+        facebook:
+            type:          facebook
+            client_id:     %facebook_app_id%
+            client_secret: %facebook_app_secret%
+            scope: "email"
+    fosub:
+        properties:
+            facebook: facebook_id
+
 # Twig Configuration
 twig:
     debug:            %kernel.debug%
@@ -72,27 +84,7 @@ swiftmailer:
     host:       smtp.gmail.com
     username:   soporte@ito-software.com
     password:   1r1r2q3t
-     
     
-
-
-hwi_oauth:
-    firewall_name:         secured_area
-    resource_owners:
-        facebook:
-            type:          facebook
-            client_id:     %facebook_app_id%
-            client_secret: %facebook_app_secret%
-            scope: ""
-
-    fosub:
-        properties:
-            facebook: facebookid
-
-
-#            scope:         "email"
-#            infos_url:     "https://graph.facebook.com/me?fields=username,name,email,picture.type(square)"
-#            paths:
-#                email:          email
-#                profilepicture: picture.data.url
-        
+presta_sitemap:
+    timetolive: 3600
+    

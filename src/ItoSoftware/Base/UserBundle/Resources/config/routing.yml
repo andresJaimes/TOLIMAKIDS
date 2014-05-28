@@ -1,0 +1,4 @@
+ito_user_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: ItoUserBundle:Default:index }
+

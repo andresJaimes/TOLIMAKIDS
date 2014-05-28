@@ -1,0 +1,3 @@
+ito_admin_homepage:
+    pattern:  /
+    defaults: { _controller: ItoAdminBundle:Default:index }

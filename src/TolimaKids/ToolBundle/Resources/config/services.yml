@@ -1,0 +1,7 @@
+parameters:
+#    ito_tool.example.class: ItoSoftware\Components\ToolBundle\Example
+
+services:
+#    ito_tool.example:
+#        class: %ito_tool.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

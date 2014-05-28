@@ -12,11 +12,11 @@ class GaleryAdmin extends Admin
 
     public function configureFormFields(FormMapper $form) {
         $form
-                ->add('activity', 'sonata_type_model', array('btn_add'=>true))
-                ->add('active')
+                ->add('activity', 'sonata_type_model', array('btn_add'=>true, 'label'=>'Actividades'))
+                ->add('active', null, array('label'=>'Activo'))
                 ->add('name', null, array('label'=>'Nombre'))
                 ->add('file', 'file', array(
-                    'required'=>  $this->getSubject()->getId()? false:true, 'data_class'=> null,
+                    'required'=>  $this->getSubject()->getId()? false:true, 'data_class'=> null,'label'=>'Archivo'
                 ))
             ;
     }   
@@ -25,7 +25,7 @@ class GaleryAdmin extends Admin
     public function configureListFields(ListMapper $list) 
     {
         $list
-                ->addIdentifier('activity')
+                ->addIdentifier('activity', null, array('label'=>'Actividad'))
                 ->add('name', null, array('label'=>'Nombre'))
                 ->add('active', null, array('label'=>'Activo'))
                 ->add('file', null, array('label' => 'Foto', 'template'=>'ItoAdminBundle:Galery:list_picture.html.twig'))

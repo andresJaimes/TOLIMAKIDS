@@ -1,23 +1,17 @@
 <?php
-
 namespace ItoSoftware\Components\ModelBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User
  */
-class User extends BaseUser{
-    
-    
+class User extends \Sonata\UserBundle\Entity\BaseUser{
+
 //    ******************************************************************************************
 //    ****ADICIONES
 //    ******************************************************************************************
-    
+
     static $UPLOAD_DIR = "uploads/user";
-    
     
     /**
      * @var string
@@ -25,7 +19,6 @@ class User extends BaseUser{
      */
     protected $file_picture;
 
-    
     public function uploadPicture($basepath) {
         if (null === $this->file_picture) {
             return;
@@ -63,24 +56,19 @@ class User extends BaseUser{
     public function getWebPathPicture() {
         return null === $this->picture ? null : 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->getUploadDir() . '/' . $this->picture;
     }
-    
-    
-    
-    public function getFilePicture(){
+
+    public function getFilePicture() {
         return $this->file_picture;
     }
-    
-    public function setFilePicture( $file_picture){
+
+    public function setFilePicture($file_picture) {
         return $this->file_picture = $file_picture;
     }
 
-    
 //    ******************************************************************************************
 //    ****MODIFICACIONES
 //    ******************************************************************************************
-    
-    
-    
+
     /**
      * @var integer
      */
@@ -91,46 +79,71 @@ class User extends BaseUser{
         $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
         // your own logic
     }
-    
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $groups;
     
-    
+    public function prePersist(){
+        $this->username = $this->getEmail();
+        $this->usernameCanonical = $this->getEmailCanonical();
+        parent::prePersist();
+    }
+
 //    ******************************************************************************************
 //    ****FIN MODIFICACIONES
 //    ******************************************************************************************
-    
-    
-    
-    
+
     /**
      * @var string
      */
     private $picture;
 
     /**
-     * @var collection plan
+     * Get id
+     *
+     * @return integer 
      */
-    private $plan;
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * Get groups
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGroups() {
+        return $this->groups;
+    }
+
+    /**
+     * Set picture
+     *
+     * @param string $picture
+     * @return User
+     */
+    public function setPicture($picture) {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string 
+     */
+    public function getPicture() {
+        return $this->picture;
+    }
     
     
-    private $facebookid;
+    protected $facebookid;
     
     
     protected $facebookaccesstoken;
-
-    
-    
-    public function setFacebookid($facebookid) {
-        $this->facebookid = $facebookid;
-    }
-
-    public function setFacebookaccesstoken($facebookaccesstoken) {
-        $this->facebookaccesstoken = $facebookaccesstoken;
-    }
-
     
     public function getFacebookid() {
         return $this->facebookid;
@@ -140,75 +153,24 @@ class User extends BaseUser{
         return $this->facebookaccesstoken;
     }
 
+    public function setFacebookid($facebookid) {
+        $this->facebookid = $facebookid;
+    }
+
+    public function setFacebookaccesstoken($facebookaccesstoken) {
+        $this->facebookaccesstoken = $facebookaccesstoken;
+    }
     
-        
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-
-
-    /**
-     * Get groups
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getGroups()
-    {
-        return $this->groups;
-    }
-
-
-    /**
-     * Set picture
-     *
-     * @param string $picture
-     * @return User
-     */
-    public function setPicture($picture)
-    {
-        $this->picture = $picture;
+    protected $plan;
     
-        return $this;
-    }
-
-    /**
-     * Get picture
-     *
-     * @return string 
-     */
-    public function getPicture()
-    {
-        return $this->picture;
-    }
-
-    /**
-     * 
-     * @return $plan
-     */
     public function getPlan() {
         return $this->plan;
     }
 
-    
-    /**
-     * 
-     * @param \ItoSoftware\Base\ModelBundle\Entity\$plan
-     * @return \ItoSoftware\Base\ModelBundle\Entity\User
-     */
-    public function setPlan(collection $plan) {
+    public function setPlan($plan) {
         $this->plan = $plan;
-        
-        return $this;
     }
 
 
-    
 
 }

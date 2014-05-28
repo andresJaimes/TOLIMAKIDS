@@ -76,8 +76,12 @@ hwi_oauth_login:
 
 facebook_login:
     pattern: /checkfacebook
-
     
+PrestaSitemapBundle:
+    resource: "@PrestaSitemapBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
     
  
     

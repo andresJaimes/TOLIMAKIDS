@@ -1,0 +1,33 @@
+<div>
+    <div style="float: left; padding:0px 5% !important; color: #666 !important;">
+        <h3>
+            {% trans %}Dear User{% endtrans %},
+        </h3>
+        <br>
+        <p>
+            {% trans %}A new account has been created for you in the website{% endtrans %} {{project_name}}
+        </p>
+        {%if(is_super_admin)%}
+            {% set url_redireccion = url('sonata_admin_dashboard') %}
+        {%else%}
+            {% set url_redireccion = url('frontend_homepage') %}
+        {%endif%}
+        
+        <h4>
+            {%trans%}You can use the information listed bellow to access your new account{%endtrans%}:
+        </h4>
+        
+        <h5>
+            {%trans%}Access{%endtrans%} URL:
+        </h5> 
+        <a href="{{url_redireccion}}">{{url_redireccion}}</a>
+        <h5>
+            {%trans%}Username{%endtrans%}:
+        </h5> 
+        {{user.username}} <br>
+        <h5>
+            {%trans%}Password{%endtrans%}:
+        </h5> 
+         {{user.getPlainPassword}}
+    </div>
+</div>
