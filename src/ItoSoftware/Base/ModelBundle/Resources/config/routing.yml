@@ -1,3 +1,0 @@
-ito_model_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: ItoModelBundle:Default:index }

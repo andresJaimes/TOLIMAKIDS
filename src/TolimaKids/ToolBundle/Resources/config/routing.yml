@@ -1,3 +1,0 @@
-ito_tool_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: ItoToolBundle:Default:index }
