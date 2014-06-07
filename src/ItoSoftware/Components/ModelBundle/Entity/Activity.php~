@@ -1,6 +1,6 @@
 <?php
 
-namespace ItoSoftware\Base\ModelBundle\Entity;
+namespace ItoSoftware\Components\ModelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -9,11 +9,33 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Activity
 {
-    /**
-     * @var integer
-     */
-    private $id;
+    
+    //-------------------------------------------------
+    //  MODIFICACIÓN
+    //----------------------------------------------------
+      
+    public function getFoto(){
+        
+         foreach ($this->getGalery() as $galery) {
+            if ($galery->getActive()) {
+                return $galery;
+            }
+        }
+        return null;
+    }
+    
+         public function getGaleryLength(){
+           return count($this->getGalery());
+       }
+    
+       public function __toString() {
+           return $this->getName();
+       }
 
+    //--------------------------------------------------
+    //
+    //--------------------------------------------------
+  
     /**
      * @var string
      */
@@ -30,47 +52,43 @@ class Activity
     private $registredDate;
 
     /**
-     * @var integer
+     * @var boolean
      */
     private $active;
 
-    
     /**
-     * @var datetime 
+     * @var float
      */
-    private $date;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Places", mappedBy="activity")
-     */
-    protected $places;
-
+    private $cost;
 
     /**
-     * @ORM\OneToMany(targetEntity="Plan", mappedBy="activity")
+     * @var integer
      */
-    protected $plan;
-    
-    
-    public function _construct(){
-        $this->places = new ArrayCollection();
-        $this->plan = new ArrayCollection();
-    }
+    private $id;
 
-
-     /**
-     * @ORM\ManyToOne(targetEntity="Actuvity", inversedBy="galery")
-     * @ORM\JoinColumn(name="activity_id", referencedColumnName="id")
-     */
-    protected $galery;
     /**
-     * Get id
-     *
-     * @return integer 
+     * @var \Doctrine\Common\Collections\Collection
      */
-    public function getId()
+    private $galery;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $plan;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $places;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
     {
-        return $this->id;
+        $this->galery = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->plan = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->places = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -82,7 +100,7 @@ class Activity
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
@@ -105,7 +123,7 @@ class Activity
     public function setDescription($description)
     {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -128,7 +146,7 @@ class Activity
     public function setRegistredDate($registredDate)
     {
         $this->registredDate = $registredDate;
-    
+
         return $this;
     }
 
@@ -145,80 +163,157 @@ class Activity
     /**
      * Set active
      *
-     * @param integer $active
+     * @param boolean $active
      * @return Activity
      */
     public function setActive($active)
     {
         $this->active = $active;
-    
+
         return $this;
     }
 
     /**
      * Get active
      *
-     * @return integer 
+     * @return boolean 
      */
     public function getActive()
     {
         return $this->active;
     }
-    
-    /**
-     * Get date
-     * @return type
-     */
-    public function getDate() {
-        return $this->date;
-    }
 
     /**
-     * @param datetime $date 
-     * @param type $date
+     * Set cost
+     *
+     * @param float $cost
+     * @return Activity
      */
-    public function setDate($date) {
-        $this->date = $date;
-        
+    public function setCost($cost)
+    {
+        $this->cost = $cost;
+
         return $this;
     }
 
     /**
-     * Get Places
-     * @return Places
+     * Get cost
+     *
+     * @return float 
      */
-    public function getPlaces() {
-        return $this->places;
+    public function getCost()
+    {
+        return $this->cost;
     }
 
-    
     /**
-     * 
-     * @param Places $places
-     * @return Places
+     * Get id
+     *
+     * @return integer 
      */
-    public function setPlaces($places) {
-        $this->places = $places;
-        
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Add galery
+     *
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Galery $galery
+     * @return Activity
+     */
+    public function addGalery(\ItoSoftware\Components\ModelBundle\Entity\Galery $galery)
+    {
+        $this->galery[] = $galery;
+
         return $this;
+    }
+
+    /**
+     * Remove galery
+     *
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Galery $galery
+     */
+    public function removeGalery(\ItoSoftware\Components\ModelBundle\Entity\Galery $galery)
+    {
+        $this->galery->removeElement($galery);
+    }
+
+    /**
+     * Get galery
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGalery()
+    {
+        return $this->galery;
+    }
+
+    /**
+     * Add plan
+     *
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Plan $plan
+     * @return Activity
+     */
+    public function addPlan(\ItoSoftware\Components\ModelBundle\Entity\Plan $plan)
+    {
+        $this->plan[] = $plan;
+
+        return $this;
+    }
+
+    /**
+     * Remove plan
+     *
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Plan $plan
+     */
+    public function removePlan(\ItoSoftware\Components\ModelBundle\Entity\Plan $plan)
+    {
+        $this->plan->removeElement($plan);
     }
 
     /**
      * Get plan
-     * @return Plan
+     *
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getPlan() {
+    public function getPlan()
+    {
         return $this->plan;
     }
 
     /**
-     * @param Plan $plan
-     * @return Plan
+     * Add places
+     *
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Places $places
+     * @return Activity
      */
-    public function setPlan($plan) {
-        $this->plan = $plan;
-        
+    public function addPlace(\ItoSoftware\Components\ModelBundle\Entity\Places $places)
+    {
+        $this->places[] = $places;
+
         return $this;
     }
-   
+
+    /**
+     * Remove places
+     *
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Places $places
+     */
+    public function removePlace(\ItoSoftware\Components\ModelBundle\Entity\Places $places)
+    {
+        $this->places->removeElement($places);
+    }
+
+    /**
+     * Get places
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPlaces()
+    {
+        return $this->places;
+    }
+    
+    
 }

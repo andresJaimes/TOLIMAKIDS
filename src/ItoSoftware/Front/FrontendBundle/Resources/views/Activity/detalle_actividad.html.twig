@@ -1,0 +1,76 @@
+{% extends '::frontend.html.twig' %}
+{% block title %}Actividad{% endblock %}
+{% block body %}
+<input type="hidden" value="{{activity.id}}" id="activity_id"/>
+<section class="principal">
+    <section class="contenido">
+       {% block content %}
+          
+        <section class="colocar_contenido">
+            <div id="informacion" class="informacion">
+                    {% if activity != NULL %}
+                    
+     
+                    <div class="informacion">
+                        <div class="informacion_derecha">
+                            {% if activity.getGaleryLength >= 1%}
+                                <section class="contenedor_slider">
+                                    {% if activity.getGalery %}    
+                                        <div id="imagen_actividad">
+                                            <img src="{{ activity.getFoto.getWebPathFile }}" alt="{{ activity.getName }}" />
+                                        </div>
+                                    {% else %}
+                                        <div id="main-inner">
+                                            <div id="slider">
+                                            {%for imagen in activity.getGalery %}
+                                                <nav>
+                                                    <img src="{{ imagen.getWebPathFile }}" alt="{{ activity.getName }}" />
+                                                </nav>                                        
+                                            {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                
+                                </section>
+                            {% endif %} 
+                            <div id="contenido_atractivo_b" >
+                                <div class="titulo_Actividad">
+                                    <h1>{{activity.getName}}</h1>
+                                </div>
+                                    
+                                     {% if activity.getGaleryLength < 1%}
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                {%endif%}
+   
+                                <div class="descripcion_atractivo_texto">
+                                    {% autoescape false %}{{ activity.getDescription }}{% endautoescape %}
+                                </div>
+                                    
+                                <div class="descripcion_atractivo_texto">
+                                    {% autoescape false %}{{ activity.getCost }}{% endautoescape %}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    </div>
+                </section>
+            </section><!--colocar_contenido-->
+    {% endblock %}
+        </section><!--cierre contenido-->
+
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var activity_id = $("#activity_id").val();
+                cargarActivity(activity_id)
+            });
+   
+            </script>
+            
+            
+{% endblock  %}

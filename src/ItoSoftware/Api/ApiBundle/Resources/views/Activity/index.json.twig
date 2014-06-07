@@ -1,0 +1,8 @@
+{"Activity":
+    [
+    {% for entity in entities %}
+        {% include 'ItoApiBundle:Activity:show.json.twig'  with { 'entity': entity }%} 
+        {% if not loop.last %} , 
+    {% endif%}{% endfor %}
+    ]
+}

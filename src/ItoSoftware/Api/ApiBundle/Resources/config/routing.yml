@@ -1,0 +1,17 @@
+api_homepage:
+    pattern:  /
+    defaults: { _controller: ItoApiBundle:Default:index }
+
+api_lugar:
+    resource: "@ItoApiBundle/Resources/config/routing/places.yml"
+    prefix:   /places
+    
+api_municipio:
+    resource: "@ItoApiBundle/Resources/config/routing/municipality.yml"
+    prefix:   /municipality
+    
+api_activity:
+   resource:  "@ItoApiBundle/Resources/config/routing/activity.yml"
+   prefix:    /activity  
+  
+

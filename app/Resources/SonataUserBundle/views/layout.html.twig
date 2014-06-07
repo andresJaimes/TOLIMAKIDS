@@ -2,7 +2,10 @@
 <html>
     <head>
         <meta charset="UTF-8" />
- 
+     {% block javascripts %}
+            <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+            <script src="/bundles/frontfrontend/js/jquery-1.11.1.js"></script>
+        {% endblock %}
         
     </head>
     <body class="sonata-bc sonata-ba-no-side-menu">

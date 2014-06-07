@@ -1,14 +1,21 @@
 <?php
 
-namespace ItoSoftware\Base\ModelBundle\Entity;
+namespace ItoSoftware\Components\ModelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+use ItoSoftware\Components\ToolBundle\Model\ApplicationBoot;
 
 /**
  * Galery
  */
 class Galery
 {
+    
+     static $UPLOAD_DIR = "uploads/galery/activity";
+     
     /**
      * @var integer
      */
@@ -16,6 +23,15 @@ class Galery
 
     /**
      * @var string
+     * @ORM\Column(name="file", type="string", length=255, nullable=true)
+     * @Assert\File(
+     *      maxSize = "2048k",
+     *      mimeTypes = {   "image/jpeg"
+     *                      ,"image/pjpeg"
+     *                      ,"image/png"
+     *                      ,"image/svg+xml"
+     *                  }
+     * )
      */
     private $file;
 
@@ -25,20 +41,15 @@ class Galery
     private $name;
 
     /**
-     * @var integer
+     * @var boolean
      */
     private $active;
 
     /**
-     * @ORM\OneToMany(targetEntity="Activity", mappedBy="galery")
+     * @var activity
      */
-    protected $activity;
+    private $activity;
 
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Places", mappedBy="galery")
-     */
-    private $places;
     
     /**
      * Get id
@@ -99,7 +110,7 @@ class Galery
     /**
      * Set active
      *
-     * @param integer $active
+     * @param boolean $active
      * @return Galery
      */
     public function setActive($active)
@@ -112,7 +123,7 @@ class Galery
     /**
      * Get active
      *
-     * @return integer 
+     * @return boolean 
      */
     public function getActive()
     {
@@ -137,15 +148,59 @@ class Galery
         return $this;
     }
 
+     public function getWebPathFile() {
+        return null === $this->file ? null : 'http://' . $_SERVER['HTTP_HOST'] . '/' . $this->getUploadDir() . '/' . $this->getFile();
+    }
+
+    protected function getUploadDir() {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return self::$UPLOAD_DIR;
+    }
+
+     public function uploadFile($file) {
+        if (null === $file) {
+            return;
+        }
+        if ($file instanceof UploadedFile) {
+            $directorio_destino = ApplicationBoot::getContainer()->get('kernel')->getRootDir() . '/../web/' . $this->getUploadDir();
+            $ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+            $nombre_archivo_logo = uniqid(date('YmdHis')) . '.' . $ext;
+            $image_size = 256729;
+            if ($file->getSize() > $image_size) {
+                if (!file_exists($file->getPathname() . '/' . $file->getClientOriginalName())) {
+                    $image = imagecreatefromjpeg($file);
+
+                    $quality = round(($image_size * 100) / $file->getSize());
+
+                    switch ($file->getMimeType()) {
+                        case "image/jpeg":
+                            imagejpeg($image, $directorio_destino . '/' . $nombre_archivo_logo, $quality);
+                            break;
+                        case "image/png" :
+                            imagepng($image, $directorio_destino . '/' . $nombre_archivo_logo, $quality);
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    $file->move($directorio_destino, $nombre_archivo_logo);
+                }
+            } else {
+                $file->move($directorio_destino, $nombre_archivo_logo);
+            }
+            $this->setFile($nombre_archivo_logo);
+        }
+    }
+
 
     
-    /**
+    /**rha
      * Constructor
      */
     public function __construct()
     {
-        $this->activity = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->places = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->activity = array();
+    
     }
     
     /**
@@ -154,7 +209,7 @@ class Galery
      * @param \ItoSoftware\Base\ModelBundle\Entity\Activity $activity
      * @return Galery
      */
-    public function addActivity(\ItoSoftware\Base\ModelBundle\Entity\Activity $activity)
+    public function addActivity(\ItoSoftware\Components\ModelBundle\Entity\Activity $activity)
     {
         $this->activity[] = $activity;
     
@@ -166,44 +221,13 @@ class Galery
      *
      * @param \ItoSoftware\Base\ModelBundle\Entity\Activity $activity
      */
-    public function removeActivity(\ItoSoftware\Base\ModelBundle\Entity\Activity $activity)
+    public function removeActivity(\ItoSoftware\Components\ModelBundle\Entity\Activity $activity)
     {
         $this->activity->removeElement($activity);
     }
+
     
- 
-
-
-    /**
-     * Add places
-     *
-     * @param \ItoSoftware\Base\ModelBundle\Entity\Places $places
-     * @return Galery
-     */
-    public function addPlace(\ItoSoftware\Base\ModelBundle\Entity\Places $places)
-    {
-        $this->places[] = $places;
-    
-        return $this;
-    }
-
-    /**
-     * Remove places
-     *
-     * @param \ItoSoftware\Base\ModelBundle\Entity\Places $places
-     */
-    public function removePlace(\ItoSoftware\Base\ModelBundle\Entity\Places $places)
-    {
-        $this->places->removeElement($places);
-    }
-
-    /**
-     * Get places
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getPlaces()
-    {
-        return $this->places;
-    }
+       public function __toString() {
+        return $this->getName() ? $this->getName() : 'Nueva Galeria';
+    }  
 }

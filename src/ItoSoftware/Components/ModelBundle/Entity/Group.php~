@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ItoSoftware\Base\ModelBundle\Entity;
+namespace ItoSoftware\Components\ModelBundle\Entity;
 
 use Sonata\UserBundle\Entity\BaseGroup as BaseGroup;
 

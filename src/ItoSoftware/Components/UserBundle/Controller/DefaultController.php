@@ -13,6 +13,7 @@ class DefaultController extends Controller
     
     public function passwordRecoveryAction()
     {
+        
         $user = $this->getUser();
         $is_super_admin = false;
         foreach ($user->getRoles() as $rol) {

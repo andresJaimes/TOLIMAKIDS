@@ -1,0 +1,12 @@
+departamento:
+    pattern:  /
+    defaults: { _controller: "CiturApiBundle:Departamento:index" }
+    requirements:
+        _method: GET
+        
+departamento_show:
+    pattern:  /{id}
+    defaults: { _controller: "CiturApiBundle:Departamento:show" }
+    requirements:
+        _method: GET
+        id: "\d+"

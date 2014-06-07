@@ -13,5 +13,7 @@
           <join-column name="user_id" referenced-column-name="id" />
     </many-to-one>
     
+    <many-to-many target-entity="Activity" field="activity" mapped-by="plan"/>
+    
   </entity>
 </doctrine-mapping>

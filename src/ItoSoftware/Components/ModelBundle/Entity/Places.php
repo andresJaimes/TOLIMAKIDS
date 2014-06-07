@@ -3,17 +3,31 @@
 namespace ItoSoftware\Components\ModelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
  * Places
  */
 class Places
 {
-    /**
-     * @var integer
-     */
-    private $id;
-
+   
+ //-------------------------------------------------------------------
+ //     MODIFICACIONES
+ //-------------------------------------------------------------------- 
+ 
+    public function validateActivity(ExecutionContextInterface $context) {
+       if ($this->getActivity()->isEmpty()) {
+           $context->addViolationAt(
+                   'activity', 'Debe seleccionar alguna actividad ', array(), null
+           );
+       }
+   }
+    
+ //--------------------------------------------------------------------
+ //     END
+ //--------------------------------------------------------------------
+    
+  
     /**
      * @var string
      */
@@ -30,48 +44,36 @@ class Places
     private $description;
 
     /**
-     * @var double
+     * @var float
      */
     private $latitude;
 
     /**
-     * @var double
+     * @var float
      */
     private $length;
 
-    
     /**
-     * @ORM\OneToMany(targetEntity="Municipatily", mappedBy="places")
-     * 
+     * @var integer
      */
-    private $municipality;
-   
-    
-    /**
-     *
-     * @var type 
-     */
-    private $activity;
-    
-    /**
-     *
-     * @var type 
-     */
-    private $galery;
-    
-    
-    public function _construct(){
-        $this->municipality = new ArrayCollection();
-    }
+    private $id;
 
     /**
-     * Get id
-     *
-     * @return integer 
+     * @var \ItoSoftware\Components\ModelBundle\Entity\Municipality
      */
-    public function getId()
+    private $municipality;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $activity;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
     {
-        return $this->id;
+        $this->activity = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -83,7 +85,7 @@ class Places
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
@@ -106,7 +108,7 @@ class Places
     public function setAddress($address)
     {
         $this->address = $address;
-    
+
         return $this;
     }
 
@@ -129,7 +131,7 @@ class Places
     public function setDescription($description)
     {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -146,20 +148,20 @@ class Places
     /**
      * Set latitude
      *
-     * @param double $latitude
+     * @param float $latitude
      * @return Places
      */
     public function setLatitude($latitude)
     {
         $this->latitude = $latitude;
-    
+
         return $this;
     }
 
     /**
      * Get latitude
      *
-     * @return double 
+     * @return float 
      */
     public function getLatitude()
     {
@@ -169,84 +171,89 @@ class Places
     /**
      * Set length
      *
-     * @param double $length
+     * @param float $length
      * @return Places
      */
     public function setLength($length)
     {
         $this->length = $length;
-    
+
         return $this;
     }
 
     /**
      * Get length
      *
-     * @return double 
+     * @return float 
      */
     public function getLength()
     {
         return $this->length;
     }
-    
-
 
     /**
-     * Get municipality_id
-     * @return type
+     * Get id
+     *
+     * @return integer 
      */
-    public function getMunicipality() {
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set municipality
+     *
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Municipality $municipality
+     * @return Places
+     */
+    public function setMunicipality(\ItoSoftware\Components\ModelBundle\Entity\Municipality $municipality = null)
+    {
+        $this->municipality = $municipality;
+
+        return $this;
+    }
+
+    /**
+     * Get municipality
+     *
+     * @return \ItoSoftware\Components\ModelBundle\Entity\Municipality 
+     */
+    public function getMunicipality()
+    {
         return $this->municipality;
     }
 
     /**
-     * @param type $municipality
-     * @return Municipality
-     */
-    public function setMunicipality($municipality) {
-        $this->municipality = $municipality;
-    
-        return $this;
-    }
-
-
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->municipality = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
-     * Add municipality
+     * Add activity
      *
-     * @param \ItoSoftware\Base\ModelBundle\Entity\Municipality $municipality
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Activity $activity
      * @return Places
      */
-    public function addMunicipality(\ItoSoftware\Components\ModelBundle\Entity\Municipality $municipality)
+    public function addActivity(\ItoSoftware\Components\ModelBundle\Entity\Activity $activity)
     {
-        $this->municipality[] = $municipality;
-    
+        $this->activity[] = $activity;
+
         return $this;
     }
 
     /**
-     * Remove municipality
+     * Remove activity
      *
-     * @param \ItoSoftware\Base\ModelBundle\Entity\Municipality $municipality
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Activity $activity
      */
-    public function removeMuniciparhality(\ItoSoftware\Components\ModelBundle\Entity\Municipality $municipality)
+    public function removeActivity(\ItoSoftware\Components\ModelBundle\Entity\Activity $activity)
     {
-        $this->municipality->removeElement($municipality);
+        $this->activity->removeElement($activity);
     }
-    
-    
-    
-    public function __toString() {
-        return $this->getName() ? $this->getName() : 'Nuevo lugar';
-    }  
-    
-    
+
+    /**
+     * Get activity
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getActivity()
+    {
+        return $this->activity;
+    }
 }

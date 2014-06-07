@@ -32,8 +32,12 @@
         "sonata-project/cache-bundle": "dev-master",        
         "sonata-project/intl-bundle": "dev-master",
 	"hwi/oauth-bundle": "0.4.*@dev",
-        "presta/sitemap-bundle": "dev-master",
-        "presta/sitemap-bundle": "v1.2.0"
+        "egeloen/google-map-bundle": "~2.1",
+        "willdurand/geocoder": "@stable",
+        "widop/http-adapter-bundle": "1.1.*",
+        "knplabs/knp-paginator-bundle": "~2.4",
+        "lexik/form-filter-bundle": "v2.0.0"
+   
         
     },
     "scripts": {

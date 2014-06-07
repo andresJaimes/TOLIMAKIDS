@@ -3,46 +3,40 @@
 namespace ItoSoftware\Front\FrontendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\Request;
-use ItoSoftware\Components\ModelBundle\Entity\User;
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Presta\SitemapBundle\Event\SitemapPopulateEvent;
-use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
+use ItoSoftware\Front\FrontendBundle\Filter\FilterActivityPlaces;
+
 
 class DefaultController extends Controller
 {
  
-     /**
-     * @Route("/", name="homepage", options={"sitemap" = true})
-     *                                      ^ include in the sitemap with default parameters
-     * @Template()
-     */
     public function indexAction()
     {
-        return array();
+        $form = $this->get('form.factory')->create(new FilterActivityPlaces());
+$actividades = array();
+        if ($this->get('request')->query->has($form->getName())) {
+            // manually bind values from the request
+            $form->submit($this->get('request')->query->get($form->getName()));
+
+            // initialize a query builder
+            $filterBuilder = $this->get('doctrine.orm.entity_manager')
+                ->getRepository('ItoModelBundle:Activity')
+                ->createQueryBuilder('a');
+            
+
+            // build the query from the given form object
+            $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $filterBuilder);
+
+            // now look at the DQL =)
+            echo $filterBuilder->getDql();
+            $actividades = $filterBuilder->getQuery()->getResult();
+        }
+
+        return $this->render('FrontFrontendBundle:Default:index.html.twig', array(
+            'form' => $form->createView(),
+            'activities' => $actividades
+        ));
+        
     }
 
-    /**
-     * @Route("/faq", name="faq", options={"sitemap" = {"priority" = 0.7 }})
-     *                                      ^ override the priority parameter
-     * @Template()
-     */
-    public function faqAction()
-    {
-        return array();
-    }
-
-    /**
-     * @Route("/about", name="about", options={"sitemap" = {"priority" = 0.7, "changefreq" = "weekly" }})
-     *                                      ^ override the priority and changefreq parameters
-     * @Template()
-     */
-    public function aboutAction()
-    {
-        return array();
-    }
     
-
 }

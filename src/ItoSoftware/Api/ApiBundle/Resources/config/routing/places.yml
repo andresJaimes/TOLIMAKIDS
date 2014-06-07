@@ -1,0 +1,12 @@
+places:
+    pattern:  /
+    defaults: { _controller: "ItoApiBundle:Places:index" }
+    requirements:
+       _format: json|html
+        
+places_show:
+    pattern:  /{id}
+    defaults: { _controller: "ItoApiBundle:Places:show" }
+    requirements:
+        _format: json|html
+        id: "\d+"

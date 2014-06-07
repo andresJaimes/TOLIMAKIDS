@@ -32,7 +32,8 @@ class AppKernel extends Kernel
             new ItoSoftware\Components\UserBundle\ItoUserBundle(),
             new ItoSoftware\Front\FrontendBundle\FrontFrontendBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
-            new Presta\SitemapBundle\PrestaSitemapBundle(),
+            new ItoSoftware\Api\ApiBundle\ItoApiBundle(),
+            new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

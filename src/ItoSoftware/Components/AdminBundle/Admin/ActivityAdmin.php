@@ -38,7 +38,6 @@ class ActivityAdmin extends Admin
            ->add('name', null , array('label'=>'Nombre'))
            ->add('description', 'textarea' , array('label'=>'Descripción'))
            ->add('active', null, array('label'=>'Activo'))
-           ->add('places',null , array('attr'=>array('rel'=>'Places'), 'label'=> 'Lugares'))
            ->add('registred_date', 'datetime', array('label'=>'fecha de registro')) 
             ->add('cost', null, array('label'=>'Valor'));
     }
@@ -53,7 +52,6 @@ class ActivityAdmin extends Admin
         $list
                 ->addIdentifier('name', null, array('label'=>'Nombre'))
                 ->add('active', null , array('label'=>'estado'))
-                ->add('places', null, array('label'=>'Lugares'))
                 ->add('cost', null, array('label'=>'Valor'))
                 ->add('registred_date', 'datetime' , array('input'  => 'datetime', 'widget' => 'choice','label'=>'Fecha de registro'))
                 ->add('_action', 'actions', array(

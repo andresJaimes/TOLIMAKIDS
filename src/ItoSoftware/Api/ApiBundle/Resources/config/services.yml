@@ -1,0 +1,7 @@
+parameters:
+#    citur_api.example.class: Citur\Bundle\CiturApiBundle\Example
+
+services:
+#    citur_api.example:
+#        class: %citur_api.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

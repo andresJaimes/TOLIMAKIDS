@@ -1,0 +1,76 @@
+{% extends '::frontend.html.twig' %}
+{% block title %}lugares{% endblock %}
+{% block body %}
+<input type="hidden" value="{{places.id}}" id="places_id"/>
+  {% include 'FrontFrontendBundle:Places:show_map.html.twig'%}
+<section class="principal">
+    <section class="contenido">
+       {% block content %}
+          
+        <section class="colocar_contenido">
+            <div id="informacion" class="informacion">
+                    {% if places != NULL %}
+                    
+                    <div class="form-group" style="margin-left: 20%">
+                        <div id="maps">
+                        </div>
+                    </div>
+                    <div class="informacion">
+                        <div class="informacion_derecha">
+
+                            <div id="contenido_atractivo_b" >
+                                <div class="titulo_lugar">
+                                    <h1>Lugar</h1>
+                                </div>
+  
+                                
+                                <div class="descripcion_atractivo_texto">
+                                    {% autoescape false %}{{ places.getDescription }}{% endautoescape %}
+                                </div>
+
+                                <div class="descripcion_atractivo_content">
+                                    <ul>
+                                        <br class="label_tolima">Nombre: </br>
+                                        <br class="descripcion_atractivo">{{ places.getName }}</br>
+
+                                        <br class="label_tolima">Municipio: </br>
+                                        <br class="descripcion_atractivo">{{ places.getMunicipality }}</br>
+                                        
+                                        <br class="label_tolima">Descripcion</br>
+                                        <br class="descripcion_atractivo">{{ places.getDescription }}</br>
+                                        
+                                        <br class="label_tolima">Latitud</br>
+                                        <br class="descripcion_atractivo">{{ places.getLatitude }}</br>
+                                        
+                                        <br class="label_tolima">Longitud</br>
+                                        <br class="descripcion_atractivo">{{ places.getLength }}</br>
+                                        
+                                        <br class="label_tolima">Actividades: </br>
+                                        
+                                        {% for activity in places.activity %}
+                                 
+                                            <a href="{{url('front_frontend_actividad_detalle',{id:activity.getId})}}">{{ activity.name }}</a>
+                                        {%  endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    </div>
+                </section>
+            </section><!--colocar_contenido-->
+    {% endblock %}
+        </section><!--cierre contenido-->
+
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var places_id = $("#places_id").val();
+                cargarPlaces(places_id)
+            });
+   
+            </script>
+            
+            
+{% endblock  %}

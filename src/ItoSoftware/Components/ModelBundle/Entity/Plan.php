@@ -176,4 +176,34 @@ class Plan
     }
 
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->activity = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add activity
+     *
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Activity $activity
+     * @return Plan
+     */
+    public function addActivity(\ItoSoftware\Components\ModelBundle\Entity\Activity $activity)
+    {
+        $this->activity[] = $activity;
+
+        return $this;
+    }
+
+    /**
+     * Remove activity
+     *
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Activity $activity
+     */
+    public function removeActivity(\ItoSoftware\Components\ModelBundle\Entity\Activity $activity)
+    {
+        $this->activity->removeElement($activity);
+    }
 }

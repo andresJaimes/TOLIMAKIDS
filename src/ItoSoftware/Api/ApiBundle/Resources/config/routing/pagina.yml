@@ -1,0 +1,19 @@
+pagina:
+  pattern:  /
+  defaults: { _controller: "CiturApiBundle:Pagina:index" }
+  requirements:
+    _method: GET
+    
+pagina_show_by_id:
+  pattern:  /{id}
+  defaults: { _controller: "CiturApiBundle:Pagina:showById" }
+  requirements:
+    _method: GET
+    id: \d+
+    
+pagina_show_by_slug:
+  pattern:  /{slug}
+  defaults: { _controller: "CiturApiBundle:Pagina:showBySlug" }
+  requirements:
+    _method: GET
+    slug: .+

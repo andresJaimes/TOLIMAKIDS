@@ -1,0 +1,11 @@
+{
+    "id":                       "{{entity.getId}}",
+    "name":                     "{{entity.getName}}",
+    "municipality_id":          "{{entity.getMunicipality.getId}}",
+    "municipio_nombre":         "{{entity.getMunicipality.getName}}",
+    "latitude":                 "{{entity.getLatitude}}",
+    "length":                   "{{entity.getLength}}",
+    "description":              "{{entity.getDescription|url_encode(true)}}",
+    "address":                  "{{entity.getAddress|url_encode(true)}}",
+    "activity":              "{{entity.getActivity.getName}}"
+}

@@ -23,7 +23,8 @@ class PlacesAdmin extends Admin
                 ->add('description', 'textarea', array('label'=>'Descripción'))
                 ->add('latitude', null, array('attr'=>array('rel'=>'latitude'), 'label'=>'Latitud'))
                 ->add('length', null, array('attr'=>array('rel'=> 'length'), 'label'=>'Longitud'))
-                ->add('municipality', null , array('attr' => array('rel'=>'Municipality'), 'label'=>'Municipios'));
+                ->add('municipality', null , array('attr' => array('rel'=>'Municipality'), 'label'=>'Municipios'))
+                ->add('activity', null, array('expanded' => true, 'multiple' => true, 'label' => 'Actividades*'));
     }
     
     
@@ -33,6 +34,7 @@ class PlacesAdmin extends Admin
                ->addIdentifier('name', null , array('label'=>'Nombre'))
                ->add('municipality', null , array('label'=>'Municipio'))
                ->add('address', null, array('label'=>'Dirección'))
+               ->add('activity', null, array('label'=>'Actividades'))
                ->add('_action', 'actions', array(
                    'label'=>'Accion',
                    'actions'=>array(
@@ -71,7 +73,8 @@ class PlacesAdmin extends Admin
                 ->add('address', null, array('label'=>'Dirección'))
                 ->add('description', null,array('label'=>'Descripción'))
                 ->add('municipality', null , array('label'=>'Municipio'))
-                ->add('Mapa', null, array('template'=>'ItoAdminBundle:Places:show_map.html.twig'));
+                ->add('Mapa', null, array('template'=>'ItoAdminBundle:Places:show_map.html.twig'))
+                ->add('activity', null, array('label'=>'Actividades'));
     }
     
     

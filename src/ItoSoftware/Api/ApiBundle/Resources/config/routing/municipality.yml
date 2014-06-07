@@ -1,0 +1,12 @@
+municipio:
+  pattern:  /
+  defaults: { _controller: "ItoApiBundle:Municipality:index"}
+  requirements:
+    _method: GET
+    
+municipio_show:
+  pattern: /{id}
+  defaults: { _controller: "ItoApiBundle:Municipality:Show"}
+  requirements:
+    _method: GET
+    id: "\d+"

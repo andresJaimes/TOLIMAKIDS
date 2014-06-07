@@ -1,0 +1,12 @@
+servicio_categoria:
+  pattern:   /
+  defaults:  { _controller: "CiturApiBundle:ServicioCategoria:index"}
+  requirements:
+    _method:  GET
+
+servicio_categoria_show:
+  pattern:  /{id}
+  defaults: { _controller: "CiturApiBundle:ServicioCategoria:show"}
+  requirements:
+    _method: GET
+    id:      \d+

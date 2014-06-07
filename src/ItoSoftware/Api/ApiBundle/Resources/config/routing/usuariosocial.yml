@@ -1,0 +1,12 @@
+usuariosocial:
+    pattern:  /
+    defaults: { _controller: "CiturApiBundle:UsuarioSocial:index" }
+
+usuariosocial_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CiturApiBundle:UsuarioSocial:show" }
+
+usuariosocial_create:
+    pattern:  /create
+    defaults: { _controller: "CiturApiBundle:UsuarioSocial:create" }
+    requirements: { _method: post }

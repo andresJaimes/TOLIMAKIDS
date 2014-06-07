@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:fb="http://ogp.me/ns/fb#">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="description" content="Descripcion de la pagina"/>
+        <meta name="keywords" content="palabra1, palabra2, palabra3"/>
+        <meta name="author" content="Nombre de el autor"/>
+
+
+        <!--Standar Web Page CSS sources-->
+        <link href="{{ asset ('bundles/frontend/css/jquery-ui.css')}}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset ('bundles/frontend/css/layout.css')}}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset ('bundles/frontend/css/marker.css')}}" rel="stylesheet" type="text/css"/>
+
+        <!--Standar Web Page JS sources-->
+        <script type="text/javascript" src="{{ asset ('bundles/frontend/js/jquery-1.7.2.min.js')}}"></script>
+        <!--JQuery PopUp Picture-->
+        <script type="text/javascript" src="{{ asset ('bundles/frontend/js/frontend/lightbox.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontend/js/jquery-migrate-1.2.1.js')}}"></script>
+        
+        <script type="text/javascript" src="{{ asset ('bundles/frontend/js/frontend/jquery-ui.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontend/js/frontend/functions.js')}}"></script>
+        <!--Designer Interactions-->
+        <script type="text/javascript" src="{{ asset ('bundles/frontend/js/frontend/superfish.js')}}"></script>
+        
+        
+        <!--[if lt IE 9]>
+            <scriptsrc="{{ asset ('bundles/frontend/js/frontend/html5shiv.js')}}"></script>
+            <![endif]-->
+        <!--[if (gte IE 6)&(lte IE 8)]>
+          <script type="text/javascript" src="{{ asset ('bundles/frontend/js/frontend//selectivizr.js')}}"></script>
+          <noscript><link rel="stylesheet" href="{{ asset ('bundles/frontend/css/ie.css')}}" /></noscript>
+        <![endif]-->
+
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('bundles/frontend/images/favicon.ico') }}" />
+      
+        <script type="text/javascript">
+            (function($){ 
+                  //create closure so we can safely use $ as alias for jQuery
+                $(document).ready(function(){
+                         // initialise plugin
+                         var example = $('.sf-menu').superfish({
+                                 //add options here if required
+                         });
+                 });
+             })(jQuery);
+        </script>
+    
+        <!--Maps CSS Sources-->
+        <link rel="stylesheet" href="{{ asset('bundles/frontend/css/mapa/bootstrap.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/frontend/css/mapa/bootstrap-responsive.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/frontend/css/mapa/realia-blue.css') }}" type="text/css" id="color-variant-default" />
+        <!--Map js Sourses-->
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=true"></script>
+        <script type="text/javascript" src="{{ asset( 'bundles/frontend/js/mapa/gmap3.infobox.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset( 'bundles/frontend/js/mapa/mapa.js') }}"></script>
+        <script type="text/javascript" src="{{ asset( 'bundles/frontend/js/lugar_iframe/filtro.js') }}"></script>
+        <!-- -->
+        
+        <!--  crop -->
+        <script src="{{ asset('bundles/fotolugar/js/crop.frontend.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('bundles/fotolugar/js/jquery.Jcrop.js') }}" type="text/javascript"></script>
+        
+        <!-- -->
+        <link rel="stylesheet" href="{{ asset('bundles/fotolugar/css/crop.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/fotolugar/css/jquery.Jcrop.css') }}" type="text/css" media="all" />
+
+        <!-- ajax form -->
+        <script type="text/javascript" src="{{ asset('bundles/frontend/js/jquery.form.js')}}"></script> 
+        
+       
+        {% block stylesheets %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+        
+        
+        <!--  SPIN-->
+        <script type="text/javascript" src="{{ asset('bundles/frontend/js/spin/spin.js')}}"></script> 
+        <script type="text/javascript" src="{{ asset('bundles/frontend/js/spin/jquery.spin.js')}}"></script> 
+        <script type="text/javascript" src="{{ asset('bundles/frontend/js/main.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/frontend/js/controller.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/frontend/js/api_calls.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/frontend/js/render.js')}}"></script>
+        
+        <!--Slider-->
+        <link href="{{ asset ('bundles/frontend/css/slider/EstilosACEX.css')}}" rel="stylesheet" type="text/css"/>
+        <script src="{{ asset('bundles/frontend/js/slider/miniSlider.js')}}"></script>
+        <script>
+              $(function() {
+              $('#slider').miniSlider();
+              });
+        </script>
+        <script src="{{ asset('bundles/frontend/js/tooltip.js')}}"></script>
+    </head>
+    <body>
+        <div class="content_preview">
+            <div class="preview"></div>
+        </div>
+        <input type="hidden" value="{{ app.request.host }}" id="webservice_domain"/>
+        <!-- script controladores -->
+        
+        
+        <div class="container">
+            {#{ include('::header.html.twig') }#}  
+            {#{ include('::menu.html.twig') }#}  
+                <div id="body-page-content">
+                    {% block body %}{% endblock %}
+                </div>
+            {#{ include('::footer.html.twig') }#}
+        </div>
+  </body>
+  
+</html>

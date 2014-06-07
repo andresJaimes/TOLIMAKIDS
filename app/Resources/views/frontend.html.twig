@@ -3,11 +3,30 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+
+         
+        {% block javascripts %}
+            <script src="/bundles/frontfrontend/js/jquery-1.11.1.js"></script>  
+            <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        
+           <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/Gmap.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/controller.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/api_calls.js')}}"></script>
+         <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/render.js')}}"></script>
+          <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/main.js')}}"></script>
+        
+        <script type="text/javascript">   
+            $(document).ready(function() {
+
+                  LoadMap();
+                  cargarPlaces();
+
+              });
+      </script>
+{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block body %}{% endblock %}     
     </body>
 </html>

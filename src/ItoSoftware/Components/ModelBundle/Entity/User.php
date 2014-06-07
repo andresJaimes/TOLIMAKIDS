@@ -70,6 +70,51 @@ class User extends \Sonata\UserBundle\Entity\BaseUser{
 //    ******************************************************************************************
 
     /**
+     *
+     * @var type 
+     */
+    protected $facebookid;
+    
+    /**
+     *
+     * @var type 
+     */
+    protected $facebookaccesstoken;
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getFacebookid() {
+        return $this->facebookid;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getFacebookaccesstoken() {
+        return $this->facebookaccesstoken;
+    }
+
+    /**
+     * 
+     * @param type $facebookid
+     */
+    public function setFacebookid($facebookid) {
+        $this->facebookid = $facebookid;
+    }
+
+    /**
+     * 
+     * @param type $facebookaccesstoken
+     */
+    public function setFacebookaccesstoken($facebookaccesstoken) {
+        $this->facebookaccesstoken = $facebookaccesstoken;
+    }
+    
+    
+    /**
      * @var integer
      */
     protected $id;
@@ -80,11 +125,34 @@ class User extends \Sonata\UserBundle\Entity\BaseUser{
         // your own logic
     }
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    protected $groups;
-    
+      /**
+    * @var \Doctrine\Common\Collections\Collection
+    */
+   protected $groups;
+
+   /**
+    * Get groups
+    *
+    * @return \Doctrine\Common\Collections\Collection 
+    */
+   public function getGroups() {
+       return $this->groups;
+   }
+
+public function addGroup(\FOS\UserBundle\Model\GroupInterface $groups) {
+       $this->groups[] = $groups;
+
+       return $this;
+   }
+
+   /**
+    * Remove groups
+    *
+    * @param \ItoSoftware\Base\ModelBundle\Entity\Group $groups
+    */
+   public function removeGroup(\FOS\UserBundle\Model\GroupInterface $groups) {
+       $this->groups->removeElement($groups);
+   }
     public function prePersist(){
         $this->username = $this->getEmail();
         $this->usernameCanonical = $this->getEmailCanonical();
@@ -95,28 +163,17 @@ class User extends \Sonata\UserBundle\Entity\BaseUser{
 //    ****FIN MODIFICACIONES
 //    ******************************************************************************************
 
+   
     /**
      * @var string
      */
     private $picture;
 
     /**
-     * Get id
-     *
-     * @return integer 
+     * @var \Doctrine\Common\Collections\Collection
      */
-    public function getId() {
-        return $this->id;
-    }
+    private $plan;
 
-    /**
-     * Get groups
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getGroups() {
-        return $this->groups;
-    }
 
     /**
      * Set picture
@@ -124,7 +181,8 @@ class User extends \Sonata\UserBundle\Entity\BaseUser{
      * @param string $picture
      * @return User
      */
-    public function setPicture($picture) {
+    public function setPicture($picture)
+    {
         $this->picture = $picture;
 
         return $this;
@@ -135,42 +193,51 @@ class User extends \Sonata\UserBundle\Entity\BaseUser{
      *
      * @return string 
      */
-    public function getPicture() {
+    public function getPicture()
+    {
         return $this->picture;
     }
-    
-    
-    protected $facebookid;
-    
-    
-    protected $facebookaccesstoken;
-    
-    public function getFacebookid() {
-        return $this->facebookid;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
-    public function getFacebookaccesstoken() {
-        return $this->facebookaccesstoken;
+    /**
+     * Add plan
+     *
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Plan $plan
+     * @return User
+     */
+    public function addPlan(\ItoSoftware\Components\ModelBundle\Entity\Plan $plan)
+    {
+        $this->plan[] = $plan;
+
+        return $this;
     }
 
-    public function setFacebookid($facebookid) {
-        $this->facebookid = $facebookid;
+    /**
+     * Remove plan
+     *
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Plan $plan
+     */
+    public function removePlan(\ItoSoftware\Components\ModelBundle\Entity\Plan $plan)
+    {
+        $this->plan->removeElement($plan);
     }
 
-    public function setFacebookaccesstoken($facebookaccesstoken) {
-        $this->facebookaccesstoken = $facebookaccesstoken;
-    }
-    
-    protected $plan;
-    
-    public function getPlan() {
+    /**
+     * Get plan
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPlan()
+    {
         return $this->plan;
     }
-
-    public function setPlan($plan) {
-        $this->plan = $plan;
-    }
-
-
-
 }

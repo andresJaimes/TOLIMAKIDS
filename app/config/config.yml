@@ -85,6 +85,9 @@ swiftmailer:
     username:   soporte@ito-software.com
     password:   1r1r2q3t
     
-presta_sitemap:
-    timetolive: 3600
     
+parameters:
+    facebook_app_id: '406153069523025'
+    facebook_app_secret: '929ad8d54a9b24aabbd9e8958151a0eb'
+    
+

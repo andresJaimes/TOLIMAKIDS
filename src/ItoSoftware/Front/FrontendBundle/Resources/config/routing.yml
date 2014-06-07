@@ -1,3 +1,13 @@
 front_frontend_homepage:
     pattern:  /
     defaults: { _controller: FrontFrontendBundle:Default:index }
+    
+      
+          
+front_frontend_lugar_detalle:
+    pattern:  /places/detalle/{id}
+    defaults: { _controller: FrontFrontendBundle:Places:detalleLugar }
+   
+front_frontend_actividad_detalle:
+    pattern:  /activity/detalle/{id}
+    defaults: { _controller: FrontFrontendBundle:Activity:detalleActividad}

@@ -1,0 +1,57 @@
+{% extends "::frontend.html.twig" %}
+
+{% block title %}Actividades{% endblock %} 
+{% block body %}
+   
+    {% block javascript %}
+        {{parent()}}
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/Gmap.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/controller.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/api_calls.js')}}"></script>
+         <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/render.js')}}"></script>
+          <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/main.js')}}"></script>
+          <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/filtro_inicio.js')}}"></script>
+        
+        <script type="text/javascript">   
+            $(document).ready(function() {
+
+                  LoadMap();
+                  cargarPlaces();
+
+              });
+
+          
+              
+
+      </script>
+    {% endblock %}
+        <style>
+            .gmaps{
+               height: 100px ;
+               margin: 100px;
+               padding: 100px
+            }
+           .gmaps img {
+                 max-width: none;
+           }
+      </style>
+       <div id="map-canvas" class="gmaps"></div>
+
+    
+
+       <input type="hidden" id="url_detalle" value="{{url('front_frontend_lugar_detalle',{id:0})}}">
+             <form method="get" action=".">
+                   {{ form_rest(form) }}
+                   <input type="submit" name="submit-filter" value="filter" />
+               </form>
+                {% for activity in activities %}
+                    <a href="{{url('front_frontend_actividad_detalle',{id:activity.id})}}">{{ activity.name }}</a>
+                {% endfor %}
+
+{% endblock %}
+
+
+
+ 
+
+

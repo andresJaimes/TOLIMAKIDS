@@ -1,0 +1,12 @@
+menu:
+  pattern:  /
+  defaults: { _controller: "CiturApiBundle:Menu:index"}
+  requirements:
+    _method: GET
+
+menu_show:
+  pattern:  /{id}
+  defaults: { _controller: "CiturApiBundle:Menu:show"}
+  requirements:
+    _method: GET
+    id:  "\d+"

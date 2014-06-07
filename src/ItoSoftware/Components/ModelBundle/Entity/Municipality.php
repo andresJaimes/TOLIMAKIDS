@@ -145,4 +145,34 @@ class Municipality
     public function __toString() {
         return $this->getName() ? $this->getName() : 'Nuevo Municipio';
     }  
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->places = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add places
+     *
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Places $places
+     * @return Municipality
+     */
+    public function addPlace(\ItoSoftware\Components\ModelBundle\Entity\Places $places)
+    {
+        $this->places[] = $places;
+
+        return $this;
+    }
+
+    /**
+     * Remove places
+     *
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Places $places
+     */
+    public function removePlace(\ItoSoftware\Components\ModelBundle\Entity\Places $places)
+    {
+        $this->places->removeElement($places);
+    }
 }

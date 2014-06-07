@@ -1,0 +1,8 @@
+{"Municipality":
+    [
+    {% for entity in entities %}
+        {% include 'ItoApiBundle:Municipality:show.json.twig'  with { 'entity': entity }%} 
+        {% if not loop.last %} , 
+    {% endif%}{% endfor %}
+    ]
+}

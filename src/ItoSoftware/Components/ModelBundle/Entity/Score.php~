@@ -1,6 +1,6 @@
 <?php
 
-namespace ItoSoftware\Base\ModelBundle\Entity;
+namespace ItoSoftware\Components\ModelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,7 +20,7 @@ class Score
     private $number;
 
     /**
-     * @var integer
+     * @var boolean
      */
     private $active;
 
@@ -76,7 +76,7 @@ class Score
     /**
      * Set active
      *
-     * @param integer $active
+     * @param boolean $active
      * @return Score
      */
     public function setActive($active)
@@ -89,7 +89,7 @@ class Score
     /**
      * Get active
      *
-     * @return integer 
+     * @return boolean 
      */
     public function getActive()
     {
@@ -150,7 +150,7 @@ class Score
      * @param \ItoSoftware\Base\ModelBundle\Entity\Activity $activity
      * @return Score
      */
-    public function addActivity(\ItoSoftware\Base\ModelBundle\Entity\Activity $activity)
+    public function addActivity(\ItoSoftware\Components\ModelBundle\Entity\Activity $activity)
     {
         $this->activity[] = $activity;
     
@@ -162,7 +162,7 @@ class Score
      *
      * @param \ItoSoftware\Base\ModelBundle\Entity\Activity $activity
      */
-    public function removeActivity(\ItoSoftware\Base\ModelBundle\Entity\Activity $activity)
+    public function removeActivity(\ItoSoftware\Components\ModelBundle\Entity\Activity $activity)
     {
         $this->activity->removeElement($activity);
     }

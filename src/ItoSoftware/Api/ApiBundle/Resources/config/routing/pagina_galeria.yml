@@ -1,0 +1,12 @@
+pagina_galeria:
+  pattern:  /
+  defaults: { _controller: "CiturApiBundle:PaginaGaleria:index" }
+  requirements:
+    _method: GET
+    
+pagina_galeria_show:
+  pattern:    /{id}
+  defaults: { _controller: "CiturApiBundle:PaginaGaleria:show" }
+  requirements:
+    _method: GET
+    id: "\d+"

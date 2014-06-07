@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class ActivityRepository extends EntityRepository
 {
+    
+     public function findAllOrderedByName()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT a FROM ItoModelBundle:Activity a ORDER BY a.name ASC'
+            )
+            ->getResult();
+    }
 }

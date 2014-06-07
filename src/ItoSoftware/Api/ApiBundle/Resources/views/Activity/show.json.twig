@@ -1,0 +1,10 @@
+{
+    "id":                       "{{entity.getId}}",
+    "nombre":                   "{{entity.getName}}",
+    "descripción":              "{{entity.getDescription}}"
+    "places_id":                "{{entity.getPlaces.getId}}",
+    "places_nombre":            "{{entity.getPlaces.getName}}",
+    "fecha de registro"         "{{entity.getRegistredDate}}",
+    "url_detalle":              "{{ url('frontend_activity_detalle', { 'active' : entity.getActive}) }}",
+    "url_detalle_to_iframe":    "{{ url('frontend_activity_detalle', { 'active' : entity.getActive}) }}?i=1",
+}

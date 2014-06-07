@@ -1,10 +1,12 @@
 
+    
+ito_api:
+    resource: "@ItoApiBundle/Resources/config/routing.yml"
+    prefix:   /api    
+
 front_frontend:
     resource: "@FrontFrontendBundle/Resources/config/routing.yml"
-    prefix:   /{_locale}
-    defaults:  { _locale: en }
-    requirements:
-        _locale: en|es|fr|
+    prefix:   /index
 
 #ito_model:
 #    resource: "@ItoModelBundle/Resources/config/routing.yml"
@@ -76,11 +78,7 @@ hwi_oauth_login:
 
 facebook_login:
     pattern: /checkfacebook
-    
-PrestaSitemapBundle:
-    resource: "@PrestaSitemapBundle/Resources/config/routing.yml"
-    prefix:   /
-
+ 
 
     
  

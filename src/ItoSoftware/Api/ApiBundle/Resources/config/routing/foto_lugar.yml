@@ -1,0 +1,12 @@
+foto_lugar:
+    pattern:  /
+    defaults: { _controller: "CiturApiBundle:FotoLugar:index" }
+    requirements:
+        _method: GET
+        
+foto_lugar_show:
+    pattern:  /{id}
+    defaults: { _controller: "CiturApiBundle:FotoLugar:show" }
+    requirements:
+        _method: GET
+        id: "\d+"

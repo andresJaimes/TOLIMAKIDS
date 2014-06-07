@@ -1,6 +1,6 @@
 <?php
 
-namespace ItoSoftware\Base\ModelBundle\Entity;
+namespace ItoSoftware\Components\ModelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -30,15 +30,16 @@ class Plan
     private $registrarionDate;
 
     /**
-     * @var integer
+     * @var boolean
      */
     private $active;
 
-     /**
-     * @ORM\ManyToOne(targetEntity="Activity", inversedBy="plan")
-     * @ORM\JoinColumn(name="activity_id", referencedColumnName="id")
-     */
-    protected $activity;
+  
+    
+    private $activity;
+    
+    
+    private $user;
 
     /**
      * Get id
@@ -122,7 +123,7 @@ class Plan
     /**
      * Set active
      *
-     * @param integer $active
+     * @param boolean $active
      * @return Plan
      */
     public function setActive($active)
@@ -135,10 +136,74 @@ class Plan
     /**
      * Get active
      *
-     * @return integer 
+     * @return boolean 
      */
     public function getActive()
     {
         return $this->active;
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getActivity() {
+        return $this->activity;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getUser() {
+        return $this->user;
+    }
+
+    /**
+     * 
+     * @param type $activity
+     */
+    public function setActivity($activity) {
+        $this->activity = $activity;
+    }
+
+    /**
+     * 
+     * @param type $user
+     */
+    public function setUser($user) {
+        $this->user = $user;
+    }
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->activity = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add activity
+     *
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Activity $activity
+     * @return Plan
+     */
+    public function addActivity(\ItoSoftware\Components\ModelBundle\Entity\Activity $activity)
+    {
+        $this->activity[] = $activity;
+
+        return $this;
+    }
+
+    /**
+     * Remove activity
+     *
+     * @param \ItoSoftware\Components\ModelBundle\Entity\Activity $activity
+     */
+    public function removeActivity(\ItoSoftware\Components\ModelBundle\Entity\Activity $activity)
+    {
+        $this->activity->removeElement($activity);
     }
 }

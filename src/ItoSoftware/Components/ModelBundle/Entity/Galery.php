@@ -13,6 +13,7 @@ use ItoSoftware\Components\ToolBundle\Model\ApplicationBoot;
  */
 class Galery
 {
+    
      static $UPLOAD_DIR = "uploads/galery/activity";
      
     /**
