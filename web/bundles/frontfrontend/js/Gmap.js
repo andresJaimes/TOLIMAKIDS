@@ -6,30 +6,51 @@ var marker_open = null;
 var map;
 var currentFeature_or_Features;
 var infoWindow;
+var circle;
+var prueba;
 
 function LoadMap() {
     var mapOptions = {
-        zoom: 6
+        zoom: 12,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+
     };
 
+  
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     latlngbounds = new google.maps.LatLngBounds();
     markers = [];
     marker_open = null;
     
     
-    if(navigator.geolocation) {
+                   if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = new google.maps.LatLng(position.coords.latitude,
+      var position = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);
 
       var infowindow = new google.maps.InfoWindow({
         map: map,
-        position: pos,
+        position: position,
         content: 'You Here'
       });
-
-      map.setCenter(pos);
+      
+      
+      
+     circle = new google.maps.Circle({
+       map: map,
+       radius: 20000,    // metres
+       fillColor: 'transparent',
+       strokeColor: 'red'
+       
+     });
+     circle.bindTo('center', infowindow , 'position');
+        
+     
+       
+       prueba =  circle.radius;
+   
+         
+      map.setCenter(position);
     }, function() {
       handleNoGeolocation(true);
     });
@@ -37,6 +58,8 @@ function LoadMap() {
     // Browser doesn't support Geolocation
     handleNoGeolocation(false);
   }
+  
+
 
 }
 
@@ -62,8 +85,12 @@ function mapDetalle(latitude, length) {
        var position = new google.maps.LatLng(latitude, length);
        map.setCenter(position);
        // content: content
+       
+       
    
 }
+
+
 
 
 function addMarkerPlaces(places) {
@@ -71,7 +98,8 @@ function addMarkerPlaces(places) {
    $.each(places.Places, function( index, element ) {
   var marker = new google.maps.Marker({
         position: new google.maps.LatLng(element.latitude, element.length),
-        map: map       
+        map: map  
+
     });
 
     
@@ -86,9 +114,6 @@ function addMarkerPlaces(places) {
                    <a title="Ver más" href="'+ url + element.id +'">Ver más</a>\n';
         $.each(element.activity, function(index, objecto){
             myHtml += '<br>' + objecto.name + '</br>';
-            
-            
-           
 
         });
         
@@ -99,6 +124,8 @@ function addMarkerPlaces(places) {
        var object = new Array();
        object.push('palces_' + places.id);
        object.push(marker);
+      
+      
       
     
     });

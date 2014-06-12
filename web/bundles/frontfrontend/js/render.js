@@ -50,7 +50,7 @@ function mostrarDetallePlaces(places){
                     
             detallePlaces +=
                     '<div class="titulo_places">'+
-                        '<h1>'+ places.name +'</h1>'+
+                        '<h1> Lugares </h1>'+
                     '</div>';
             
     

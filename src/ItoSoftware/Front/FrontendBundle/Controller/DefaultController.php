@@ -35,6 +35,7 @@ $actividades = array();
             'form' => $form->createView(),
             'activities' => $actividades
         ));
+            
         
     }
 

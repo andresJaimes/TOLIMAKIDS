@@ -10,7 +10,6 @@
         <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/api_calls.js')}}"></script>
          <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/render.js')}}"></script>
           <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/main.js')}}"></script>
-          <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/filtro_inicio.js')}}"></script>
         
         <script type="text/javascript">   
             $(document).ready(function() {
@@ -18,10 +17,9 @@
                   LoadMap();
                   cargarPlaces();
 
+
               });
 
-          
-              
 
       </script>
     {% endblock %}
@@ -45,7 +43,9 @@
                    <input type="submit" name="submit-filter" value="filter" />
                </form>
                 {% for activity in activities %}
-                    <a href="{{url('front_frontend_actividad_detalle',{id:activity.id})}}">{{ activity.name }}</a>
+               
+                        <a href="{{url('front_frontend_actividad_detalle',{id:activity.id})}}">{{ activity.name }}</a>
+
                 {% endfor %}
 
 {% endblock %}
