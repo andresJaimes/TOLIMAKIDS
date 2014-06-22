@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new ItoSoftware\Api\ApiBundle\ItoApiBundle(),
             new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
+            new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

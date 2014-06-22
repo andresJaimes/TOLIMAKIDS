@@ -6,14 +6,20 @@
 
          
         {% block javascripts %}
-            <script src="/bundles/frontfrontend/js/jquery-1.11.1.js"></script>  
-            <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
         
-           <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/Gmap.js')}}"></script>
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/controller.js')}}"></script>
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/api_calls.js')}}"></script>
-         <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/render.js')}}"></script>
-          <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/main.js')}}"></script>
+            <script src="/bundles/frontfrontend/js/jquery-1.11.1.js"></script>  
+            <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>  
+            <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+            <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+            <link href="{{ asset ('bundles/frontfronttend/css/slider/EstilosACEX.css')}}" rel="stylesheet" type="text/css"/>
+        
+            <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/Gmap.js')}}"></script>
+            <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/controller.js')}}"></script>
+            <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/api_calls.js')}}"></script>
+            <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/render.js')}}"></script>
+            <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/main.js')}}"></script>
+            <script src="{{ asset('bundles/frontfronttend/js/slider/miniSlider.js')}}"></script>
+   
         
         <script type="text/javascript">   
             $(document).ready(function() {
@@ -22,7 +28,14 @@
                   cargarPlaces();
 
               });
-      </script>
+
+              $(function() {
+              $('#slider').miniSlider();
+              });
+        </script>
+              
+      
+     
 {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>

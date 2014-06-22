@@ -88,6 +88,7 @@ $catalogue = new MessageCatalogue('es', array (
     'fos_user.email.invalid' => 'La dirección de correo no es válida',
     'fos_user.password.blank' => 'Por favor, ingrese una contraseña',
     'fos_user.password.short' => '[-Inf,Inf]La contraseña es demasiado corta',
+    'fos_user.password.mismatch' => 'La contraseña ingresada no coincide',
     'fos_user.new_password.blank' => 'Por favor, ingrese una nueva contraseña',
     'fos_user.new_password.short' => '[-Inf,Inf]La nueva contraseña es demasiado corta',
     'fos_user.current_password.invalid' => 'La contraseña ingresada no es válida',
@@ -735,6 +736,8 @@ the Team.
     'label_type_yes' => 'yes',
     'label_type_no' => 'no',
     'sonata_core_template_box_file_found_in' => 'This file can be found in',
+    'label_type_equals' => 'is equal to',
+    'label_type_not_equals' => 'is not equal to',
   ),
   'SonataUserBundle' => 
   array (

@@ -1,5 +1,17 @@
 # CHANGELOG
 
+### 1.4.0 (2014-06-17)
+
+ * c622643 - [Helper][Map] Introduce renderJsContainerExtra
+ * c5a19df - [Services][Directions] Fix waypoint stopover
+ * b5173e9 - [Helper][Extension] Fix InfoBox loading with async map
+ * b10a1a2 - Add coveralls support
+ * a1608ae - [Services] Check if the http adapter returns a valid response
+ * ca767aa - [Places][Autocomplete] Fix exception + tests
+ * 654744c - [Helper] Rely on egeloen/json-builder
+ * 533a5b0 - [Places] Fix helper rendering bug + Add component restrictions support
+ * ece9738 - Update new year
+
 ### 1.3.0 (2013-12-12)
 
  * a308662 - [MapHelper] Fix default info window open support

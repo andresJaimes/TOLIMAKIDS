@@ -1,5 +1,16 @@
 # CHANGELOG
 
+### 2.2.0 (2014-06-17)
+
+ * 2599efe - [Travis] Add Symfony 2.5 + Remove 2.0 branch
+ * bf48170 - Replace deprecated twig features + Fix PHPDoc + Bump phpunit to ~4.0 + Bump twig to ~1.12
+ * fdffec8 - Add coveralls support
+ * b2569ba - Fix Geocoder provider documentation
+ * c2d25a7 - [Helper] Allow to render the map in a single call
+ * d69152a - [Places] Add component restrictions support
+ * e6cf9ce - Update new year
+ * 69e8426 - Deprecate Symfony 2.0
+
 ### 2.0.3 - 2.1.3 (2013-12-12)
 
  * 2ffb7cd - [Travis] Simplify matrix + Add Symfony 2.4 to the build

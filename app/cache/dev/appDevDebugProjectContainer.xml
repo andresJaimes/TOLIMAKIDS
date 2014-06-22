@@ -32,6 +32,7 @@
       <parameter key="HWIOAuthBundle">HWI\Bundle\OAuthBundle\HWIOAuthBundle</parameter>
       <parameter key="ItoApiBundle">ItoSoftware\Api\ApiBundle\ItoApiBundle</parameter>
       <parameter key="LexikFormFilterBundle">Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle</parameter>
+      <parameter key="RaulFraileLadybugBundle">RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
       <parameter key="SensioGeneratorBundle">Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle</parameter>
@@ -505,7 +506,14 @@
     <parameter key="sonata.block.service.text.class">Sonata\BlockBundle\Block\Service\TextBlockService</parameter>
     <parameter key="sonata.block.service.rss.class">Sonata\BlockBundle\Block\Service\RssBlockService</parameter>
     <parameter key="sonata.block.service.menu.class">Sonata\BlockBundle\Block\Service\MenuBlockService</parameter>
+    <parameter key="sonata.block.service.template.class">Sonata\BlockBundle\Block\Service\TemplateBlockService</parameter>
     <parameter key="sonata.block.exception.strategy.manager.class">Sonata\BlockBundle\Exception\Strategy\StrategyManager</parameter>
+    <parameter key="sonata.block.container.types" type="collection">
+      <parameter>sonata.block.service.container</parameter>
+      <parameter>sonata.page.block.container</parameter>
+      <parameter>cmf.block.container</parameter>
+      <parameter>cmf.block.slideshow</parameter>
+    </parameter>
     <parameter key="sonata_block.blocks" type="collection">
       <parameter key="sonata.admin.block.admin_list" type="collection">
         <parameter key="contexts" type="collection">
@@ -515,17 +523,23 @@
         <parameter key="settings" type="collection"/>
       </parameter>
       <parameter key="sonata.block.service.text" type="collection">
-        <parameter key="contexts" type="collection"/>
+        <parameter key="contexts" type="collection">
+          <parameter>ito_base_s2</parameter>
+        </parameter>
         <parameter key="cache">sonata.cache.noop</parameter>
         <parameter key="settings" type="collection"/>
       </parameter>
       <parameter key="sonata.block.service.action" type="collection">
-        <parameter key="contexts" type="collection"/>
+        <parameter key="contexts" type="collection">
+          <parameter>ito_base_s2</parameter>
+        </parameter>
         <parameter key="cache">sonata.cache.noop</parameter>
         <parameter key="settings" type="collection"/>
       </parameter>
       <parameter key="sonata.block.service.rss" type="collection">
-        <parameter key="contexts" type="collection"/>
+        <parameter key="contexts" type="collection">
+          <parameter>ito_base_s2</parameter>
+        </parameter>
         <parameter key="cache">sonata.cache.noop</parameter>
         <parameter key="settings" type="collection"/>
       </parameter>
@@ -839,6 +853,16 @@
     <parameter key="hwi_oauth.connect">false</parameter>
     <parameter key="hwi_oauth.templating.engine">twig</parameter>
     <parameter key="lexik_form_filter.query_builder_updater.class">Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdater</parameter>
+    <parameter key="ladybug.options" type="collection">
+      <parameter key="extra_helpers" type="collection">
+        <parameter>RaulFraile\Bundle\LadybugBundle\DataCollector\LadybugDataCollector:log</parameter>
+      </parameter>
+      <parameter key="theme">modern</parameter>
+      <parameter key="expanded">false</parameter>
+      <parameter key="silenced">false</parameter>
+      <parameter key="array_max_nesting_level">9</parameter>
+      <parameter key="object_max_nesting_level">3</parameter>
+    </parameter>
     <parameter key="web_profiler.controller.profiler.class">Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController</parameter>
     <parameter key="web_profiler.controller.router.class">Symfony\Bundle\WebProfilerBundle\Controller\RouterController</parameter>
     <parameter key="web_profiler.controller.exception.class">Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController</parameter>
@@ -895,6 +919,10 @@
       <parameter key="sonata.block.data_collector" type="collection">
         <parameter>block</parameter>
         <parameter>SonataBlockBundle:Profiler:block.html.twig</parameter>
+      </parameter>
+      <parameter key="data_collector.ladybug_data_collector" type="collection">
+        <parameter>ladybug</parameter>
+        <parameter>RaulFraileLadybugBundle:Collector:ladybug</parameter>
       </parameter>
     </parameter>
   </parameters>
@@ -1177,6 +1205,14 @@
         <argument type="collection">
           <argument>lexik_form_filter.filter_prepare</argument>
           <argument>onFilterBuilderPrepare</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListenerService">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument>ladybug.event_listener.ladybug_config_listener</argument>
+          <argument>onKernelRequest</argument>
         </argument>
         <argument>0</argument>
       </call>
@@ -3272,6 +3308,7 @@
               <argument key="currency">form.type.currency</argument>
               <argument key="entity">form.type.entity</argument>
               <argument key="sonata_block_service_choice">sonata.block.form.type.block</argument>
+              <argument key="sonata_type_container_template_choice">sonata.block.form.type.container_template</argument>
               <argument key="sonata_type_admin">sonata.admin.form.type.admin</argument>
               <argument key="sonata_type_model">sonata.admin.form.type.model_choice</argument>
               <argument key="sonata_type_model_list">sonata.admin.form.type.model_list</argument>
@@ -3296,6 +3333,8 @@
               <argument key="sonata_type_translatable_choice">sonata.core.form.type.translatable_choice</argument>
               <argument key="sonata_type_date_range">sonata.core.form.type.date_range</argument>
               <argument key="sonata_type_datetime_range">sonata.core.form.type.datetime_range</argument>
+              <argument key="sonata_type_date_picker">sonata.core.form.type.date_picker</argument>
+              <argument key="sonata_type_datetime_picker">sonata.core.form.type.datetime_picker</argument>
               <argument key="sonata_type_equal">sonata.core.form.type.equal</argument>
               <argument key="sonata_security_roles">sonata.user.form.type.security_roles</argument>
               <argument key="sonata_user_profile">sonata.user.profile.form.type</argument>
@@ -3701,6 +3740,9 @@
           </service>
         </argument>
       </call>
+      <call method="add">
+        <argument type="service" id="data_collector.ladybug_data_collector"/>
+      </call>
     </service>
     <service id="profiler_listener" class="Symfony\Component\HttpKernel\EventListener\ProfilerListener">
       <tag name="kernel.event_subscriber"/>
@@ -3833,7 +3875,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>53961472657db</argument>
+            <argument>53a60214b0028</argument>
           </service>
         </argument>
         <argument type="service">
@@ -3861,7 +3903,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>53961472657db</argument>
+            <argument>53a60214b0028</argument>
           </service>
         </argument>
       </argument>
@@ -4150,7 +4192,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>53961472657db</argument>
+            <argument>53a60214b0028</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -4414,7 +4456,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>53961472657db</argument>
+            <argument>53a60214b0028</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -4617,6 +4659,14 @@
           <service class="HWI\Bundle\OAuthBundle\Twig\Extension\OAuthExtension" public="false">
             <tag name="twig.extension"/>
             <argument type="service" id="hwi_oauth.templating.helper.oauth"/>
+          </service>
+        </argument>
+      </call>
+      <call method="addExtension">
+        <argument type="service">
+          <service class="RaulFraile\Bundle\LadybugBundle\Twig\Extension\LadybugExtension" public="false">
+            <tag name="twig.extension"/>
+            <argument type="service" id="service_container"/>
           </service>
         </argument>
       </call>
@@ -5408,18 +5458,19 @@
       <argument type="service" id="knp_menu.menu_provider"/>
       <argument type="collection"/>
     </service>
+    <service id="sonata.block.service.template" class="Sonata\BlockBundle\Block\Service\TemplateBlockService">
+      <tag name="sonata.block"/>
+      <argument>sonata.block.template</argument>
+      <argument type="service" id="templating"/>
+    </service>
     <service id="sonata.block.form.type.block" class="Sonata\BlockBundle\Form\Type\ServiceListType">
       <tag name="form.type" alias="sonata_block_service_choice"/>
       <argument type="service" id="sonata.block.manager"/>
+    </service>
+    <service id="sonata.block.form.type.container_template" class="Sonata\BlockBundle\Form\Type\ContainerTemplateType">
+      <tag name="form.type" alias="sonata_type_container_template_choice"/>
       <argument type="collection">
-        <argument key="admin" type="collection">
-          <argument>sonata.admin.block.admin_list</argument>
-        </argument>
-        <argument key="ito_base_s2" type="collection">
-          <argument>sonata.block.service.text</argument>
-          <argument>sonata.block.service.action</argument>
-          <argument>sonata.block.service.rss</argument>
-        </argument>
+        <argument key="SonataBlockBundle:Block:block_container.html.twig">SonataBlockBundle default template</argument>
       </argument>
     </service>
     <service id="sonata.block.manager" class="Sonata\BlockBundle\Block\BlockServiceManager" public="false">
@@ -5429,38 +5480,58 @@
       <call method="add">
         <argument>sonata.block.service.container</argument>
         <argument>sonata.block.service.container</argument>
+        <argument type="collection"/>
       </call>
       <call method="add">
         <argument>sonata.block.service.empty</argument>
         <argument>sonata.block.service.empty</argument>
+        <argument type="collection"/>
       </call>
       <call method="add">
         <argument>sonata.block.service.text</argument>
         <argument>sonata.block.service.text</argument>
+        <argument type="collection">
+          <argument>ito_base_s2</argument>
+        </argument>
       </call>
       <call method="add">
         <argument>sonata.block.service.rss</argument>
         <argument>sonata.block.service.rss</argument>
+        <argument type="collection">
+          <argument>ito_base_s2</argument>
+        </argument>
       </call>
       <call method="add">
         <argument>sonata.block.service.menu</argument>
         <argument>sonata.block.service.menu</argument>
+        <argument type="collection"/>
+      </call>
+      <call method="add">
+        <argument>sonata.block.service.template</argument>
+        <argument>sonata.block.service.template</argument>
+        <argument type="collection"/>
       </call>
       <call method="add">
         <argument>sonata.admin.block.admin_list</argument>
         <argument>sonata.admin.block.admin_list</argument>
+        <argument type="collection">
+          <argument>admin</argument>
+        </argument>
       </call>
       <call method="add">
         <argument>sonata.admin.block.search_result</argument>
         <argument>sonata.admin.block.search_result</argument>
+        <argument type="collection"/>
       </call>
       <call method="add">
         <argument>sonata.user.block.menu</argument>
         <argument>sonata.user.block.menu</argument>
+        <argument type="collection"/>
       </call>
       <call method="add">
         <argument>sonata.user.block.account</argument>
         <argument>sonata.user.block.account</argument>
+        <argument type="collection"/>
       </call>
     </service>
     <service id="sonata.block.context_manager.default" class="Sonata\BlockBundle\Block\BlockContextManager">
@@ -5482,7 +5553,7 @@
       <argument type="service" id="logger" on-invalid="ignore"/>
       <argument>true</argument>
     </service>
-    <service id="sonata.block.templating.helper" class="Sonata\BlockBundle\Templating\Helper\BlockHelper" public="false">
+    <service id="sonata.block.templating.helper" class="Sonata\BlockBundle\Templating\Helper\BlockHelper">
       <tag name="templating.helper" alias="sonata_block"/>
       <argument type="service" id="sonata.block.manager"/>
       <argument type="collection">
@@ -6085,6 +6156,7 @@
       <tag name="form.type" alias="fos_user_group"/>
       <argument>ItoSoftware\Components\ModelBundle\Entity\Group</argument>
     </service>
+    <service id="sonata.core.date.moment_format_converter" class="Sonata\CoreBundle\Date\MomentFormatConverter"/>
     <service id="sonata.core.flashmessage.manager" class="Sonata\CoreBundle\FlashMessage\FlashManager">
       <tag name="sonata.status.renderer"/>
       <argument type="service" id="session"/>
@@ -6112,7 +6184,7 @@
             <argument key="domain">SonataAdminBundle</argument>
           </argument>
         </argument>
-        <argument key="error" type="collection">
+        <argument key="danger" type="collection">
           <argument key="error" type="collection">
             <argument key="domain">SonataCoreBundle</argument>
           </argument>
@@ -6127,7 +6199,7 @@
       <argument type="collection">
         <argument key="success">success</argument>
         <argument key="warning">warning</argument>
-        <argument key="error">error</argument>
+        <argument key="danger">danger</argument>
       </argument>
     </service>
     <service id="sonata.core.flashmessage.twig.extension" class="Sonata\CoreBundle\Twig\Extension\FlashMessageExtension">
@@ -6154,6 +6226,14 @@
     <service id="sonata.core.form.type.datetime_range" class="Sonata\CoreBundle\Form\Type\DateTimeRangeType">
       <tag name="form.type" alias="sonata_type_datetime_range"/>
       <argument type="service" id="translator.default"/>
+    </service>
+    <service id="sonata.core.form.type.date_picker" class="Sonata\CoreBundle\Form\Type\DatePickerType">
+      <tag name="form.type" alias="sonata_type_date_picker"/>
+      <argument type="service" id="sonata.core.date.moment_format_converter"/>
+    </service>
+    <service id="sonata.core.form.type.datetime_picker" class="Sonata\CoreBundle\Form\Type\DateTimePickerType">
+      <tag name="form.type" alias="sonata_type_datetime_picker"/>
+      <argument type="service" id="sonata.core.date.moment_format_converter"/>
     </service>
     <service id="sonata.core.form.type.equal" class="Sonata\CoreBundle\Form\Type\EqualType">
       <tag name="form.type" alias="sonata_type_equal"/>
@@ -6645,6 +6725,37 @@
     <service id="lexik_form_filter.doctrine_subscriber" class="Lexik\Bundle\FormFilterBundle\Event\Subscriber\DoctrineSubscriber">
       <tag name="kernel.event_subscriber"/>
     </service>
+    <service id="ladybug.dumper" class="Ladybug\Dumper">
+      <call method="setOptions">
+        <argument type="collection">
+          <argument key="extra_helpers" type="collection">
+            <argument>RaulFraile\Bundle\LadybugBundle\DataCollector\LadybugDataCollector:log</argument>
+          </argument>
+          <argument key="theme">modern</argument>
+          <argument key="expanded">false</argument>
+          <argument key="silenced">false</argument>
+          <argument key="array_max_nesting_level">9</argument>
+          <argument key="object_max_nesting_level">3</argument>
+        </argument>
+      </call>
+    </service>
+    <service id="data_collector.ladybug_data_collector" class="RaulFraile\Bundle\LadybugBundle\DataCollector\LadybugDataCollector">
+      <tag name="data_collector" template="RaulFraileLadybugBundle:Collector:ladybug" id="ladybug"/>
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="ladybug.event_listener.ladybug_config_listener" class="RaulFraile\Bundle\LadybugBundle\EventListener\LadybugConfigListener">
+      <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
+      <argument type="collection">
+        <argument key="extra_helpers" type="collection">
+          <argument>RaulFraile\Bundle\LadybugBundle\DataCollector\LadybugDataCollector:log</argument>
+        </argument>
+        <argument key="theme">modern</argument>
+        <argument key="expanded">false</argument>
+        <argument key="silenced">false</argument>
+        <argument key="array_max_nesting_level">9</argument>
+        <argument key="object_max_nesting_level">3</argument>
+      </argument>
+    </service>
     <service id="web_profiler.controller.profiler" class="Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController">
       <argument type="service" id="router" on-invalid="null"/>
       <argument type="service" id="profiler" on-invalid="null"/>
@@ -6697,6 +6808,10 @@
         <argument key="sonata.block.data_collector" type="collection">
           <argument>block</argument>
           <argument>SonataBlockBundle:Profiler:block.html.twig</argument>
+        </argument>
+        <argument key="data_collector.ladybug_data_collector" type="collection">
+          <argument>ladybug</argument>
+          <argument>RaulFraileLadybugBundle:Collector:ladybug</argument>
         </argument>
       </argument>
       <argument>bottom</argument>
@@ -7033,6 +7148,10 @@
         <argument>LexikFormFilter</argument>
       </call>
       <call method="addPath">
+        <argument>/home/Tolima_Kids/vendor/raulfraile/ladybug-bundle/RaulFraile/Bundle/LadybugBundle/Resources/views</argument>
+        <argument>RaulFraileLadybug</argument>
+      </call>
+      <call method="addPath">
         <argument>/home/Tolima_Kids/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views</argument>
         <argument>WebProfiler</argument>
       </call>
@@ -7236,6 +7355,7 @@
     <service id="fos_user.change_password.form.handler" alias="fos_user.change_password.form.handler.default"/>
     <service id="sonata.user.authentication.form" alias="fos_user.profile.form"/>
     <service id="sonata.user.authentication.form_handler" alias="fos_user.profile.form.handler"/>
+    <service id="ladybug" alias="data_collector.ladybug_data_collector"/>
     <service id="sensio.distribution.webconfigurator" alias="sensio_distribution.webconfigurator"/>
   </services>
 </container>

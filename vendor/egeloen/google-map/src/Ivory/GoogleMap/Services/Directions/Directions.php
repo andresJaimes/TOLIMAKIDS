@@ -67,6 +67,11 @@ class Directions extends AbstractService
 
         $url = $this->generateUrl($directionsRequest);
         $response = $this->httpAdapter->getContent($url);
+
+        if ($response === null) {
+            throw DirectionsException::invalidServiceResult();
+        }
+
         $directionsResponse = $this->buildDirectionsResponse($this->parse($response));
 
         return $directionsResponse;
@@ -111,11 +116,14 @@ class Directions extends AbstractService
             }
 
             foreach ($directionsRequest->getWaypoints() as $waypoint) {
+                $stopover = $waypoint->getStopover() ? 'via:' : '';
+
                 if (is_string($waypoint->getLocation())) {
-                    $waypoints[] = $waypoint->getLocation();
+                    $waypoints[] = $stopover.$waypoint->getLocation();
                 } else {
                     $waypoints[] = sprintf(
-                        '%s,%s',
+                        '%s%s,%s',
+                        $stopover,
                         $waypoint->getLocation()->getLatitude(),
                         $waypoint->getLocation()->getLongitude()
                     );

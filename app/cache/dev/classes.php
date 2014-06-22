@@ -6266,6 +6266,7 @@ public function getCacheKeys(BlockInterface $block);
 }
 namespace Sonata\BlockBundle\Block
 {
+use Sonata\AdminBundle\Validator\ErrorElement;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -6344,6 +6345,12 @@ public function execute(BlockContextInterface $blockContext, Response $response 
 {
 return $this->renderResponse($blockContext->getTemplate(), array('block_context'=> $blockContext,'block'=> $blockContext->getBlock(),
 ), $response);
+}
+public function buildEditForm(FormMapper $form, BlockInterface $block)
+{
+}
+public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
+{
 }
 }
 }
@@ -6465,10 +6472,11 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Model\BlockInterface;
 interface BlockServiceManagerInterface
 {
-public function add($name, $service);
+public function add($name, $service, $contexts = array());
 public function get(BlockInterface $block);
 public function setServices(array $blockServices);
 public function getServices();
+public function getServicesByContext($name);
 public function has($name);
 public function getService($name);
 public function getLoadedServices();
@@ -6486,9 +6494,11 @@ class BlockServiceManager implements BlockServiceManagerInterface
 protected $services;
 protected $container;
 protected $inValidate;
+protected $contexts;
 public function __construct(ContainerInterface $container, $debug, LoggerInterface $logger = null)
 {
 $this->services = array();
+$this->contexts = array();
 $this->container = $container;
 }
 private function load($type)
@@ -6517,13 +6527,21 @@ public function has($id)
 {
 return isset($this->services[$id]) ? true : false;
 }
-public function add($name, $service)
+public function add($name, $service, $contexts = array())
 {
 $this->services[$name] = $service;
+foreach ($contexts as $context) {
+if (!array_key_exists($context, $this->contexts)) {
+$this->contexts[$context] = array();
+}
+$this->contexts[$context][] = $name;
+}
 }
 public function setServices(array $blockServices)
 {
-$this->services = $blockServices;
+foreach($blockServices as $name => $service) {
+$this->add($name, $service);
+}
 }
 public function getServices()
 {
@@ -6533,6 +6551,17 @@ $this->load($id);
 }
 }
 return $this->services;
+}
+public function getServicesByContext($context)
+{
+if (!array_key_exists($context, $this->contexts)) {
+return array();
+}
+$services = array();
+foreach ($this->contexts[$context] as $name) {
+$services[$name] = $this->getService($name);
+}
+return $services;
 }
 public function getLoadedServices()
 {
@@ -6577,7 +6606,9 @@ $this->types = $types;
 public function load($configuration)
 {
 if (!in_array($configuration['type'], $this->types)) {
-throw new \RuntimeException(sprintf('The block type %s does not exist', $configuration['type']));
+throw new \RuntimeException(sprintf('The block type "%s" does not exist',
+$configuration['type']
+));
 }
 $block = new Block;
 $block->setId(uniqid());
@@ -6727,16 +6758,14 @@ public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
 {
 if (($name = $block->getSetting('menu_name')) && $name !==""&& !$this->menuProvider->has($name)) {
 $errorElement->with('menu_name')
-->addViolation('soanta.block.menu.not_existing', array('name'=> $name))
+->addViolation('sonata.block.menu.not_existing', array('name'=> $name))
 ->end();
 }
 }
 public function setDefaultSettings(OptionsResolverInterface $resolver)
 {
-$resolver->setDefaults(
-array('title'=> $this->getName(),'cache_policy'=>'public','template'=>'SonataBlockBundle:Block:block_core_menu.html.twig','menu_name'=>"",'safe_labels'=> false,'current_class'=>'active','first_class'=> false,'last_class'=> false,'current_uri'=> null,'menu_class'=>"list-group",'children_class'=>"list-group-item",'menu_template'=> null,
-)
-);
+$resolver->setDefaults(array('title'=> $this->getName(),'cache_policy'=>'public','template'=>'SonataBlockBundle:Block:block_core_menu.html.twig','menu_name'=>"",'safe_labels'=> false,'current_class'=>'active','first_class'=> false,'last_class'=> false,'current_uri'=> null,'menu_class'=>"list-group",'children_class'=>"list-group-item",'menu_template'=> null,
+));
 }
 public function getName()
 {
@@ -7149,11 +7178,9 @@ use Sonata\BlockBundle\Block\BlockServiceManagerInterface;
 class ServiceListType extends AbstractType
 {
 protected $manager;
-protected $contexts;
-public function __construct(BlockServiceManagerInterface $manager, array $contexts = array())
+public function __construct(BlockServiceManagerInterface $manager)
 {
 $this->manager = $manager;
-$this->contexts = $contexts;
 }
 public function getName()
 {
@@ -7165,18 +7192,13 @@ return'choice';
 }
 public function setDefaultOptions(OptionsResolverInterface $resolver)
 {
-$contexts = $this->contexts;
 $manager = $this->manager;
-$resolver->setDefaults(array('context'=> false,'multiple'=> false,'expanded'=> false,'choices'=> function (Options $options, $previousValue) use ($contexts, $manager) {
-if (!isset($contexts[$options['context']])) {
-if (Kernel::MINOR_VERSION < 3) {
-throw new \RuntimeException(sprintf('Invalid context: `%s`', $options['context']));
-}
-throw new InvalidArgumentException(sprintf('Invalid context: `%s`', $options['context']));
-}
+$resolver->setRequired(array('context',
+));
+$resolver->setDefaults(array('multiple'=> false,'expanded'=> false,'choices'=> function (Options $options, $previousValue) use ($manager) {
 $types = array();
-foreach ($contexts[$options['context']] as $service) {
-$types[$service] = sprintf('%s - %s', $manager->getService($service)->getName(), $service);
+foreach ($manager->getServicesByContext($options['context']) as $code => $service) {
+$types[$code] = sprintf('%s - %s', $service->getName(), $code);
 }
 return $types;
 },'preferred_choices'=> array(),'empty_data'=> function (Options $options) {
@@ -7337,7 +7359,7 @@ public function getTtl()
 if (!$this->getSetting('use_cache', true)) {
 return 0;
 }
-$ttl = $this->getSetting('ttl', 84600);
+$ttl = $this->getSetting('ttl', 86400);
 foreach ($this->getChildren() as $block) {
 $blockTtl = $block->getTtl();
 $ttl = ($blockTtl < $ttl) ? $blockTtl : $ttl;
@@ -7375,6 +7397,7 @@ public function getClass();
 public function findAll();
 public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null);
 public function findOneBy(array $criteria, array $orderBy = null);
+public function find($id);
 public function create();
 public function save($entity, $andFlush = true);
 public function delete($entity, $andFlush = true);
@@ -7382,10 +7405,18 @@ public function getTableName();
 public function getConnection();
 }
 }
+namespace Sonata\CoreBundle\Model
+{
+interface PageableManagerInterface
+{
+public function getPager(array $criteria, $page, $limit = 10, array $sort = array());
+}
+}
 namespace Sonata\BlockBundle\Model
 {
 use Sonata\CoreBundle\Model\ManagerInterface;
-interface BlockManagerInterface extends ManagerInterface
+use Sonata\CoreBundle\Model\PageableManagerInterface;
+interface BlockManagerInterface extends ManagerInterface, PageableManagerInterface
 {
 }
 }
@@ -13751,8 +13782,8 @@ $this->translator = $translator;
 }
 public function buildForm(FormBuilderInterface $builder, array $options)
 {
-$builder->add('start','date', array_merge(array('required'=> false), $options['field_options']));
-$builder->add('end','date', array_merge(array('required'=> false), $options['field_options']));
+$builder->add('start', $options['field_type'], array_merge(array('required'=> false), $options['field_options']));
+$builder->add('end', $options['field_type'], array_merge(array('required'=> false), $options['field_options']));
 }
 public function getName()
 {
@@ -13760,8 +13791,7 @@ return'sonata_type_date_range';
 }
 public function setDefaultOptions(OptionsResolverInterface $resolver)
 {
-$resolver->setDefaults(array('field_options'=> array()
-));
+$resolver->setDefaults(array('field_options'=> array(),'field_type'=>'date'));
 }
 }
 }
@@ -13780,8 +13810,8 @@ $this->translator = $translator;
 }
 public function buildForm(FormBuilderInterface $builder, array $options)
 {
-$builder->add('start','datetime', array_merge(array('required'=> false), $options['field_options']));
-$builder->add('end','datetime', array_merge(array('required'=> false), $options['field_options']));
+$builder->add('start', $options['field_type'], array_merge(array('required'=> false), $options['field_options']));
+$builder->add('end', $options['field_type'], array_merge(array('required'=> false), $options['field_options']));
 }
 public function getName()
 {
@@ -13789,7 +13819,7 @@ return'sonata_type_datetime_range';
 }
 public function setDefaultOptions(OptionsResolverInterface $resolver)
 {
-$resolver->setDefaults(array('field_options'=> array()
+$resolver->setDefaults(array('field_options'=> array(),'field_type'=>'datetime',
 ));
 }
 }

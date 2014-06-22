@@ -8,7 +8,7 @@ var currentFeature_or_Features;
 var infoWindow;
 var circle;
 var prueba;
-
+var latitud;
 function LoadMap() {
     var mapOptions = {
         zoom: 12,
@@ -23,33 +23,27 @@ function LoadMap() {
     marker_open = null;
     
     
-                   if(navigator.geolocation) {
+    
+    if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-      var position = new google.maps.LatLng(position.coords.latitude,
-                                       position.coords.longitude);
+ 
+                        var latitud = position.coords.latitude;
+			var longitud = position.coords.longitude;
 
+			var position = new google.maps.LatLng(latitud,longitud);
+                        
+                        
+                        document.getElementById("lti").innerHTML=latitud;
+                        document.getElementById("lgi").innerHTML=longitud;	
+
+                  
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: position,
         content: 'You Here'
       });
-      
-      
-      
-     circle = new google.maps.Circle({
-       map: map,
-       radius: 20000,    // metres
-       fillColor: 'transparent',
-       strokeColor: 'red'
-       
-     });
-     circle.bindTo('center', infowindow , 'position');
-        
-     
-       
-       prueba =  circle.radius;
    
-         
+   
       map.setCenter(position);
     }, function() {
       handleNoGeolocation(true);
@@ -89,7 +83,6 @@ function mapDetalle(latitude, length) {
        
    
 }
-
 
 
 

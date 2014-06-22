@@ -12,6 +12,7 @@
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "1.2.*",
         "twig/extensions": "1.0.*",
+        "symfony/finder": "2.3.*",
         "symfony/assetic-bundle": "2.3.*",
         "symfony/swiftmailer-bundle": "2.3.*",
         "symfony/monolog-bundle": "2.3.*",
@@ -23,7 +24,7 @@
         "sonata-project/doctrine-orm-admin-bundle": "2.2.7",
         "sonata-project/block-bundle": "2.2.*",
         "sonata-project/user-bundle": "2.2.*@dev",
-        "sonata-project/core-bundle": "2.2.5",
+        "sonata-project/core-bundle": "2.2.6",
         "friendsofsymfony/user-bundle": "1.3.*",
         "doctrine/doctrine-fixtures-bundle": "2.1.*@dev",
         "doctrine/data-fixtures": "1.0.*@dev",
@@ -36,7 +37,8 @@
         "willdurand/geocoder": "@stable",
         "widop/http-adapter-bundle": "1.1.*",
         "knplabs/knp-paginator-bundle": "~2.4",
-        "lexik/form-filter-bundle": "v2.0.0"
+        "lexik/form-filter-bundle": "v2.0.0",
+        "raulfraile/ladybug-bundle": "~1.0"
    
         
     },

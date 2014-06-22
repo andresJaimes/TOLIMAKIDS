@@ -1,6 +1,7 @@
 # README
 
 [![Build Status](https://secure.travis-ci.org/egeloen/IvoryGoogleMapBundle.png)](http://travis-ci.org/egeloen/IvoryGoogleMapBundle)
+[![Coverage Status](https://coveralls.io/repos/egeloen/IvoryGoogleMapBundle/badge.png?branch=master)](https://coveralls.io/r/egeloen/IvoryGoogleMapBundle?branch=master)
 
 The bundle provides an integration of the [Ivory Google Map](https://github.com/egeloen/ivory-google-map) library for
 your Symfony2 project.
@@ -39,9 +40,6 @@ your Symfony2 project.
        - [Directions API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/directions/directions.md)
        - [Distance Matrix API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/distance_matrix/distance_matrix.md)
        - [Business Account](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/business_account.md)
-
-The bundle is compatible with all Symfony2 versions. For BC reasons, you must use the 2.0 branch of the bundle for
-Symfony 2.0 (2.0.* version of the bundle) and the master branch for Symfony >= 2.1 (2.1.* version of the bundle).
 
 ## Cookbook
 
