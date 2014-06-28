@@ -1,81 +1,113 @@
 {% extends "::frontend.html.twig" %}
 
-{% block title %}Actividades{% endblock %} 
 {% block body %}
-   
+
     {% block javascript %}
         {{parent()}}
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/Gmap.js')}}"></script>
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/controller.js')}}"></script>
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/api_calls.js')}}"></script>
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/render.js')}}"></script>
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/main.js')}}"></script>
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/jquery-ui-1.10.3.js')}}"></script>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-        <link rel="stylesheet" href="/resources/demos/style.css">
+          <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>    
+            <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/Gmap.js')}}"></script>
+            <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/controller.js')}}"></script>
+            <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/api_calls.js')}}"></script>
+            <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/render.js')}}"></script>
+            <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/main.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/frontfrontend/js/slider/miniSlider.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/frontfrontend/js/jquery-ui.js')}}"></script>        
+            <script type="text/javascript" src="{{ asset('bundles/frontfrontend/js/jquery-1.11.1.js')}}"></script> 
+<script type="text/javascript">
+    $(document).ready(function() {
 
-        <script type="text/javascript">   
-            $(document).ready(function() {
-
-                  LoadMap();
-                  cargarPlaces();
+        LoadMap();
+        cargarPlaces();
 
 
-              });
- 
+    });
 
-      </script>
+
+    </script>
     {% endblock %}
-        <style>
-            .gmaps{
-               height: 100px ;
-               margin: 100px;
-               padding: 100px
+
+  
+    <style>
+      .gmaps{
+                height: 360px;
+
             }
-           .gmaps img {
-                 max-width: none;
-           }
-      </style>
-      
-      <body onload="localize()"> 
+
+        .gmaps img {
+                        max-width: none;
+        }
+        </style>
+        <div class="row">
+            <input type="hidden" id="url_detalle" value="{{url('front_frontend_lugar_detalle',{id:0})}}">
+            <div class="col-md-12">
+               <div class="col-md-9 col-md-offset-1 if"><div id="map-canvas" class="gmaps"></div></div>
+                    <div class="row">
+                          <div class="col-md-6 col-md-offset-3 buscar1">
+                              
+                            <h1 class="text-center">Buscar Actividad</h1>
+                            
+                            <form class="form-inline" action="."  method="GET" role="form">
+                                    <div class="form-group">
+                                        
+                                     <label>Actividad</label><br/>  
+                                     
+                                     {{form_widget(form.name,{'attr': {'class':'form-control searche'}})}}
+                                     </div>
+                                     <div class="form-group">
+                                         
+                                     <label>Lugares</label><br/> 
+                                     
+                                     {{form_widget(form.places,{'attr': {'class':'form-control searche'}})}}
+                                    </div> 
+                            
+                                    <button type="submit" class="btn btn-info btn-sm adde">Buscar Actividad</button>
+                                 
+                                     <input  id="lti" type="hidden" name="latitud" value=""/>
+                                     <input  id="lgi" type="hidden" name="longitud" value=""/>
+                            {{form_end(form)}}
+                          
+                                 
+                        </div>  
+                    </div>
+           </div>
+
           
-       <div id="map-canvas" class="gmaps"></div>
+
+        <div class="curve"></div>
+
+    <div class="row actividades">
+	<h1>Lista de actividades</h1>
+		<div class="col-md-12 child">
+      
+        </div><!--child-->
+        <div class="list_actividad">  
+            {% for activity in actividades %}  
+            <div class="row activ">
+                <div class="col-md-8"> <a href="{{url('front_frontend_actividad_detalle',{id:activity.getId})}}"><h4>{{ activity.name}}</h4></a></div>
+                <div class="col-md-4"><p class="text-right fecha">{{ activity.cost}}</p></div>
+                <div class="col-md-12"><p>{{ activity.description}}</p></div>
+             </div>
+            {% endfor %}
+            
+            </div> <!--list_actividad--> 
+            {% if actividades|length > 0 %}
+               <div class="paginador">
+                    <a href="{{ knp_pagination_render(actividades) }}"/>      
+                </div> 
+            {% endif %}
+      </div>
+
        
-      </body>
-    
 
-       <input type="hidden" id="url_detalle" value="{{url('front_frontend_lugar_detalle',{id:0})}}">
-             <form method="get" action=".">
-                   {{ form_rest(form) }}
-                   <input type="submit" name="submit-filter" value="filter" />
-               </form>
-       
-       <p><input  id="lti" value="" type="hidden" name="latitud"/></p>
-       <p><input  id="lgi" value="" type="hidden" name="longitud"/></p>
 
-                
-                {% for activity in activities %}
-                        <a href="{{url('front_frontend_actividad_detalle',{id:activity.id})}}">{{ activity.name}}</a>
-                    
-                {% endfor %}
-                        
-                <div id="accordion">
-                    <h3>Section 1</h3>
-                    <div>
-                      {% for result in results %}
-                        <li>{{result.name}} </li>
-                      {% endfor %}
-                    </div>                     
-                </div>             
-                
-     
-
+ 
+      </div>
+           
+        
 {% endblock %}
 
-
-
  
+
+
 
 

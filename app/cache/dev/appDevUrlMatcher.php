@@ -133,6 +133,15 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        // root
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'root');
+            }
+
+            return array (  '_controller' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\RedirectController::urlRedirectAction',  'path' => '/index',  'permanent' => true,  '_route' => 'root',);
+        }
+
         if (0 === strpos($pathinfo, '/api')) {
             // api_homepage
             if (rtrim($pathinfo, '/') === '/api') {
@@ -238,6 +247,24 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             // front_frontend_actividad_detalle
             if (0 === strpos($pathinfo, '/index/activity/detalle') && preg_match('#^/index/activity/detalle/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'front_frontend_actividad_detalle')), array (  '_controller' => 'ItoSoftware\\Front\\FrontendBundle\\Controller\\ActivityController::detalleActividadAction',));
+            }
+
+            // front_frontend_plan
+            if (rtrim($pathinfo, '/') === '/index/plan') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'front_frontend_plan');
+                }
+
+                return array (  '_controller' => 'ItoSoftware\\Front\\FrontendBundle\\Controller\\PlanController::planAction',  '_route' => 'front_frontend_plan',);
+            }
+
+            // front_frontend_crear
+            if (rtrim($pathinfo, '/') === '/index/crear') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'front_frontend_crear');
+                }
+
+                return array (  '_controller' => 'ItoSoftware\\Front\\FrontendBundle\\Controller\\PlanController::crearAction',  '_route' => 'front_frontend_crear',);
             }
 
         }

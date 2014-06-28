@@ -31,7 +31,19 @@ security:
                 target:         /admin/login
                 success_handler: logout_admin_handler
             anonymous:          null
- 
+        usuario:
+           context:            user
+           pattern:            /index(.*)
+           form_login:
+               provider:       fos_userbundle
+               login_path:     fos_user_security_login
+               use_forward:    false
+               check_path:     /index/login_check
+               failure_path:   null
+           logout:
+               path:           fos_user_security_logout
+               target:         /
+           anonymous:          false
         main:
             pattern:             .*
             context:             user

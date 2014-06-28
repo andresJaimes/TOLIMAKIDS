@@ -33,17 +33,23 @@ function LoadMap() {
 			var position = new google.maps.LatLng(latitud,longitud);
                         
                         
-                        document.getElementById("lti").innerHTML=latitud;
-                        document.getElementById("lgi").innerHTML=longitud;	
+                        $('#lti').val(latitud);
+                        $('#lgi').val(longitud);	
 
-                  
+   
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: position,
         content: 'You Here'
       });
    
-   
+//    var circle = new google.maps.Circle({
+//            center: new google.maps.LatLng(latitud,longitud),
+//            radius: 20000,
+//            fillColor: "#blue",
+//            map: map
+//        });
+//      
       map.setCenter(position);
     }, function() {
       handleNoGeolocation(true);
@@ -59,7 +65,7 @@ function LoadMap() {
 
 function handleNoGeolocation(errorFlag) {
     if (errorFlag) {
-        var content = 'Error: The Geolocation service failed.';
+        var content = 'Error: La localizacion fallo.';
     } else {
         var content = 'Error: Your browser doesn\'t support geolocation.';
     }

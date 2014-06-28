@@ -13,99 +13,66 @@ file that was distributed with this source code.
 
 
 {% block fos_user_content %}  
-{% block javascript %}
-{{parent()}}
-<link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css">
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-<link href="css/style.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
-<script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/main.js')}}"></script>
-{%endblock%}
 
-{% include '::frontend.html.twig'%}
-
-    
-    <div class="col-sm-6">
-      
-      
       {% block sonata_user_login %}  
-     
-                <div class="panel-heading">
-                    <h2 class="panel-title">{{ 'title_user_authentication'|trans({}, 'SonataUserBundle') }}</h2>
-                </div>
+<div class="row">
 
-                <div class="panel-body">
-                   
+
                     {% block sonata_user_login_error %}
                         {% if error %}
-                    <div class="alert alert-danger alert-error">{{ error|trans({}, 'FOSUserBundle') }}</div>
+    <div class="alert alert-danger alert-error">{{ error|trans({}, 'FOSUserBundle') }}</div>
                         {% endif %}
                     {% endblock %}
 
                     {% block sonata_user_login_form %}
-                    
-                    <form action="{{ path("fos_user_security_check") }}" method="post" role="form"
+
+
+
+<form action="{{ path("fos_user_security_check") }}" method="post" role="form"
                           class="form-horizontal">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+        <div class="form-group">
 
-                        <div class="form-group">
-                            <label for="username"
-                                   class="col-sm-4 control-label">{{ 'security.login.username'|trans({}, 'SonataUserBundle') }}</label>
-
-                            <div class="col-sm-8"><input type="text" class="form-control" id="username"
-                                                         name="_username" value="{{ last_username }}"
-                                                         required="required"/></div>
-                        </div>
-
-
-                        <div class="form-group control-group">
-                            <label for="password"
-                                   class="col-sm-4 control-label">{{ 'security.login.password'|trans({}, 'SonataUserBundle') }}</label>
-
-                            <div class="col-sm-8"><input type="password" class="form-control" id="password"
-                                                         name="_password" required="required"/></div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-offset-4 col-sm-8">
-                                <div class="checkbox control-group">
-                                    <label for="remember_me">
-                                        <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
-                                            {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group control-group">
-                            <div class="controls col-sm-offset-4 col-sm-8">
-                                <a href="{{ path('fos_user_resetting_request') }}">{{ 'forgotten_password'|trans({}, 'SonataUserBundle') }}</a>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-offset-4 col-sm-8">
-                                <input type="submit" id="_submit" name="_submit" class="btn btn-primary"
-                                       value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
-                            </div>
-                        </div>
-
-
-                        <div class="login">
-
-                            <a class="facebook btn" href="{{ path("hwi_oauth_service_redirect",{service: "facebook"})}}">
-                                <div class="btn-icon fb-icon"></div>
-                                Login with Facebook
-                            </a>
-                    </form>
-                  
-                 </div>
-                    {% endblock %}
+            <div class="col-sm-12">
+                <input type="email" class="form-control log" id="inputEmail3"
+                       name="_username" value="{{ last_username }}"
+                       required="required" placeholder="Nombre de usurio o correo electrónico"/> 
             </div>
         </div>
-            {% endblock %}
+        <div class="form-group">
+
+            <div class="col-sm-7">
+                <input type="password" class="form-control log" id="inputPassword3"
+                       name="_password" required="required" placeholder="Contraseña"/>
+            </div>
+            <div class="col-sm-3">
+                <input type="submit" id="_submit" name="_submit" class="btn btn-info"
+                       value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="checkbox remb">
+                    <label>
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                                            {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <p class="tc">¿Crea tu cuenta en Tolima Kids? <a href="#">Registrate</a></p>
+        <ul class="social_log" align="center">
+            <li><a href="#"></a></li>
+            <li class="f_icon"><a href="{{ path("hwi_oauth_service_redirect",{service: "facebook"})}}"><img src="{{ asset('bundles/frontfrontend/images/facebook.jpg')}}"></a></li>
+            <li><a href="#"></a></li>
+        </ul>
+
+    </form>
     </div>
+                    {% endblock %}
+</div>
+            {% endblock %}
+</div>
 </div>
 
 {% endblock fos_user_content %}

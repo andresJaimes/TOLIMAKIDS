@@ -39,7 +39,8 @@ class ActivityAdmin extends Admin
            ->add('description', 'textarea' , array('label'=>'Descripción'))
            ->add('active', null, array('label'=>'Activo'))
            ->add('registred_date', 'datetime', array('label'=>'fecha de registro')) 
-            ->add('cost', null, array('label'=>'Valor'));
+            ->add('cost', null, array('label'=>'Valor niño'))
+            ->add('costa', null, array('label'=>'Valor adulto'));
     }
     
 
@@ -52,7 +53,8 @@ class ActivityAdmin extends Admin
         $list
                 ->addIdentifier('name', null, array('label'=>'Nombre'))
                 ->add('active', null , array('label'=>'estado'))
-                ->add('cost', null, array('label'=>'Valor'))
+                ->add('cost', null, array('label'=>'Valor niño'))
+                ->add('costa', null, array('label'=>'Valor adulto'))
                 ->add('registred_date', 'datetime' , array('input'  => 'datetime', 'widget' => 'choice','label'=>'Fecha de registro'))
                 ->add('_action', 'actions', array(
                     'label'=>'Acciones',
@@ -71,7 +73,8 @@ class ActivityAdmin extends Admin
            ->add('description')
            ->add('registred_date','datetime', array( 'input'  => 'datetime', 'widget' => 'choice'))
            ->add('active', null, array('label'=> 'activo'))
-            ->add('cost', null, array('label'=>'Valor'));
+            ->add('cost', null, array('label'=>'Valor niño'))
+            ->add('costa', null, array('label'=>'Valor adulto'));
     }
     
     

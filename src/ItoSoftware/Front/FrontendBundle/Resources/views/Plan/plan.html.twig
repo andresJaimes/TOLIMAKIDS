@@ -1,0 +1,108 @@
+{% extends "::frontend.html.twig" %}
+
+{% block body %}
+
+    {% block javascript %}
+        {{parent()}}
+<script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/Gmap.js')}}"></script>
+<script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/controller.js')}}"></script>
+<script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/api_calls.js')}}"></script>
+<script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/render.js')}}"></script>
+<script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/main.js')}}"></script>
+<script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/jquery-ui-1.10.3.js')}}"></script>
+<script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/check/check.js')}}"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        LoadMap();
+        cargarPlaces();
+
+    });
+
+
+    </script>
+    {% endblock %}
+    <style>
+       .gmaps{
+                 height: 360px;
+
+             }
+
+         .gmaps img {
+                         max-width: none;
+         }
+        </style>
+        <div class="row">
+
+            <input type="hidden" id="url_crear" value="{{url('front_frontend_crear')}}">
+
+            <div class="col-md-12">
+                <div class="col-md-9 col-md-offset-1 if"><div id="map-canvas" class="gmaps"></div></div>
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 buscar1">
+
+                        <h1 class="text-center">Buscar Actividad</h1>
+
+                        <form class="form-inline" action="."  method="GET" role="form">
+                            <div class="form-group">
+
+                                <label>Actividad</label><br/>  
+
+                                     {{form_widget(form.name,{'attr': {'class':'form-control searche'}})}}
+                            </div>
+                            <div class="form-group">
+
+                                <label>Lugares</label><br/> 
+
+                                     {{form_widget(form.places,{'attr': {'class':'form-control searche'}})}}
+                            </div> 
+
+                            <button type="submit" class="btn btn-info btn-sm adde">Buscar Actividad</button>
+
+                            <input  id="lti" type="hidden" name="latitud" value=""/>
+                            <input  id="lgi" type="hidden" name="longitud" value=""/>
+
+                            {{form_end(form)}}
+
+                    </div>  
+                </div>
+            </div>
+            <div class="curve"></div>
+
+            <div class="row actividades">
+                <h1>Actividades</h1>
+
+            {% for result in actividades %}
+                <div class="actividad col-md-10">   
+                    <div class="col-md-4">
+                    {% if result.getGaleryLength >= 1%}
+                                    {% if result.getGalery %}    
+                            <img src="{{ result.getFoto.getWebPathFile }}" alt="{{ result.getName }}" class="img-responsive" />
+                                    {% else %}
+                                            {%for imagen in result.getGalery %}
+                            <nav>
+                                <img src="{{ imagen.getWebPathFile }}" alt="{{ result.getName }}" class="img-responsive"/>
+                            </nav>                                        
+                                            {% endfor %}
+                                    {% endif %}
+                     {% endif %}
+
+                        </div>
+
+                        <div class="col-md-7"><h3>{{result.name}}</h3><p>{{result.description}}</p><br>{{result.cost}} <a href="#">Ver más</a></br></div>
+                        <div class="col-md-1"><input class="act" type="checkbox" id="inlineCheckbox1" value="{{result.id}}"></div>
+
+                    </div><!--actividad-->
+     {% endfor %}     
+                </div><!--content actividades-->
+                <input type="button" value="Registrar Plan" id="buttonClass"class="btn btn-info btn-sm adde" > 
+
+
+            </div>
+
+{% endblock %}

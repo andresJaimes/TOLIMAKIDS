@@ -1,101 +1,106 @@
 {% extends '::frontend.html.twig' %}
-{% block title %}Actividad{% endblock %}
 {% block body %}
+{% block javascript %}
+{{parent()}}
+ <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/jquery.cbpFWSlider.min.js')}}"></script>
+ <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/rating.js')}}"></script>
+  <link href="{{ asset ('bundles/frontfrontend/css/rating.css')}}" rel="stylesheet" type="text/css">
+  <script src="http://js-kit.com/ratings.js"></script>
+
+ <script type="text/javascript">
+$( function() {
+
+
+        //alert(map + "pru");
+        //alert('sik');
+        $('#cbp-fwslider').cbpFWSlider();
+       
+       // Detecto la estrella que es presionada
+   
+        
+        
+         var element = document.createElement('script'); 
+            element.type = "text/javascript"; 
+            element.async = true;
+            element.id = "406153069523025"
+            element.src = "//connect.facebook.net/es_ES/all.js#xfbml=1";
+            var s = document.getElementsByTagName('script')[0]; 
+            s.parentNode.insertBefore(element, s);
+        
+            $('#star1').rating('Score.php', {maxvalue: 5, curvalue:1, id:20});
+    });
+   
+</script>
+{% endblock%}
 <input type="hidden" value="{{activity.id}}" id="activity_id"/>
-<section class="principal">
-    <section class="contenido">
-       {% block content %}
-            
-               {% block javascript %}
-                    {{ parent() }}
+<div class="row">
 
-                {% endblock%}
-                    
-                    
-                    {% block styles%}
-                        <style>
-                        #feedback { font-size: 1.4em; }
-                        #selectable .ui-selecting { background: #FECA40; }
-                        #selectable .ui-selected { background: #F39814; color: white; }
-                        #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-                        #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
-                        </style>
-                    {% endblock%}
+
+    <div class="curve">
+    {% include 'FrontFrontendBundle:Activity:show_map.html.twig'%}
+    </div>
+      <div class="row actividades">
+          <div class="col-md-12 child"></div><!--child-->
+          <div class="list_actividad">
           
-        <section class="colocar_contenido">
-            <div id="informacion" class="informacion">
-                    {% if activity != NULL %}
-                    
-     
-                    <div class="informacion">
-                        <div class="informacion_derecha">
-                            {% if activity.getGaleryLength >= 1%}
-                                <section class="contenedor_slider">
+      		<div class="col-md-8">
+  				
+                <div id="cbp-fwslider" class="cbp-fwslider">
+                    <ul>
+
+                              {% if activity.getGaleryLength >= 1%}
+
                                     {% if activity.getGalery %}    
-                                        <div id="imagen_actividad">
-                                            <img src="{{ activity.getFoto.getWebPathFile }}" alt="{{ activity.getName }}" />
-                                        </div>
-                                    {% else %}
-                                        <div id="main-inner">
-                                            <div id="slider">
-                                            {%for imagen in activity.getGalery %}
-                                                <nav>
-                                                    <img src="{{ imagen.getWebPathFile }}" alt="{{ activity.getName }}" />
-                                                </nav>                                        
-                                            {% endfor %}
-                                            </div>
-                                        </div>
+
+                        <li><a href="#"> <img src="{{ activity.getFoto.getWebPathFile }}" alt="{{ activity.getName }}" /></a></li>
+
                                     {% endif %}
-                                
-                                </section>
+
+
                             {% endif %} 
-                            <div id="contenido_atractivo_b" >
-                                <div class="titulo_Actividad">
-                                    <h1>{{activity.getName}}</h1>
-                                </div>
-                                    
-                                     {% if activity.getGaleryLength < 1%}
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                {%endif%}
-   
-                                <div class="descripcion_atractivo_texto">
-                                    {% autoescape false %}{{ activity.getDescription }}{% endautoescape %}
-                                </div>
-                                    
-                                <div class="descripcion_atractivo_texto">
-                                    {% autoescape false %}{{ activity.getCost }}{% endautoescape %}
-                                </div>
-                                 
-                                    <h3>Calificación</h3>
-                                    
-                              
-                          
-                            
-
-                            </div>
+                    </ul>
+                    
+                    
+                </div><!--silder detalle-->
+       		
+            </div>
+            
+            <div class="col-md-4">
+            	<h1>{{activity.getName}}</h1>
+                	<div>
+            		<p>{{activity.getDescription}}</p></div>
+                    
+                    <div class="costo">
+                    <h3>Costos:</h3>
+                    <p>Adultos: ${{activity.getCosta}}</p>
+                    <p>Niños: ${{activity.getCost}}</p>
+                    </div>
+                     <div class="calificacion">
+                    <h3>Calificación:</h3>
+                    <div class="calificar">
+                         <ul>
+                             <div class="ffbs_rating_wrapper">
+<div id='rate_2mea1fbv' class='ffbs_rate ffbs_rate_border ffbs_centered' data-label-rating='icon' data-label-views='icon' data-label-votes='icon'>
+<!--{[['<img src="http://static.graddit.com/img/star_blue.png"/>']]}--></div>
+<div id='stats_2mea1fbv' class='ffbs_stats ffbs_centered'></div>
+<div id='share_2mea1fbv' class='ffbs_share ffbs_share_border ffbs_centered'></div></div>
+<script type='text/javascript' src='http://www.graddit.com/rate/rus/5/2mea1fbv?id=rate_2mea1fbv&stats=stats_2mea1fbv&info=info&info_delay=2&class_star=ffbs_star_img&class_star_set=ffbs_star_img_set&class_star_vote=ffbs_star_img_vote&views=yes&votes=yes&average=yes&share=share_2mea1fbv'></script>
+                         </ul>
+                     <div class="fb-like" data-href="http://tolimakids.local/" data-width="292" data-send="true"></div>
                         </div>
+                    
+                     
                     </div>
-                    {% endif %}
-                    </div>
-                </section>
-            </section><!--colocar_contenido-->
-    {% endblock %}
-        </section><!--cierre contenido-->
+            </div>
+            <div style="clear:both"></div>
+            </div>
+      </div> <!--list_actividad-->   
 
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                var activity_id = $("#activity_id").val();
-                cargarActivity(activity_id)
-            });
    
+ </div> <!--list_actividad--> 
 
-            $(function() {
-              $( "#selectable" ).selectable();
-            });
-       </script>
             
 {% endblock  %}
+
+ 
+                 

@@ -1,0 +1,86 @@
+{# empty Twig template #}
+{% extends '::frontend.html.twig' %}
+{% block body %}
+{% block javascript %}
+        {{parent()}}
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/Gmap.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/controller.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/api_calls.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/render.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/main.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/jquery-ui-1.10.3.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/check/check.js')}}"></script>
+        <link rel="stylesheet" src="{{ asset ('bundles/frontfrontend/css/jquery-ui.css')}}">
+        <link rel="stylesheet" src="{{ asset ('bundles/frontfrontend/css/style.css')}}">
+    
+        <script type="text/javascript">
+          $(function() {
+   
+            
+
+            var element = document.createElement('script'); 
+            element.type = "text/javascript"; 
+            element.async = true;
+            element.id = "406153069523025"
+            element.src = "//connect.facebook.net/es_ES/all.js#xfbml=1";
+            var s = document.getElementsByTagName('script')[0]; 
+            s.parentNode.insertBefore(element, s);
+
+
+          });
+          </script>
+    {% endblock %}
+ <form class="form-row" role="form">
+
+
+<div class="row actividades">
+	<h1>Plan</h1>
+		<div class="col-md-12 child">
+        
+        </div><!--child-->
+      <div class="list_actividad">  
+        <div class="row activ">
+   
+            <div class="form-group">
+             <label>Titulo</label><br/>  
+
+            {{form_widget(form.tittle,{'attr': {'class':'form-control'}})}}
+            </div>
+             
+            <div class="form-group">
+            <label>Fecha</label><br/>  
+
+            {{form_widget(form.date)}}
+            </div>
+            
+            <div class="form-group">
+
+            {{form_widget(form.registrarionDate,{'attr': {'type':'date', 'hidden':true}})}}
+            </div>
+              
+            <div class="form-group">
+            <label>Estado</label><br/>  
+
+            {{form_widget(form.active,{'attr': {'class':'inlineCheckbox1','type':'checkbox'}})}}
+            </div>
+              
+            
+        
+       </div>
+<h2>Acticvidades</h2>
+              <div class="row activ">
+              
+                  {% for activity in actividades  %}
+                  <li><h3>{{activity.name}}</h3></li>
+          
+                  
+                  {% endfor %}
+              </div>
+        </div>
+        {{form_widget(form.save,{'label':'Guardar'})}}
+        <div class="fb-like" data-href="http://tolimakids.local/" data-width="292" data-send="true"></div>
+      </div> <!--list_actividad--> 
+</div><!--content actividades-->
+
+{{ form_end(form) }}
+{% endblock %}

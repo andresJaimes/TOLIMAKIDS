@@ -64,10 +64,10 @@ class Activity extends \ItoSoftware\Components\ModelBundle\Entity\Activity imple
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'name', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'description', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'registredDate', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'active', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'cost', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'id', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'galery', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'plan', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'places');
+            return array('__isInitialized__', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'name', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'description', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'registredDate', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'active', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'cost', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'id', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'galery', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'plan', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'places', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'costa');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'name', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'description', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'registredDate', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'active', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'cost', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'id', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'galery', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'plan', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'places');
+        return array('__isInitialized__', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'name', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'description', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'registredDate', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'active', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'cost', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'id', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'galery', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'plan', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'places', '' . "\0" . 'ItoSoftware\\Components\\ModelBundle\\Entity\\Activity' . "\0" . 'costa');
     }
 
     /**
@@ -428,6 +428,28 @@ class Activity extends \ItoSoftware\Components\ModelBundle\Entity\Activity imple
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPlaces', array());
 
         return parent::getPlaces();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCosta($costa)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCosta', array($costa));
+
+        return parent::setCosta($costa);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCosta()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCosta', array());
+
+        return parent::getCosta();
     }
 
 }

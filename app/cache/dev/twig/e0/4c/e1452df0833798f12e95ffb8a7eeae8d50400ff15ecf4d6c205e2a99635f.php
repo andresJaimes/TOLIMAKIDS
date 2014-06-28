@@ -11,7 +11,6 @@ class __TwigTemplate_e04ce1452df0833798f12e95ffb8a7eeae8d50400ff15ecf4d6c205e2a9
 
         $this->blocks = array(
             'fos_user_content' => array($this, 'block_fos_user_content'),
-            'javascript' => array($this, 'block_javascript'),
             'sonata_user_login' => array($this, 'block_sonata_user_login'),
             'sonata_user_login_error' => array($this, 'block_sonata_user_login_error'),
             'sonata_user_login_form' => array($this, 'block_sonata_user_login_form'),
@@ -32,178 +31,121 @@ class __TwigTemplate_e04ce1452df0833798f12e95ffb8a7eeae8d50400ff15ecf4d6c205e2a9
     public function block_fos_user_content($context, array $blocks = array())
     {
         echo "  
-";
-        // line 16
-        $this->displayBlock('javascript', $context, $blocks);
-        // line 24
-        echo "
-";
-        // line 25
-        $this->env->loadTemplate("::frontend.html.twig")->display($context);
-        // line 26
-        echo "
-    
-    <div class=\"col-sm-6\">
-      
-      
+
       ";
-        // line 31
+        // line 17
         $this->displayBlock('sonata_user_login', $context, $blocks);
-        // line 107
-        echo "    </div>
+        // line 75
+        echo "</div>
 </div>
 
 ";
     }
 
-    // line 16
-    public function block_javascript($context, array $blocks = array())
-    {
-        // line 17
-        $this->displayParentBlock("javascript", $context, $blocks);
-        echo "
-<link href=\"css/bootstrap-theme.css\" rel=\"stylesheet\" type=\"text/css\">
-<link href=\"css/bootstrap.css\" rel=\"stylesheet\" type=\"text/css\">
-<link href=\"css/style.css\" rel=\"stylesheet\" type=\"text/css\">
-<script type=\"text/javascript\" src=\"js/jquery.js\"></script>
-<script type=\"text/javascript\" src=\"js/bootstrap.js\"></script>
-";
-    }
-
-    // line 31
+    // line 17
     public function block_sonata_user_login($context, array $blocks = array())
     {
         echo "  
-     
-                <div class=\"panel-heading\">
-                    <h2 class=\"panel-title\">";
-        // line 34
-        echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("title_user_authentication", array(), "SonataUserBundle"), "html", null, true);
-        echo "</h2>
-                </div>
+<div class=\"row\">
 
-                <div class=\"panel-body\">
-                   
+
                     ";
-        // line 39
+        // line 21
         $this->displayBlock('sonata_user_login_error', $context, $blocks);
-        // line 44
+        // line 26
         echo "
                     ";
-        // line 45
+        // line 27
         $this->displayBlock('sonata_user_login_form', $context, $blocks);
-        // line 104
-        echo "            </div>
-        </div>
+        // line 73
+        echo "</div>
             ";
     }
 
-    // line 39
+    // line 21
     public function block_sonata_user_login_error($context, array $blocks = array())
     {
-        // line 40
+        // line 22
         echo "                        ";
         if ((isset($context["error"]) ? $context["error"] : $this->getContext($context, "error"))) {
-            // line 41
-            echo "                    <div class=\"alert alert-danger alert-error\">";
+            // line 23
+            echo "    <div class=\"alert alert-danger alert-error\">";
             echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans((isset($context["error"]) ? $context["error"] : $this->getContext($context, "error")), array(), "FOSUserBundle"), "html", null, true);
             echo "</div>
                         ";
         }
-        // line 43
+        // line 25
         echo "                    ";
     }
 
-    // line 45
+    // line 27
     public function block_sonata_user_login_form($context, array $blocks = array())
     {
-        // line 46
-        echo "                    
-                    <form action=\"";
-        // line 47
+        // line 28
+        echo "
+
+
+<form action=\"";
+        // line 31
         echo $this->env->getExtension('routing')->getPath("fos_user_security_check");
         echo "\" method=\"post\" role=\"form\"
                           class=\"form-horizontal\">
                         <input type=\"hidden\" name=\"_csrf_token\" value=\"";
-        // line 49
+        // line 33
         echo twig_escape_filter($this->env, (isset($context["csrf_token"]) ? $context["csrf_token"] : $this->getContext($context, "csrf_token")), "html", null, true);
         echo "\"/>
+        <div class=\"form-group\">
 
-                        <div class=\"form-group\">
-                            <label for=\"username\"
-                                   class=\"col-sm-4 control-label\">";
-        // line 53
-        echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("security.login.username", array(), "SonataUserBundle"), "html", null, true);
-        echo "</label>
-
-                            <div class=\"col-sm-8\"><input type=\"text\" class=\"form-control\" id=\"username\"
-                                                         name=\"_username\" value=\"";
-        // line 56
+            <div class=\"col-sm-12\">
+                <input type=\"email\" class=\"form-control log\" id=\"inputEmail3\"
+                       name=\"_username\" value=\"";
+        // line 38
         echo twig_escape_filter($this->env, (isset($context["last_username"]) ? $context["last_username"] : $this->getContext($context, "last_username")), "html", null, true);
         echo "\"
-                                                         required=\"required\"/></div>
-                        </div>
+                       required=\"required\" placeholder=\"Nombre de usurio o correo electrónico\"/> 
+            </div>
+        </div>
+        <div class=\"form-group\">
 
-
-                        <div class=\"form-group control-group\">
-                            <label for=\"password\"
-                                   class=\"col-sm-4 control-label\">";
-        // line 63
-        echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("security.login.password", array(), "SonataUserBundle"), "html", null, true);
-        echo "</label>
-
-                            <div class=\"col-sm-8\"><input type=\"password\" class=\"form-control\" id=\"password\"
-                                                         name=\"_password\" required=\"required\"/></div>
-                        </div>
-
-                        <div class=\"form-group\">
-                            <div class=\"col-sm-offset-4 col-sm-8\">
-                                <div class=\"checkbox control-group\">
-                                    <label for=\"remember_me\">
-                                        <input type=\"checkbox\" id=\"remember_me\" name=\"_remember_me\" value=\"on\"/>
-                                            ";
-        // line 74
-        echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("security.login.remember_me", array(), "FOSUserBundle"), "html", null, true);
-        echo "
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class=\"form-group control-group\">
-                            <div class=\"controls col-sm-offset-4 col-sm-8\">
-                                <a href=\"";
-        // line 82
-        echo $this->env->getExtension('routing')->getPath("fos_user_resetting_request");
-        echo "\">";
-        echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("forgotten_password", array(), "SonataUserBundle"), "html", null, true);
-        echo "</a>
-                            </div>
-                        </div>
-
-                        <div class=\"form-group\">
-                            <div class=\"col-sm-offset-4 col-sm-8\">
-                                <input type=\"submit\" id=\"_submit\" name=\"_submit\" class=\"btn btn-primary\"
-                                       value=\"";
-        // line 89
+            <div class=\"col-sm-7\">
+                <input type=\"password\" class=\"form-control log\" id=\"inputPassword3\"
+                       name=\"_password\" required=\"required\" placeholder=\"Contraseña\"/>
+            </div>
+            <div class=\"col-sm-3\">
+                <input type=\"submit\" id=\"_submit\" name=\"_submit\" class=\"btn btn-info\"
+                       value=\"";
+        // line 50
         echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("security.login.submit", array(), "FOSUserBundle"), "html", null, true);
         echo "\"/>
-                            </div>
-                        </div>
-
-
-                        <div class=\"login\">
-
-                            <a class=\"facebook btn\" href=\"";
-        // line 96
+            </div>
+        </div>
+        <div class=\"form-group\">
+            <div class=\"col-sm-12\">
+                <div class=\"checkbox remb\">
+                    <label>
+                        <input type=\"checkbox\" id=\"remember_me\" name=\"_remember_me\" value=\"on\"/>
+                                            ";
+        // line 58
+        echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("security.login.remember_me", array(), "FOSUserBundle"), "html", null, true);
+        echo "
+                    </label>
+                </div>
+            </div>
+        </div>
+        <p class=\"tc\">¿Crea tu cuenta en Tolima Kids? <a href=\"#\">Registrate</a></p>
+        <ul class=\"social_log\" align=\"center\">
+            <li><a href=\"#\"></a></li>
+            <li class=\"f_icon\"><a href=\"";
+        // line 66
         echo $this->env->getExtension('routing')->getPath("hwi_oauth_service_redirect", array("service" => "facebook"));
-        echo "\">
-                                <div class=\"btn-icon fb-icon\"></div>
-                                Login with Facebook
-                            </a>
-                    </form>
-                  
-                 </div>
+        echo "\"><img src=\"";
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/images/facebook.jpg"), "html", null, true);
+        echo "\"></a></li>
+            <li><a href=\"#\"></a></li>
+        </ul>
+
+    </form>
+    </div>
                     ";
     }
 
@@ -219,6 +161,6 @@ class __TwigTemplate_e04ce1452df0833798f12e95ffb8a7eeae8d50400ff15ecf4d6c205e2a9
 
     public function getDebugInfo()
     {
-        return array (  199 => 96,  189 => 89,  177 => 82,  166 => 74,  152 => 63,  142 => 56,  136 => 53,  129 => 49,  124 => 47,  121 => 46,  118 => 45,  114 => 43,  108 => 41,  105 => 40,  102 => 39,  96 => 104,  94 => 45,  91 => 44,  89 => 39,  81 => 34,  74 => 31,  63 => 17,  60 => 16,  53 => 107,  51 => 31,  44 => 26,  42 => 25,  39 => 24,  37 => 16,  32 => 15,);
+        return array (  140 => 66,  129 => 58,  118 => 50,  103 => 38,  95 => 33,  90 => 31,  85 => 28,  82 => 27,  78 => 25,  72 => 23,  69 => 22,  66 => 21,  61 => 73,  59 => 27,  56 => 26,  54 => 21,  46 => 17,  39 => 75,  37 => 17,  31 => 15,);
     }
 }

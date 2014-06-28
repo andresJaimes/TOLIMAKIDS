@@ -316,4 +316,32 @@ class Activity
     }
     
     
+    /**
+     * @var float
+     */
+    private $costa;
+
+
+    /**
+     * Set costa
+     *
+     * @param float $costa
+     * @return Activity
+     */
+    public function setCosta($costa)
+    {
+        $this->costa = $costa;
+
+        return $this;
+    }
+
+    /**
+     * Get costa
+     *
+     * @return float 
+     */
+    public function getCosta()
+    {
+        return $this->costa;
+    }
 }

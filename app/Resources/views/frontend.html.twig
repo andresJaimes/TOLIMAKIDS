@@ -2,44 +2,42 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}{% endblock %}</title>
-
-         
+         {% block title %}<title>Tolima Kids</title>﻿{% endblock %}
         {% block javascripts %}
-        
-            <script src="/bundles/frontfrontend/js/jquery-1.11.1.js"></script>  
-            <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>  
-            <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-            <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-            <link href="{{ asset ('bundles/frontfronttend/css/slider/EstilosACEX.css')}}" rel="stylesheet" type="text/css"/>
-        
-            <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/Gmap.js')}}"></script>
-            <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/controller.js')}}"></script>
-            <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/api_calls.js')}}"></script>
-            <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/render.js')}}"></script>
-            <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/main.js')}}"></script>
-            <script src="{{ asset('bundles/frontfronttend/js/slider/miniSlider.js')}}"></script>
-   
-        
-        <script type="text/javascript">   
-            $(document).ready(function() {
-
-                  LoadMap();
-                  cargarPlaces();
-
-              });
-
-              $(function() {
-              $('#slider').miniSlider();
-              });
-        </script>
-              
-      
-     
-{% endblock %}
+        <link href="{{ asset ('bundles/frontfrontend/css/component.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{ asset ('bundles/frontfrontend/css/bootstrap-theme.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{ asset ('bundles/frontfrontend/css/bootstrap.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{ asset ('bundles/frontfrontend/css/style.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{ asset ('bundles/frontfrontend/css/slider/EstilosACEX.css')}}" rel="stylesheet" type="text/css"/>                   
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>     
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/controller.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/modernizr.custom.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/api_calls.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/render.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/main.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/jquery.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/bootstrap.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/jquery.cbpFWSlider.min.js')}}"></script>
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/Gmap.js')}}"></script>
+
+
+    {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}     
+    <body> 
+
+           
+
+
+        <div id="contaniner">
+
+                        {{ include('::headerindex.html.twig')}}
+                        {% block body %}
+
+                        {% endblock %}
+                      {{ include('::footer.html.twig')}}
+        </div>
     </body>
+
 </html>

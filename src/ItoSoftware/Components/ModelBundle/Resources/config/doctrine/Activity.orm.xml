@@ -9,6 +9,7 @@
     <field name="registredDate" type="datetime" column="registred_date"/>
     <field name="active" type="boolean" column="active"/>
     <field name="cost" type="float" column="cost"/>
+    <field name="costa" type="float" column="costa"/>
 
  
     

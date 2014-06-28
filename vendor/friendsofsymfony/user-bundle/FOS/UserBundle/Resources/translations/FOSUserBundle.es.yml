@@ -16,10 +16,10 @@ group:
 
 security:
     login:
-        username: "Nombre de usuario:"
-        password: "Contraseña:"
-        remember_me: Recordar
-        submit: Entrar
+        username: "Nombre de usurio o correo electrónico"
+        password: "Contraseña"
+        remember_me: Recordar mis datos
+        submit: Iniciar Sesión
 
 # Profile
 profile:

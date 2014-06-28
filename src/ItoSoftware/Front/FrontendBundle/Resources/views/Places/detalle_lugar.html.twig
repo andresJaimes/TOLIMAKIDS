@@ -1,8 +1,7 @@
 {% extends '::frontend.html.twig' %}
-{% block title %}lugares{% endblock %}
 {% block body %}
 <input type="hidden" value="{{places.id}}" id="places_id"/>
-  {% include 'FrontFrontendBundle:Places:show_map.html.twig'%}
+  
 <section class="principal">
     <section class="contenido">
        {% block content %}
@@ -11,51 +10,40 @@
             <div id="informacion" class="informacion">
                     {% if places != NULL %}
                     
-                    <div class="form-group" style="margin-left: 20%">
-                        <div id="maps">
-                        </div>
+                    
+                    
+                    <div class="curve">
+                    {% include 'FrontFrontendBundle:Places:show_map.html.twig'%}
+                      
                     </div>
-                    <div class="informacion">
-                        <div class="informacion_derecha">
+                    </div>
+                    <div class="row actividades">
+                            <h1>{{ places.getName }}</h1>
+                                    <div class="col-md-12 child">
+        
+                            </div><!--child-->
+                          <div class="list_actividad">
+    
+                                <div class="col-md-12">
+                                    <h1>Detalle</h1>
+                                            <div>
+                                            <h3>Descripción</h3>    
+                                            <p>{{ places.getDescription }}</p></div>
+                                            <div>
+                                            <h3>Dirección</h3>
+                                            <p>{{ places.getAddress }}</p></div>
 
-                            <div id="contenido_atractivo_b" >
-                                <div class="titulo_lugar">
-                                    <h1>Lugar</h1>
-                                </div>
-  
-                                
-                                <div class="descripcion_atractivo_texto">
-                                    {% autoescape false %}{{ places.getDescription }}{% endautoescape %}
-                                </div>
-
-                                <div class="descripcion_atractivo_content">
-                                    <ul>
-                                        <br class="label_tolima">Nombre: </br>
-                                        <br class="descripcion_atractivo">{{ places.getName }}</br>
-
-                                        <br class="label_tolima">Municipio: </br>
-                                        <br class="descripcion_atractivo">{{ places.getMunicipality }}</br>
-                                        
-                                        <br class="label_tolima">Descripcion</br>
-                                        <br class="descripcion_atractivo">{{ places.getDescription }}</br>
-                                        
-                                        <br class="label_tolima">Latitud</br>
-                                        <br class="descripcion_atractivo">{{ places.getLatitude }}</br>
-                                        
-                                        <br class="label_tolima">Longitud</br>
-                                        <br class="descripcion_atractivo">{{ places.getLength }}</br>
-                                        
-                                        <br class="label_tolima">Actividades: </br>
-                                        
+                                        <div class="costo">
+                                        <h3>Actividades:</h3>
                                         {% for activity in places.activity %}
-                                 
                                             <a href="{{url('front_frontend_actividad_detalle',{id:activity.getId})}}">{{ activity.name }}</a>
                                         {%  endfor %}
-                                    </ul>
+                                        </div>
+   
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                                <div style="clear:both"></div>
+                          </div> <!--list_actividad--> 
+                    </div><!--content actividades-->
                     {% endif %}
                     </div>
                 </section>
@@ -74,3 +62,5 @@
             
             
 {% endblock  %}
+            
+            

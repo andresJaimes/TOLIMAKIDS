@@ -16,15 +16,16 @@ class FilterActivityPlaces extends AbstractType{
     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', 'filter_text', array('label'=>'Actividad'));
+        $builder->add('name', 'filter_text', array('label'=>false));
         //$builder->add('lugar', 'filter_text');
         
         
-        $builder->add('places', 'filter_text', array('label' => 'Lugar',
+        $builder->add('places', 'filter_text', array('label' => false,
            'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
        if (!empty($values['value'])) {
            $qb = $filterQuery->getQueryBuilder();
-           $qb->innerJoin('a.places', 'p', Join::WITH, "p.name = LOWER('".$values['value']."')");
+          // $qb->innerJoin('a.places', 'p', Join::WITH, "p.name = LOWER('".$values['value']."')");
+           $qb->andWhere("p.name = LOWER('".$values['value']."')");
        }
    }));
     }
