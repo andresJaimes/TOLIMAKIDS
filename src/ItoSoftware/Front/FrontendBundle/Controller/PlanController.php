@@ -193,8 +193,8 @@ class PlanController extends Controller{
         $em = $this->getDoctrine()->getManager();
             $em->persist($plan);
             $em->flush();
-            return new Response('News added successfuly');
-           return new Response('Created product id '.$plan->getId());
+  
+           return $this->redirect($this->generateUrl('front_frontend_homepage'));
             
         }
            

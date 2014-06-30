@@ -31,7 +31,7 @@ class __TwigTemplate_870a98939e80ac0f9f13748ff3281d14626389ef6b52992b7f81cc4fb5a
         // line 4
         $this->displayBlock('javascript', $context, $blocks);
         // line 33
-        echo " <form class=\"form-row\" role=\"form\">
+        echo " <form class=\"form-row\" role=\"form\" method=\"POST\">
 
 
 <div class=\"row actividades\">

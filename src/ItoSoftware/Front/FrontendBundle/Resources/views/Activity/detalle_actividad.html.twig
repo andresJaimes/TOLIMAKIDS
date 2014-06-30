@@ -3,12 +3,18 @@
 {% block javascript %}
 {{parent()}}
  <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/jquery.cbpFWSlider.min.js')}}"></script>
- <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/rating.js')}}"></script>
+ <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/jquery.raty.js')}}"></script>
   <link href="{{ asset ('bundles/frontfrontend/css/rating.css')}}" rel="stylesheet" type="text/css">
   <script src="http://js-kit.com/ratings.js"></script>
 
  <script type="text/javascript">
 $( function() {
+
+$('#star').raty({
+  size      : 24,
+  starOff   : 'icon_star_ok.png',
+  starOn    : 'icon_star.png'
+}); 
 
 
         //alert(map + "pru");
@@ -78,18 +84,8 @@ $( function() {
                      <div class="calificacion">
                     <h3>Calificación:</h3>
                     <div class="calificar">
-                         <ul>
-                             <div class="ffbs_rating_wrapper">
-<div id='rate_2mea1fbv' class='ffbs_rate ffbs_rate_border ffbs_centered' data-label-rating='icon' data-label-views='icon' data-label-votes='icon'>
-<!--{[['<img src="http://static.graddit.com/img/star_blue.png"/>']]}--></div>
-<div id='stats_2mea1fbv' class='ffbs_stats ffbs_centered'></div>
-<div id='share_2mea1fbv' class='ffbs_share ffbs_share_border ffbs_centered'></div></div>
-<script type='text/javascript' src='http://www.graddit.com/rate/rus/5/2mea1fbv?id=rate_2mea1fbv&stats=stats_2mea1fbv&info=info&info_delay=2&class_star=ffbs_star_img&class_star_set=ffbs_star_img_set&class_star_vote=ffbs_star_img_vote&views=yes&votes=yes&average=yes&share=share_2mea1fbv'></script>
-                         </ul>
-                     <div class="fb-like" data-href="http://tolimakids.local/" data-width="292" data-send="true"></div>
-                        </div>
-                    
-                     
+                         <div id="star"></div>
+     
                     </div>
             </div>
             <div style="clear:both"></div>
