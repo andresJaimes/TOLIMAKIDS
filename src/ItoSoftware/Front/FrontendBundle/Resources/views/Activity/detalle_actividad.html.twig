@@ -10,11 +10,13 @@
  <script type="text/javascript">
 $( function() {
 
-$('#star').raty({
-  size      : 24,
-  starOff   : 'icon_star_ok.png',
-  starOn    : 'icon_star.png'
-}); 
+        $('#star').raty({
+          half      : true,
+          size      : 24,
+          starHalf  : '/bundles/frontfrontend/images/star-half.png',
+          starOff   : '/bundles/frontfrontend/images/star-off.png',
+          starOn    : '/bundles/frontfrontend/images/star-on.png'
+        });
 
 
         //alert(map + "pru");
@@ -46,8 +48,9 @@ $('#star').raty({
     {% include 'FrontFrontendBundle:Activity:show_map.html.twig'%}
     </div>
       <div class="row actividades">
-          <div class="col-md-12 child"></div><!--child-->
-          <div class="list_actividad">
+          <div class="col-md-12 child">
+          </div><!--child-->
+
           
       		<div class="col-md-8">
   				
@@ -71,6 +74,7 @@ $('#star').raty({
        		
             </div>
             
+              
             <div class="col-md-4">
             	<h1>{{activity.getName}}</h1>
                 	<div>
@@ -90,7 +94,7 @@ $('#star').raty({
             </div>
             <div style="clear:both"></div>
             </div>
-      </div> <!--list_actividad-->   
+ 
 
    
  </div> <!--list_actividad--> 

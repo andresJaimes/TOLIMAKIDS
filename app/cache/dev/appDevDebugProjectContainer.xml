@@ -32,7 +32,6 @@
       <parameter key="HWIOAuthBundle">HWI\Bundle\OAuthBundle\HWIOAuthBundle</parameter>
       <parameter key="ItoApiBundle">ItoSoftware\Api\ApiBundle\ItoApiBundle</parameter>
       <parameter key="LexikFormFilterBundle">Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle</parameter>
-      <parameter key="RaulFraileLadybugBundle">RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle</parameter>
       <parameter key="KnpMenuBundle">Knp\Bundle\MenuBundle\KnpMenuBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -848,16 +847,6 @@
     <parameter key="hwi_oauth.connect">false</parameter>
     <parameter key="hwi_oauth.templating.engine">twig</parameter>
     <parameter key="lexik_form_filter.query_builder_updater.class">Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdater</parameter>
-    <parameter key="ladybug.options" type="collection">
-      <parameter key="extra_helpers" type="collection">
-        <parameter>RaulFraile\Bundle\LadybugBundle\DataCollector\LadybugDataCollector:log</parameter>
-      </parameter>
-      <parameter key="theme">modern</parameter>
-      <parameter key="expanded">false</parameter>
-      <parameter key="silenced">false</parameter>
-      <parameter key="array_max_nesting_level">9</parameter>
-      <parameter key="object_max_nesting_level">3</parameter>
-    </parameter>
     <parameter key="knp_menu.factory.class">Knp\Menu\Silex\RouterAwareFactory</parameter>
     <parameter key="knp_menu.helper.class">Knp\Menu\Twig\Helper</parameter>
     <parameter key="knp_menu.menu_provider.chain.class">Knp\Menu\Provider\ChainProvider</parameter>
@@ -927,10 +916,6 @@
       <parameter key="sonata.block.data_collector" type="collection">
         <parameter>block</parameter>
         <parameter>SonataBlockBundle:Profiler:block.html.twig</parameter>
-      </parameter>
-      <parameter key="data_collector.ladybug_data_collector" type="collection">
-        <parameter>ladybug</parameter>
-        <parameter>RaulFraileLadybugBundle:Collector:ladybug</parameter>
       </parameter>
     </parameter>
   </parameters>
@@ -1261,14 +1246,6 @@
         <argument type="collection">
           <argument>lexik_form_filter.filter_prepare</argument>
           <argument>onFilterBuilderPrepare</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListenerService">
-        <argument>kernel.request</argument>
-        <argument type="collection">
-          <argument>ladybug.event_listener.ladybug_config_listener</argument>
-          <argument>onKernelRequest</argument>
         </argument>
         <argument>0</argument>
       </call>
@@ -3796,9 +3773,6 @@
           </service>
         </argument>
       </call>
-      <call method="add">
-        <argument type="service" id="data_collector.ladybug_data_collector"/>
-      </call>
     </service>
     <service id="profiler_listener" class="Symfony\Component\HttpKernel\EventListener\ProfilerListener">
       <tag name="kernel.event_subscriber"/>
@@ -3931,7 +3905,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>53aee9a08d5ed</argument>
+            <argument>53b1f2aead385</argument>
           </service>
         </argument>
         <argument type="service">
@@ -3968,7 +3942,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>53aee9a08d5ed</argument>
+            <argument>53b1f2aead385</argument>
           </service>
         </argument>
       </argument>
@@ -4269,7 +4243,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>53aee9a08d5ed</argument>
+            <argument>53b1f2aead385</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -4629,7 +4603,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>53aee9a08d5ed</argument>
+            <argument>53b1f2aead385</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -4822,14 +4796,6 @@
           <service class="HWI\Bundle\OAuthBundle\Twig\Extension\OAuthExtension" public="false">
             <tag name="twig.extension"/>
             <argument type="service" id="hwi_oauth.templating.helper.oauth"/>
-          </service>
-        </argument>
-      </call>
-      <call method="addExtension">
-        <argument type="service">
-          <service class="RaulFraile\Bundle\LadybugBundle\Twig\Extension\LadybugExtension" public="false">
-            <tag name="twig.extension"/>
-            <argument type="service" id="service_container"/>
           </service>
         </argument>
       </call>
@@ -6924,37 +6890,6 @@
     <service id="lexik_form_filter.doctrine_subscriber" class="Lexik\Bundle\FormFilterBundle\Event\Subscriber\DoctrineSubscriber">
       <tag name="kernel.event_subscriber"/>
     </service>
-    <service id="ladybug.dumper" class="Ladybug\Dumper">
-      <call method="setOptions">
-        <argument type="collection">
-          <argument key="extra_helpers" type="collection">
-            <argument>RaulFraile\Bundle\LadybugBundle\DataCollector\LadybugDataCollector:log</argument>
-          </argument>
-          <argument key="theme">modern</argument>
-          <argument key="expanded">false</argument>
-          <argument key="silenced">false</argument>
-          <argument key="array_max_nesting_level">9</argument>
-          <argument key="object_max_nesting_level">3</argument>
-        </argument>
-      </call>
-    </service>
-    <service id="data_collector.ladybug_data_collector" class="RaulFraile\Bundle\LadybugBundle\DataCollector\LadybugDataCollector">
-      <tag name="data_collector" template="RaulFraileLadybugBundle:Collector:ladybug" id="ladybug"/>
-      <argument type="service" id="service_container"/>
-    </service>
-    <service id="ladybug.event_listener.ladybug_config_listener" class="RaulFraile\Bundle\LadybugBundle\EventListener\LadybugConfigListener">
-      <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
-      <argument type="collection">
-        <argument key="extra_helpers" type="collection">
-          <argument>RaulFraile\Bundle\LadybugBundle\DataCollector\LadybugDataCollector:log</argument>
-        </argument>
-        <argument key="theme">modern</argument>
-        <argument key="expanded">false</argument>
-        <argument key="silenced">false</argument>
-        <argument key="array_max_nesting_level">9</argument>
-        <argument key="object_max_nesting_level">3</argument>
-      </argument>
-    </service>
     <service id="knp_menu.factory" class="Knp\Menu\Silex\RouterAwareFactory">
       <argument type="service" id="router"/>
     </service>
@@ -7029,10 +6964,6 @@
         <argument key="sonata.block.data_collector" type="collection">
           <argument>block</argument>
           <argument>SonataBlockBundle:Profiler:block.html.twig</argument>
-        </argument>
-        <argument key="data_collector.ladybug_data_collector" type="collection">
-          <argument>ladybug</argument>
-          <argument>RaulFraileLadybugBundle:Collector:ladybug</argument>
         </argument>
       </argument>
       <argument>bottom</argument>
@@ -7374,10 +7305,6 @@
         <argument>LexikFormFilter</argument>
       </call>
       <call method="addPath">
-        <argument>/home/Tolima_Kids/vendor/raulfraile/ladybug-bundle/RaulFraile/Bundle/LadybugBundle/Resources/views</argument>
-        <argument>RaulFraileLadybug</argument>
-      </call>
-      <call method="addPath">
         <argument>/home/Tolima_Kids/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views</argument>
         <argument>WebProfiler</argument>
       </call>
@@ -7581,7 +7508,6 @@
     <service id="fos_user.change_password.form.handler" alias="fos_user.change_password.form.handler.default"/>
     <service id="sonata.user.authentication.form" alias="fos_user.profile.form"/>
     <service id="sonata.user.authentication.form_handler" alias="fos_user.profile.form.handler"/>
-    <service id="ladybug" alias="data_collector.ladybug_data_collector"/>
     <service id="sensio.distribution.webconfigurator" alias="sensio_distribution.webconfigurator"/>
   </services>
 </container>

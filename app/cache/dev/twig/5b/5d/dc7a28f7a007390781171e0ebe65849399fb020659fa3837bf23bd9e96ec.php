@@ -22,7 +22,7 @@ class __TwigTemplate_5b5ddc7a28f7a007390781171e0ebe65849399fb020659fa3837bf23bd9
     <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>
     <script type=\"text/javascript\" src=\"//maps.google.com/maps/api/js?sensor=false\"></script>
     <script type=\"text/javascript\">
-
+var width =  \"<div style='width: 300px;></div>\";
       var map;
       function initialize() {
         var mapDiv = document.getElementById('maps');
@@ -41,16 +41,14 @@ class __TwigTemplate_5b5ddc7a28f7a007390781171e0ebe65849399fb020659fa3837bf23bd9
 \t\t\tvar longitud = position.coords.longitude;
 
 \t\t\tvar position = new google.maps.LatLng(latitud,longitud);
-                        
-                        
-                        \$('#lti').val(latitud);
-                        \$('#lgi').val(longitud);\t
-
+   \t
+        
    
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: position,
-        content: 'You Here'
+        width: width,
+        content: '<h1>Usted esta aqui</h1>'
       });
    
 //    var circle = new google.maps.Circle({
@@ -125,6 +123,6 @@ class __TwigTemplate_5b5ddc7a28f7a007390781171e0ebe65849399fb020659fa3837bf23bd9
 
     public function getDebugInfo()
     {
-        return array (  19 => 1,  155 => 5,  151 => 4,  148 => 3,  130 => 85,  126 => 84,  122 => 83,  118 => 82,  114 => 81,  104 => 74,  100 => 73,  93 => 69,  80 => 58,  75 => 56,  67 => 53,  62 => 51,  59 => 50,  57 => 49,  45 => 39,  43 => 38,  34 => 33,  32 => 3,  29 => 2,);
+        return array (  19 => 1,);
     }
 }

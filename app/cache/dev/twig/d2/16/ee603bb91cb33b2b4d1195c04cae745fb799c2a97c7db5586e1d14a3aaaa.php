@@ -94,40 +94,65 @@ class __TwigTemplate_d216ee603bb91cb33b2b4d1195c04cae745fb799c2a97c7db5586e1d14a
             <div class=\"curve\"></div>
 
             <div class=\"row actividades\">
-                <h1>Actividades</h1>
+                <h1>Lugares</h1>
 
             ";
         // line 80
         $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["lugares"]) ? $context["lugares"] : $this->getContext($context, "lugares")));
+        foreach ($context['_seq'] as $context["_key"] => $context["results"]) {
+            // line 81
+            echo "
+                <div class=\"col-md-7\"><h3>";
+            // line 82
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["results"]) ? $context["results"] : $this->getContext($context, "results")), "name"), "html", null, true);
+            echo "</h3></div>
+
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['results'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 84
+        echo "     
+            </div><!--content actividades-->
+            
+            
+            <div class=\"row actividades\">
+                <h1>Actividades</h1>
+
+            ";
+        // line 91
+        $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["actividades"]) ? $context["actividades"] : $this->getContext($context, "actividades")));
         foreach ($context['_seq'] as $context["_key"] => $context["result"]) {
-            // line 81
+            // line 92
             echo "                <div class=\"actividad col-md-10\">   
                     <div class=\"col-md-4\">
                     ";
-            // line 83
+            // line 94
             if (($this->getAttribute((isset($context["result"]) ? $context["result"] : $this->getContext($context, "result")), "getGaleryLength") >= 1)) {
-                // line 84
+                // line 95
                 echo "                                    ";
                 if ($this->getAttribute((isset($context["result"]) ? $context["result"] : $this->getContext($context, "result")), "getGalery")) {
                     echo "    
                             <img src=\"";
-                    // line 85
+                    // line 96
                     echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["result"]) ? $context["result"] : $this->getContext($context, "result")), "getFoto"), "getWebPathFile"), "html", null, true);
                     echo "\" alt=\"";
                     echo twig_escape_filter($this->env, $this->getAttribute((isset($context["result"]) ? $context["result"] : $this->getContext($context, "result")), "getName"), "html", null, true);
                     echo "\" class=\"img-responsive\" />
                                     ";
                 } else {
-                    // line 87
+                    // line 98
                     echo "                                            ";
                     $context['_parent'] = (array) $context;
                     $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["result"]) ? $context["result"] : $this->getContext($context, "result")), "getGalery"));
                     foreach ($context['_seq'] as $context["_key"] => $context["imagen"]) {
-                        // line 88
+                        // line 99
                         echo "                            <nav>
                                 <img src=\"";
-                        // line 89
+                        // line 100
                         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["imagen"]) ? $context["imagen"] : $this->getContext($context, "imagen")), "getWebPathFile"), "html", null, true);
                         echo "\" alt=\"";
                         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["result"]) ? $context["result"] : $this->getContext($context, "result")), "getName"), "html", null, true);
@@ -138,26 +163,27 @@ class __TwigTemplate_d216ee603bb91cb33b2b4d1195c04cae745fb799c2a97c7db5586e1d14a
                     $_parent = $context['_parent'];
                     unset($context['_seq'], $context['_iterated'], $context['_key'], $context['imagen'], $context['_parent'], $context['loop']);
                     $context = array_intersect_key($context, $_parent) + $_parent;
-                    // line 92
+                    // line 103
                     echo "                                    ";
                 }
-                // line 93
+                // line 104
                 echo "                     ";
             }
-            // line 94
+            // line 105
             echo "
                         </div>
-
                         <div class=\"col-md-7\"><h3>";
-            // line 97
+            // line 107
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["result"]) ? $context["result"] : $this->getContext($context, "result")), "name"), "html", null, true);
             echo "</h3><p>";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["result"]) ? $context["result"] : $this->getContext($context, "result")), "description"), "html", null, true);
             echo "</p><br>";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["result"]) ? $context["result"] : $this->getContext($context, "result")), "cost"), "html", null, true);
-            echo " <a href=\"#\">Ver más</a></br></div>
+            echo " <a href=\"";
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getUrl("front_frontend_actividad_detalle", array("id" => $this->getAttribute((isset($context["result"]) ? $context["result"] : $this->getContext($context, "result")), "getId"))), "html", null, true);
+            echo "\">Ver más</a></br></div>
                         <div class=\"col-md-1\"><input class=\"act\" type=\"checkbox\" id=\"inlineCheckbox1\" value=\"";
-            // line 98
+            // line 108
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["result"]) ? $context["result"] : $this->getContext($context, "result")), "id"), "html", null, true);
             echo "\"></div>
 
@@ -167,7 +193,7 @@ class __TwigTemplate_d216ee603bb91cb33b2b4d1195c04cae745fb799c2a97c7db5586e1d14a
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['result'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 101
+        // line 111
         echo "     
                 </div><!--content actividades-->
                 <input type=\"button\" value=\"Registrar Plan\" id=\"buttonClass\"class=\"btn btn-info btn-sm adde\" > 
@@ -243,6 +269,6 @@ class __TwigTemplate_d216ee603bb91cb33b2b4d1195c04cae745fb799c2a97c7db5586e1d14a
 
     public function getDebugInfo()
     {
-        return array (  214 => 13,  210 => 12,  206 => 11,  202 => 10,  198 => 9,  194 => 8,  190 => 7,  185 => 6,  182 => 5,  171 => 101,  161 => 98,  153 => 97,  148 => 94,  145 => 93,  142 => 92,  131 => 89,  128 => 88,  123 => 87,  116 => 85,  111 => 84,  109 => 83,  105 => 81,  101 => 80,  88 => 70,  77 => 62,  68 => 56,  51 => 42,  37 => 30,  35 => 5,  32 => 4,  29 => 3,);
+        return array (  240 => 13,  236 => 12,  232 => 11,  228 => 10,  224 => 9,  220 => 8,  216 => 7,  211 => 6,  208 => 5,  197 => 111,  187 => 108,  177 => 107,  173 => 105,  170 => 104,  167 => 103,  156 => 100,  153 => 99,  148 => 98,  141 => 96,  136 => 95,  134 => 94,  130 => 92,  126 => 91,  117 => 84,  108 => 82,  105 => 81,  101 => 80,  88 => 70,  77 => 62,  68 => 56,  51 => 42,  37 => 30,  35 => 5,  32 => 4,  29 => 3,);
     }
 }

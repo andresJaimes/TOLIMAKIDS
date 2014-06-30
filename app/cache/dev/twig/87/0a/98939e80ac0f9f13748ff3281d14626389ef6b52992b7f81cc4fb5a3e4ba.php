@@ -33,11 +33,16 @@ class __TwigTemplate_870a98939e80ac0f9f13748ff3281d14626389ef6b52992b7f81cc4fb5a
         // line 33
         echo " <form class=\"form-row\" role=\"form\" method=\"POST\">
 
-
+        <div class=\"curve\">
+    ";
+        // line 36
+        $this->env->loadTemplate("FrontFrontendBundle:Activity:show_map.html.twig")->display($context);
+        // line 37
+        echo "    </div>
 <div class=\"row actividades\">
 \t<h1>Plan</h1>
 \t\t<div class=\"col-md-12 child\">
-        
+ 
         </div><!--child-->
       <div class=\"list_actividad\">  
         <div class=\"row activ\">
@@ -46,7 +51,7 @@ class __TwigTemplate_870a98939e80ac0f9f13748ff3281d14626389ef6b52992b7f81cc4fb5a
              <label>Titulo</label><br/>  
 
             ";
-        // line 47
+        // line 49
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "tittle"), 'widget', array("attr" => array("class" => "form-control")));
         echo "
             </div>
@@ -55,7 +60,7 @@ class __TwigTemplate_870a98939e80ac0f9f13748ff3281d14626389ef6b52992b7f81cc4fb5a
             <label>Fecha</label><br/>  
 
             ";
-        // line 53
+        // line 55
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "date"), 'widget');
         echo "
             </div>
@@ -63,7 +68,7 @@ class __TwigTemplate_870a98939e80ac0f9f13748ff3281d14626389ef6b52992b7f81cc4fb5a
             <div class=\"form-group\">
 
             ";
-        // line 58
+        // line 60
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "registrarionDate"), 'widget', array("attr" => array("type" => "date", "hidden" => true)));
         echo "
             </div>
@@ -72,7 +77,7 @@ class __TwigTemplate_870a98939e80ac0f9f13748ff3281d14626389ef6b52992b7f81cc4fb5a
             <label>Estado</label><br/>  
 
             ";
-        // line 64
+        // line 66
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "active"), 'widget', array("attr" => array("class" => "inlineCheckbox1", "type" => "checkbox")));
         echo "
             </div>
@@ -84,11 +89,11 @@ class __TwigTemplate_870a98939e80ac0f9f13748ff3281d14626389ef6b52992b7f81cc4fb5a
               <div class=\"row activ\">
               
                   ";
-        // line 73
+        // line 75
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["actividades"]) ? $context["actividades"] : $this->getContext($context, "actividades")));
         foreach ($context['_seq'] as $context["_key"] => $context["activity"]) {
-            // line 74
+            // line 76
             echo "                  <li><h3>";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["activity"]) ? $context["activity"] : $this->getContext($context, "activity")), "name"), "html", null, true);
             echo "</h3></li>
@@ -99,11 +104,11 @@ class __TwigTemplate_870a98939e80ac0f9f13748ff3281d14626389ef6b52992b7f81cc4fb5a
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['activity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 78
+        // line 80
         echo "              </div>
         </div>
         ";
-        // line 80
+        // line 82
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "save"), 'widget', array("label" => "Guardar"));
         echo "
         <div class=\"fb-like\" data-href=\"http://tolimakids.local/\" data-width=\"292\" data-send=\"true\"></div>
@@ -111,7 +116,7 @@ class __TwigTemplate_870a98939e80ac0f9f13748ff3281d14626389ef6b52992b7f81cc4fb5a
 </div><!--content actividades-->
 
 ";
-        // line 85
+        // line 87
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
         echo "
 ";
@@ -192,6 +197,6 @@ class __TwigTemplate_870a98939e80ac0f9f13748ff3281d14626389ef6b52992b7f81cc4fb5a
 
     public function getDebugInfo()
     {
-        return array (  161 => 14,  157 => 13,  153 => 12,  149 => 11,  145 => 10,  141 => 9,  137 => 8,  133 => 7,  129 => 6,  124 => 5,  121 => 4,  115 => 85,  107 => 80,  103 => 78,  92 => 74,  88 => 73,  76 => 64,  67 => 58,  59 => 53,  50 => 47,  34 => 33,  32 => 4,  29 => 3,);
+        return array (  166 => 14,  162 => 13,  158 => 12,  154 => 11,  150 => 10,  146 => 9,  142 => 8,  138 => 7,  134 => 6,  129 => 5,  126 => 4,  120 => 87,  112 => 82,  108 => 80,  97 => 76,  93 => 75,  81 => 66,  72 => 60,  64 => 55,  55 => 49,  41 => 37,  39 => 36,  34 => 33,  32 => 4,  29 => 3,);
     }
 }

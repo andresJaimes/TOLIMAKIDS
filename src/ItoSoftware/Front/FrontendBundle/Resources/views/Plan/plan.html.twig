@@ -75,6 +75,17 @@
             <div class="curve"></div>
 
             <div class="row actividades">
+                <h1>Lugares</h1>
+
+            {% for results in lugares %}
+
+                <div class="col-md-7"><h3>{{results.name}}</h3></div>
+
+            {% endfor %}     
+            </div><!--content actividades-->
+            
+            
+            <div class="row actividades">
                 <h1>Actividades</h1>
 
             {% for result in actividades %}
@@ -93,8 +104,7 @@
                      {% endif %}
 
                         </div>
-
-                        <div class="col-md-7"><h3>{{result.name}}</h3><p>{{result.description}}</p><br>{{result.cost}} <a href="#">Ver más</a></br></div>
+                        <div class="col-md-7"><h3>{{result.name}}</h3><p>{{result.description}}</p><br>{{result.cost}} <a href="{{url('front_frontend_actividad_detalle',{id:result.getId})}}">Ver más</a></br></div>
                         <div class="col-md-1"><input class="act" type="checkbox" id="inlineCheckbox1" value="{{result.id}}"></div>
 
                     </div><!--actividad-->

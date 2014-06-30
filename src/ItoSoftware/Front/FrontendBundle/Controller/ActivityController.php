@@ -21,8 +21,7 @@ class ActivityController extends Controller{
         $parametros =  array();
         $parametros['activity'] = $actividad;
         
-        
-  
+
         return $this->render('FrontFrontendBundle:Activity:detalle_actividad.html.twig',$parametros );
 
     }

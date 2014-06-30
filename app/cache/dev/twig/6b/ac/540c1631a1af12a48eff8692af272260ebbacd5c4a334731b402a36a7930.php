@@ -30,7 +30,7 @@ class __TwigTemplate_6bac540c1631a1af12a48eff8692af272260ebbacd5c4a334731b402a36
     {
         // line 3
         $this->displayBlock('javascript', $context, $blocks);
-        // line 41
+        // line 43
         echo "<input type=\"hidden\" value=\"";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["activity"]) ? $context["activity"] : $this->getContext($context, "activity")), "id"), "html", null, true);
         echo "\" id=\"activity_id\"/>
@@ -39,13 +39,14 @@ class __TwigTemplate_6bac540c1631a1af12a48eff8692af272260ebbacd5c4a334731b402a36
 
     <div class=\"curve\">
     ";
-        // line 46
+        // line 48
         $this->env->loadTemplate("FrontFrontendBundle:Activity:show_map.html.twig")->display($context);
-        // line 47
+        // line 49
         echo "    </div>
       <div class=\"row actividades\">
-          <div class=\"col-md-12 child\"></div><!--child-->
-          <div class=\"list_actividad\">
+          <div class=\"col-md-12 child\">
+          </div><!--child-->
+
           
       \t\t<div class=\"col-md-8\">
   \t\t\t\t
@@ -53,17 +54,17 @@ class __TwigTemplate_6bac540c1631a1af12a48eff8692af272260ebbacd5c4a334731b402a36
                     <ul>
 
                               ";
-        // line 57
+        // line 60
         if (($this->getAttribute((isset($context["activity"]) ? $context["activity"] : $this->getContext($context, "activity")), "getGaleryLength") >= 1)) {
-            // line 58
+            // line 61
             echo "
                                     ";
-            // line 59
+            // line 62
             if ($this->getAttribute((isset($context["activity"]) ? $context["activity"] : $this->getContext($context, "activity")), "getGalery")) {
                 echo "    
 
                         <li><a href=\"#\"> <img src=\"";
-                // line 61
+                // line 64
                 echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["activity"]) ? $context["activity"] : $this->getContext($context, "activity")), "getFoto"), "getWebPathFile"), "html", null, true);
                 echo "\" alt=\"";
                 echo twig_escape_filter($this->env, $this->getAttribute((isset($context["activity"]) ? $context["activity"] : $this->getContext($context, "activity")), "getName"), "html", null, true);
@@ -71,12 +72,12 @@ class __TwigTemplate_6bac540c1631a1af12a48eff8692af272260ebbacd5c4a334731b402a36
 
                                     ";
             }
-            // line 64
+            // line 67
             echo "
 
                             ";
         }
-        // line 66
+        // line 69
         echo " 
                     </ul>
                     
@@ -85,25 +86,26 @@ class __TwigTemplate_6bac540c1631a1af12a48eff8692af272260ebbacd5c4a334731b402a36
        \t\t
             </div>
             
+              
             <div class=\"col-md-4\">
             \t<h1>";
-        // line 75
+        // line 79
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["activity"]) ? $context["activity"] : $this->getContext($context, "activity")), "getName"), "html", null, true);
         echo "</h1>
                 \t<div>
             \t\t<p>";
-        // line 77
+        // line 81
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["activity"]) ? $context["activity"] : $this->getContext($context, "activity")), "getDescription"), "html", null, true);
         echo "</p></div>
                     
                     <div class=\"costo\">
                     <h3>Costos:</h3>
                     <p>Adultos: \$";
-        // line 81
+        // line 85
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["activity"]) ? $context["activity"] : $this->getContext($context, "activity")), "getCosta"), "html", null, true);
         echo "</p>
                     <p>Niños: \$";
-        // line 82
+        // line 86
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["activity"]) ? $context["activity"] : $this->getContext($context, "activity")), "getCost"), "html", null, true);
         echo "</p>
                     </div>
@@ -116,7 +118,7 @@ class __TwigTemplate_6bac540c1631a1af12a48eff8692af272260ebbacd5c4a334731b402a36
             </div>
             <div style=\"clear:both\"></div>
             </div>
-      </div> <!--list_actividad-->   
+ 
 
    
  </div> <!--list_actividad--> 
@@ -148,11 +150,13 @@ class __TwigTemplate_6bac540c1631a1af12a48eff8692af272260ebbacd5c4a334731b402a36
  <script type=\"text/javascript\">
 \$( function() {
 
-\$('#star').raty({
-  size      : 24,
-  starOff   : 'icon_star_ok.png',
-  starOn    : 'icon_star.png'
-}); 
+        \$('#star').raty({
+          half      : true,
+          size      : 24,
+          starHalf  : '/bundles/frontfrontend/images/star-half.png',
+          starOff   : '/bundles/frontfrontend/images/star-off.png',
+          starOn    : '/bundles/frontfrontend/images/star-on.png'
+        });
 
 
         //alert(map + \"pru\");
@@ -190,6 +194,6 @@ class __TwigTemplate_6bac540c1631a1af12a48eff8692af272260ebbacd5c4a334731b402a36
 
     public function getDebugInfo()
     {
-        return array (  144 => 7,  140 => 6,  136 => 5,  132 => 4,  129 => 3,  107 => 82,  103 => 81,  96 => 77,  91 => 75,  80 => 66,  75 => 64,  67 => 61,  62 => 59,  59 => 58,  57 => 57,  45 => 47,  43 => 46,  34 => 41,  32 => 3,  29 => 2,);
+        return array (  146 => 7,  142 => 6,  138 => 5,  134 => 4,  131 => 3,  109 => 86,  105 => 85,  98 => 81,  93 => 79,  81 => 69,  76 => 67,  68 => 64,  63 => 62,  60 => 61,  58 => 60,  45 => 49,  43 => 48,  34 => 43,  32 => 3,  29 => 2,);
     }
 }
