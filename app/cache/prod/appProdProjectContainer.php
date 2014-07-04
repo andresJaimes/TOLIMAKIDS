@@ -26,7 +26,6 @@ class appProdProjectContainer extends Container
             'cache_clearer' => 'getCacheClearerService',
             'cache_warmer' => 'getCacheWarmerService',
             'controller_name_converter' => 'getControllerNameConverterService',
-            'data_collector.ladybug_data_collector' => 'getDataCollector_LadybugDataCollectorService',
             'debug.emergency_logger_listener' => 'getDebug_EmergencyLoggerListenerService',
             'doctrine' => 'getDoctrineService',
             'doctrine.dbal.connection_factory' => 'getDoctrine_Dbal_ConnectionFactoryService',
@@ -133,8 +132,6 @@ class appProdProjectContainer extends Container
             'knp_paginator.subscriber.sortable' => 'getKnpPaginator_Subscriber_SortableService',
             'knp_paginator.templating.helper.pagination' => 'getKnpPaginator_Templating_Helper_PaginationService',
             'knp_paginator.twig.extension.pagination' => 'getKnpPaginator_Twig_Extension_PaginationService',
-            'ladybug.dumper' => 'getLadybug_DumperService',
-            'ladybug.event_listener.ladybug_config_listener' => 'getLadybug_EventListener_LadybugConfigListenerService',
             'lexik_form_filter.data_extraction_method.default' => 'getLexikFormFilter_DataExtractionMethod_DefaultService',
             'lexik_form_filter.data_extraction_method.key_values' => 'getLexikFormFilter_DataExtractionMethod_KeyValuesService',
             'lexik_form_filter.data_extraction_method.text' => 'getLexikFormFilter_DataExtractionMethod_TextService',
@@ -403,7 +400,6 @@ class appProdProjectContainer extends Container
             'fos_user.change_password.form.handler' => 'fos_user.change_password.form.handler.default',
             'fos_user.util.username_canonicalizer' => 'fos_user.util.email_canonicalizer',
             'hwi_oauth.user.provider.entity.main' => 'my.oauth_aware.user_provider.service',
-            'ladybug' => 'data_collector.ladybug_data_collector',
             'mailer' => 'swiftmailer.mailer.default',
             'session.storage' => 'session.storage.native',
             'sonata.block.cache.handler' => 'sonata.block.cache.handler.default',
@@ -444,10 +440,6 @@ class appProdProjectContainer extends Container
         $b = $this->get('templating.filename_parser');
         $c = new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder($a, $b, '/home/Tolima_Kids/app/Resources');
         return $this->services['cache_warmer'] = new \Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerAggregate(array(0 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer($c, $this->get('templating.locator')), 1 => new \Symfony\Bundle\AsseticBundle\CacheWarmer\AssetManagerCacheWarmer($this), 2 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer($this->get('router')), 3 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheCacheWarmer($this, $c), 4 => new \Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer($this->get('doctrine'))));
-    }
-    protected function getDataCollector_LadybugDataCollectorService()
-    {
-        return $this->services['data_collector.ladybug_data_collector'] = new \RaulFraile\Bundle\LadybugBundle\DataCollector\LadybugDataCollector($this);
     }
     protected function getDebug_EmergencyLoggerListenerService()
     {
@@ -522,7 +514,6 @@ class appProdProjectContainer extends Container
         $instance->addListenerService('kernel.request', array(0 => 'knp_paginator.subscriber.sliding_pagination', 1 => 'onKernelRequest'), 0);
         $instance->addListenerService('security.interactive_login', array(0 => 'fos_user.security.interactive_login_listener', 1 => 'onSecurityInteractiveLogin'), 0);
         $instance->addListenerService('lexik_filter.prepare', array(0 => 'lexik_form_filter.filter_prepare', 1 => 'onFilterBuilderPrepare'), 0);
-        $instance->addListenerService('kernel.request', array(0 => 'ladybug.event_listener.ladybug_config_listener', 1 => 'onKernelRequest'), 0);
         $instance->addSubscriberService('response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener');
         $instance->addSubscriberService('streamed_response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\StreamedResponseListener');
         $instance->addSubscriberService('locale_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\LocaleListener');
@@ -1002,16 +993,6 @@ class appProdProjectContainer extends Container
     {
         return $this->services['knp_paginator.twig.extension.pagination'] = new \Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension($this->get('knp_paginator.helper.processor'));
     }
-    protected function getLadybug_DumperService()
-    {
-        $this->services['ladybug.dumper'] = $instance = new \Ladybug\Dumper();
-        $instance->setOptions(array('extra_helpers' => array(0 => 'RaulFraile\\Bundle\\LadybugBundle\\DataCollector\\LadybugDataCollector:log'), 'theme' => 'modern', 'expanded' => false, 'silenced' => false, 'array_max_nesting_level' => 9, 'object_max_nesting_level' => 3));
-        return $instance;
-    }
-    protected function getLadybug_EventListener_LadybugConfigListenerService()
-    {
-        return $this->services['ladybug.event_listener.ladybug_config_listener'] = new \RaulFraile\Bundle\LadybugBundle\EventListener\LadybugConfigListener(array('extra_helpers' => array(0 => 'RaulFraile\\Bundle\\LadybugBundle\\DataCollector\\LadybugDataCollector:log'), 'theme' => 'modern', 'expanded' => false, 'silenced' => false, 'array_max_nesting_level' => 9, 'object_max_nesting_level' => 3));
-    }
     protected function getLexikFormFilter_DataExtractionMethod_DefaultService()
     {
         return $this->services['lexik_form_filter.data_extraction_method.default'] = new \Lexik\Bundle\FormFilterBundle\Filter\DataExtractor\Method\DefaultExtractionMethod();
@@ -1218,7 +1199,7 @@ class appProdProjectContainer extends Container
         $d = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
         $e = new \Symfony\Component\Security\Http\Firewall\LogoutListener($a, $b, $this->get('logout_admin_handler'), array('csrf_parameter' => '_csrf_token', 'intention' => 'logout', 'logout_path' => '/admin/logout'));
         $e->addHandler($this->get('security.logout.handler.session'));
-        return $this->services['security.firewall.map.context.admin'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => $this->get('security.context_listener.0'), 2 => $e, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($a, $this->get('security.authentication.manager'), $this->get('security.authentication.session_strategy'), $b, 'admin', new \ItoSoftware\Components\UserBundle\Handler\AuthenticationHandler($this->get('router'), $this->get('translator.default'), $this), new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($c, $b, array('login_path' => '/admin/login', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'), $d), array('use_forward' => false, 'check_path' => '/admin/login_check', 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $d, $this->get('event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53aee9b137632', $d), 5 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $b, 'admin', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($c, $b, '/admin/login', false), NULL, NULL, $d));
+        return $this->services['security.firewall.map.context.admin'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => $this->get('security.context_listener.0'), 2 => $e, 3 => new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($a, $this->get('security.authentication.manager'), $this->get('security.authentication.session_strategy'), $b, 'admin', new \ItoSoftware\Components\UserBundle\Handler\AuthenticationHandler($this->get('router'), $this->get('translator.default'), $this), new \Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler($c, $b, array('login_path' => '/admin/login', 'failure_path' => NULL, 'failure_forward' => false, 'failure_path_parameter' => '_failure_path'), $d), array('use_forward' => false, 'check_path' => '/admin/login_check', 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'intention' => 'authenticate', 'post_only' => true), $d, $this->get('event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 4 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53b6da55ee1e2', $d), 5 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $b, 'admin', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($c, $b, '/admin/login', false), NULL, NULL, $d));
     }
     protected function getSecurity_Firewall_Map_Context_MainService()
     {
@@ -1244,7 +1225,7 @@ class appProdProjectContainer extends Container
         $n->setResourceOwnerMap($this->get('hwi_oauth.resource_ownermap.main'));
         $n->setCheckPaths(array(0 => '/checkfacebook'));
         $n->setRememberMeServices($i);
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => $this->get('security.context_listener.0'), 2 => $j, 3 => $l, 4 => $n, 5 => new \Symfony\Component\Security\Http\Firewall\RememberMeListener($d, $i, $f, $c, $h), 6 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($d, '53aee9b137632', $c), 7 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($d, $this->get('security.authentication.trust_resolver'), $a, 'main', new \HWI\Bundle\OAuthBundle\Security\Http\EntryPoint\OAuthEntryPoint($e, $a, '/loginface', false), NULL, NULL, $c));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => $this->get('security.context_listener.0'), 2 => $j, 3 => $l, 4 => $n, 5 => new \Symfony\Component\Security\Http\Firewall\RememberMeListener($d, $i, $f, $c, $h), 6 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($d, '53b6da55ee1e2', $c), 7 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($d, $this->get('security.authentication.trust_resolver'), $a, 'main', new \HWI\Bundle\OAuthBundle\Security\Http\EntryPoint\OAuthEntryPoint($e, $a, '/loginface', false), NULL, NULL, $c));
     }
     protected function getSecurity_Firewall_Map_Context_UsuarioService()
     {
@@ -2530,7 +2511,6 @@ class appProdProjectContainer extends Container
         $instance->addExtension($this->get('sonata.core.twig.status_extension'));
         $instance->addExtension($this->get('sonata.core.twig.template_extension'));
         $instance->addExtension(new \HWI\Bundle\OAuthBundle\Twig\Extension\OAuthExtension($this->get('hwi_oauth.templating.helper.oauth')));
-        $instance->addExtension(new \RaulFraile\Bundle\LadybugBundle\Twig\Extension\LadybugExtension($this));
         $instance->addExtension(new \Knp\Menu\Twig\MenuExtension(new \Knp\Menu\Twig\Helper($this->get('knp_menu.renderer_provider'), $this->get('knp_menu.menu_provider'))));
         $instance->addGlobal('app', $this->get('templating.globals'));
         $instance->addGlobal('project_name', 'Tolima Kids');
@@ -2574,7 +2554,6 @@ class appProdProjectContainer extends Container
         $instance->addPath('/home/Tolima_Kids/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/views', 'HWIOAuth');
         $instance->addPath('/home/Tolima_Kids/src/ItoSoftware/Api/ApiBundle/Resources/views', 'ItoApi');
         $instance->addPath('/home/Tolima_Kids/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/views', 'LexikFormFilter');
-        $instance->addPath('/home/Tolima_Kids/vendor/raulfraile/ladybug-bundle/RaulFraile/Bundle/LadybugBundle/Resources/views', 'RaulFraileLadybug');
         $instance->addPath('/home/Tolima_Kids/app/Resources/views');
         $instance->addPath('/home/Tolima_Kids/vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form');
         $instance->addPath('/home/Tolima_Kids/vendor/knplabs/knp-menu/src/Knp/Menu/Resources/views');
@@ -2653,7 +2632,7 @@ class appProdProjectContainer extends Container
         $a = $this->get('fos_user.user_provider.username');
         $b = $this->get('hwi_oauth.user_checker');
         $c = $this->get('security.encoder_factory');
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($a, $b, 'admin', $c, true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53aee9b137632'), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($a, $b, 'usuario', $c, true), 3 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($a, $b, 'main', $c, true), 4 => new \HWI\Bundle\OAuthBundle\Security\Core\Authentication\Provider\OAuthProvider($this->get('my.oauth_aware.user_provider.service'), $this->get('hwi_oauth.resource_ownermap.main'), $b), 5 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($b, '1t0s0ftw4r32013*', 'main'), 6 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53aee9b137632')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($a, $b, 'admin', $c, true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53b6da55ee1e2'), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($a, $b, 'usuario', $c, true), 3 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($a, $b, 'main', $c, true), 4 => new \HWI\Bundle\OAuthBundle\Security\Core\Authentication\Provider\OAuthProvider($this->get('my.oauth_aware.user_provider.service'), $this->get('hwi_oauth.resource_ownermap.main'), $b), 5 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($b, '1t0s0ftw4r32013*', 'main'), 6 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53b6da55ee1e2')), true);
         $instance->setEventDispatcher($this->get('event_dispatcher'));
         return $instance;
     }
@@ -2774,7 +2753,6 @@ class appProdProjectContainer extends Container
                 'HWIOAuthBundle' => 'HWI\\Bundle\\OAuthBundle\\HWIOAuthBundle',
                 'ItoApiBundle' => 'ItoSoftware\\Api\\ApiBundle\\ItoApiBundle',
                 'LexikFormFilterBundle' => 'Lexik\\Bundle\\FormFilterBundle\\LexikFormFilterBundle',
-                'RaulFraileLadybugBundle' => 'RaulFraile\\Bundle\\LadybugBundle\\RaulFraileLadybugBundle',
                 'KnpMenuBundle' => 'Knp\\Bundle\\MenuBundle\\KnpMenuBundle',
             ),
             'kernel.charset' => 'UTF-8',
@@ -3583,16 +3561,6 @@ class appProdProjectContainer extends Container
             'hwi_oauth.connect' => false,
             'hwi_oauth.templating.engine' => 'twig',
             'lexik_form_filter.query_builder_updater.class' => 'Lexik\\Bundle\\FormFilterBundle\\Filter\\FilterBuilderUpdater',
-            'ladybug.options' => array(
-                'extra_helpers' => array(
-                    0 => 'RaulFraile\\Bundle\\LadybugBundle\\DataCollector\\LadybugDataCollector:log',
-                ),
-                'theme' => 'modern',
-                'expanded' => false,
-                'silenced' => false,
-                'array_max_nesting_level' => 9,
-                'object_max_nesting_level' => 3,
-            ),
             'knp_menu.factory.class' => 'Knp\\Menu\\Silex\\RouterAwareFactory',
             'knp_menu.helper.class' => 'Knp\\Menu\\Twig\\Helper',
             'knp_menu.menu_provider.chain.class' => 'Knp\\Menu\\Provider\\ChainProvider',

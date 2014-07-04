@@ -37,19 +37,25 @@ class __TwigTemplate_eb8ad877a4cefb40bc946937470988c99de99e3cfb6374cc843fc30e039
       }
       
       function addMarkers() {
-          
-           var marker = new google.maps.Marker({
-                position: new  google.maps.LatLng(";
-        // line 24
+           var latitud = ";
+        // line 22
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["places"]) ? $context["places"] : $this->getContext($context, "places")), "getLatitude"), "html", null, true);
-        echo ", ";
+        echo ";
+\t\t\tvar longitud = ";
+        // line 23
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["places"]) ? $context["places"] : $this->getContext($context, "places")), "getLength"), "html", null, true);
-        echo "),
+        echo ";
+           var marker = new google.maps.Marker({
+                position: new  google.maps.LatLng(latitud, longitud),
                 map: map
             });
             
             map.setZoom(14);
             map.setCenter(marker.getPosition());
+            
+                   
+                        \$('#lti').val(latitud);
+                        \$('#lgi').val(longitud);
       }
       
 
@@ -75,7 +81,7 @@ class __TwigTemplate_eb8ad877a4cefb40bc946937470988c99de99e3cfb6374cc843fc30e039
                             <br/>
                             <br/>
                             <h1 class=\"text-center\">";
-        // line 54
+        // line 59
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["places"]) ? $context["places"] : $this->getContext($context, "places")), "getMunicipality"), "html", null, true);
         echo "</h1>
                             <br/>
@@ -100,6 +106,6 @@ class __TwigTemplate_eb8ad877a4cefb40bc946937470988c99de99e3cfb6374cc843fc30e039
 
     public function getDebugInfo()
     {
-        return array (  79 => 54,  44 => 24,  19 => 1,  132 => 48,  123 => 41,  112 => 39,  108 => 38,  101 => 34,  95 => 31,  82 => 21,  76 => 17,  74 => 16,  68 => 12,  66 => 11,  61 => 8,  58 => 7,  42 => 52,  40 => 7,  32 => 3,  29 => 2,);
+        return array (  85 => 59,  46 => 23,  42 => 22,  19 => 1,);
     }
 }

@@ -29,27 +29,25 @@ class __TwigTemplate_b741f8bcd00be822bb4bbfefd7b44992082da11dc601c73793166e4a0f7
         // line 6
         echo "        ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 27
+        // line 24
         echo "    </head>
     <body> 
-
-           
-
 
         <div id=\"contaniner\">
 
                         ";
-        // line 35
+        // line 29
         echo twig_include($this->env, $context, "::headerindex.html.twig");
         echo "
                         ";
-        // line 36
+        // line 30
         $this->displayBlock('body', $context, $blocks);
-        // line 39
+        // line 33
         echo "                      ";
         echo twig_include($this->env, $context, "::footer.html.twig");
         echo "
         </div>
+        
     </body>
 
 </html>
@@ -101,41 +99,26 @@ class __TwigTemplate_b741f8bcd00be822bb4bbfefd7b44992082da11dc601c73793166e4a0f7
         echo "\"></script>
         <script type=\"text/javascript\" src=\"";
         // line 17
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/api_calls.js"), "html", null, true);
-        echo "\"></script>
-        <script type=\"text/javascript\" src=\"";
-        // line 18
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/render.js"), "html", null, true);
-        echo "\"></script>
-        <script type=\"text/javascript\" src=\"";
-        // line 19
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/main.js"), "html", null, true);
-        echo "\"></script>
-        <script type=\"text/javascript\" src=\"";
-        // line 20
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/jquery.js"), "html", null, true);
         echo "\"></script>
         <script type=\"text/javascript\" src=\"";
-        // line 21
+        // line 18
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/bootstrap.js"), "html", null, true);
         echo "\"></script>
         <script type=\"text/javascript\" src=\"";
-        // line 22
+        // line 19
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/jquery.cbpFWSlider.min.js"), "html", null, true);
         echo "\"></script>
-        <script type=\"text/javascript\" src=\"";
-        // line 23
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/Gmap.js"), "html", null, true);
-        echo "\"></script>
+      
 
 
     ";
     }
 
-    // line 36
+    // line 30
     public function block_body($context, array $blocks = array())
     {
-        // line 37
+        // line 31
         echo "
                         ";
     }
@@ -152,6 +135,6 @@ class __TwigTemplate_b741f8bcd00be822bb4bbfefd7b44992082da11dc601c73793166e4a0f7
 
     public function getDebugInfo()
     {
-        return array (  136 => 36,  128 => 23,  116 => 20,  112 => 19,  108 => 18,  104 => 17,  100 => 16,  96 => 15,  90 => 12,  86 => 11,  82 => 10,  78 => 9,  74 => 8,  69 => 7,  66 => 6,  60 => 5,  49 => 39,  47 => 36,  43 => 35,  33 => 27,  30 => 6,  28 => 5,  22 => 1,  198 => 15,  194 => 14,  190 => 13,  186 => 12,  182 => 11,  178 => 10,  174 => 9,  170 => 8,  164 => 6,  161 => 5,  148 => 98,  142 => 95,  139 => 37,  137 => 93,  133 => 91,  124 => 22,  120 => 21,  114 => 86,  107 => 84,  87 => 67,  77 => 60,  68 => 54,  52 => 41,  37 => 28,  35 => 5,  32 => 4,  29 => 3,);
+        return array (  122 => 31,  119 => 30,  110 => 19,  106 => 18,  102 => 17,  98 => 16,  94 => 15,  84 => 11,  80 => 10,  76 => 9,  72 => 8,  67 => 7,  64 => 6,  58 => 5,  46 => 33,  44 => 30,  40 => 29,  33 => 24,  30 => 6,  28 => 5,  22 => 1,  244 => 14,  240 => 13,  236 => 12,  232 => 11,  228 => 10,  224 => 9,  220 => 8,  216 => 7,  211 => 6,  208 => 5,  197 => 112,  187 => 109,  177 => 108,  173 => 106,  170 => 105,  167 => 104,  156 => 101,  153 => 100,  148 => 99,  141 => 97,  136 => 96,  134 => 95,  130 => 93,  126 => 92,  117 => 85,  108 => 83,  105 => 82,  101 => 81,  88 => 12,  77 => 63,  68 => 57,  51 => 43,  37 => 31,  35 => 5,  32 => 4,  29 => 3,);
     }
 }

@@ -33,7 +33,7 @@ class __TwigTemplate_a7af22cfab02c7ee9392297d31c5de68e3386cb5fd91af63287a70df5a1
     ";
         // line 5
         $this->displayBlock('javascript', $context, $blocks);
-        // line 28
+        // line 27
         echo "
   
     <style>
@@ -48,7 +48,7 @@ class __TwigTemplate_a7af22cfab02c7ee9392297d31c5de68e3386cb5fd91af63287a70df5a1
         </style>
         <div class=\"row\">
             <input type=\"hidden\" id=\"url_detalle\" value=\"";
-        // line 41
+        // line 40
         echo $this->env->getExtension('routing')->getUrl("front_frontend_lugar_detalle", array("id" => 0));
         echo "\">
             <div class=\"col-md-12\">
@@ -64,7 +64,7 @@ class __TwigTemplate_a7af22cfab02c7ee9392297d31c5de68e3386cb5fd91af63287a70df5a1
                                      <label>Actividad</label><br/>  
                                      
                                      ";
-        // line 54
+        // line 53
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "name"), 'widget', array("attr" => array("class" => "form-control searche")));
         echo "
                                      </div>
@@ -73,7 +73,7 @@ class __TwigTemplate_a7af22cfab02c7ee9392297d31c5de68e3386cb5fd91af63287a70df5a1
                                      <label>Lugares</label><br/> 
                                      
                                      ";
-        // line 60
+        // line 59
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "places"), 'widget', array("attr" => array("class" => "form-control searche")));
         echo "
                                     </div> 
@@ -83,7 +83,7 @@ class __TwigTemplate_a7af22cfab02c7ee9392297d31c5de68e3386cb5fd91af63287a70df5a1
                                      <input  id=\"lti\" type=\"hidden\" name=\"latitud\" value=\"\"/>
                                      <input  id=\"lgi\" type=\"hidden\" name=\"longitud\" value=\"\"/>
                             ";
-        // line 67
+        // line 66
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
         echo "
                           
@@ -103,24 +103,24 @@ class __TwigTemplate_a7af22cfab02c7ee9392297d31c5de68e3386cb5fd91af63287a70df5a1
         </div><!--child-->
         <div class=\"list_actividad\">  
             ";
-        // line 84
+        // line 83
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["actividades"]) ? $context["actividades"] : $this->getContext($context, "actividades")));
         foreach ($context['_seq'] as $context["_key"] => $context["activity"]) {
             echo "  
             <div class=\"row activ\">
                 <div class=\"col-md-8\"> <a href=\"";
-            // line 86
+            // line 85
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getUrl("front_frontend_actividad_detalle", array("id" => $this->getAttribute((isset($context["activity"]) ? $context["activity"] : $this->getContext($context, "activity")), "getId"))), "html", null, true);
             echo "\"><h4>";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["activity"]) ? $context["activity"] : $this->getContext($context, "activity")), "name"), "html", null, true);
             echo "</h4></a></div>
                 <div class=\"col-md-4\"><p class=\"text-right fecha\">";
-            // line 87
+            // line 86
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["activity"]) ? $context["activity"] : $this->getContext($context, "activity")), "cost"), "html", null, true);
             echo "</p></div>
                 <div class=\"col-md-12\"><p>";
-            // line 88
+            // line 87
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["activity"]) ? $context["activity"] : $this->getContext($context, "activity")), "description"), "html", null, true);
             echo "</p></div>
              </div>
@@ -129,22 +129,22 @@ class __TwigTemplate_a7af22cfab02c7ee9392297d31c5de68e3386cb5fd91af63287a70df5a1
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['activity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 91
+        // line 90
         echo "            
             </div> <!--list_actividad--> 
             ";
-        // line 93
+        // line 92
         if ((twig_length_filter($this->env, (isset($context["actividades"]) ? $context["actividades"] : $this->getContext($context, "actividades"))) > 0)) {
-            // line 94
+            // line 93
             echo "               <div class=\"paginador\">
                     <a href=\"";
-            // line 95
+            // line 94
             echo $this->env->getExtension('knp_pagination')->render((isset($context["actividades"]) ? $context["actividades"] : $this->getContext($context, "actividades")));
             echo "\"/>      
                 </div> 
             ";
         }
-        // line 98
+        // line 97
         echo "      </div>
 
        
@@ -167,35 +167,31 @@ class __TwigTemplate_a7af22cfab02c7ee9392297d31c5de68e3386cb5fd91af63287a70df5a1
           <script src=\"https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false\"></script>    
             <script type=\"text/javascript\" src=\"";
         // line 8
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/Gmap.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/map2/Gmap2.js"), "html", null, true);
         echo "\"></script>
             <script type=\"text/javascript\" src=\"";
         // line 9
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/controller.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/map2/controller.js"), "html", null, true);
         echo "\"></script>
             <script type=\"text/javascript\" src=\"";
         // line 10
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/api_calls.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/map2/api_calls.js"), "html", null, true);
         echo "\"></script>
             <script type=\"text/javascript\" src=\"";
         // line 11
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/render.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/map2/render.js"), "html", null, true);
         echo "\"></script>
             <script type=\"text/javascript\" src=\"";
         // line 12
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/main.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/map2/main.js"), "html", null, true);
         echo "\"></script>
             <script type=\"text/javascript\" src=\"";
         // line 13
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/slider/miniSlider.js"), "html", null, true);
-        echo "\"></script>
-            <script type=\"text/javascript\" src=\"";
-        // line 14
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/jquery-ui.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/map2/jquery-ui.js"), "html", null, true);
         echo "\"></script>        
             <script type=\"text/javascript\" src=\"";
-        // line 15
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/jquery-1.11.1.js"), "html", null, true);
+        // line 14
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/frontfrontend/js/map2/jquery-1.11.1.js"), "html", null, true);
         echo "\"></script> 
 <script type=\"text/javascript\">
     \$(document).ready(function() {
@@ -223,6 +219,6 @@ class __TwigTemplate_a7af22cfab02c7ee9392297d31c5de68e3386cb5fd91af63287a70df5a1
 
     public function getDebugInfo()
     {
-        return array (  198 => 15,  194 => 14,  190 => 13,  186 => 12,  182 => 11,  178 => 10,  174 => 9,  170 => 8,  164 => 6,  161 => 5,  148 => 98,  142 => 95,  139 => 94,  137 => 93,  133 => 91,  124 => 88,  120 => 87,  114 => 86,  107 => 84,  87 => 67,  77 => 60,  68 => 54,  52 => 41,  37 => 28,  35 => 5,  32 => 4,  29 => 3,);
+        return array (  194 => 14,  190 => 13,  186 => 12,  182 => 11,  178 => 10,  174 => 9,  170 => 8,  164 => 6,  161 => 5,  148 => 97,  142 => 94,  139 => 93,  137 => 92,  133 => 90,  124 => 87,  120 => 86,  114 => 85,  107 => 83,  87 => 66,  77 => 59,  68 => 53,  52 => 40,  37 => 27,  35 => 5,  32 => 4,  29 => 3,);
     }
 }

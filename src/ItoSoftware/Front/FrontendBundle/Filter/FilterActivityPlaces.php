@@ -25,7 +25,7 @@ class FilterActivityPlaces extends AbstractType{
        if (!empty($values['value'])) {
            $qb = $filterQuery->getQueryBuilder();
           // $qb->innerJoin('a.places', 'p', Join::WITH, "p.name = LOWER('".$values['value']."')");
-           $qb->andWhere("p.name = LOWER('".$values['value']."')");
+           $qb->andWhere("p.name LIKE LOWER('%".$values['value']."%')");
        }
    }));
     }

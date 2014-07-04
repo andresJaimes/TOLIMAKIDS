@@ -26,19 +26,13 @@ function LoadMap() {
     if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
  
-                        var latitud = position.coords.latitude;
-			var longitud = position.coords.longitude;
+                        var latitud = 4.440663;
+			var longitud = -75.24414100000001;
 
 			var position = new google.maps.LatLng(latitud,longitud);
                         	
 
-                  
-      var infowindow = new google.maps.InfoWindow({
-        map: map,
-        position: position,
-        content: 'You Here'
-      });
-   
+     
    
       map.setCenter(position);
     }, function() {

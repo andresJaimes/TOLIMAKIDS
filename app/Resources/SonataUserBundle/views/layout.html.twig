@@ -4,31 +4,24 @@
         <meta charset="UTF-8" />
         
      {% block javascripts %}
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/jquery.js')}}"></script>
         <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/bootstrap.js')}}"></script>
         <link href="{{ asset ('bundles/frontfrontend/css/bootstrap-theme.css')}}" rel="stylesheet" type="text/css">
         <link href="{{ asset ('bundles/frontfrontend/css/bootstrap.css')}}" rel="stylesheet" type="text/css">
         <link href="{{ asset ('bundles/frontfrontend/css/style.css')}}" rel="stylesheet" type="text/css">
         <link href="{{ asset ('bundles/frontfrontend/css/bootstrap-theme.css')}}" rel="stylesheet" type="text/css">
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/jquery-1.11.1.js')}}"></script>
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/jquery.js')}}"></script>
         <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/bootstrap.js')}}"></script>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>    
         <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/map/map.js')}}"></script>
         <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/map/controller.js')}}"></script>
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/map/api_calls.js')}}"></script>
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/map/render.js')}}"></script>
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/map/main.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/frontfrontend/js/slider/miniSlider.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/frontfrontend/js/jquery-ui.js')}}"></script>        
-        <script type="text/javascript" src="{{ asset('bundles/frontfrontend/js/jquery-1.11.1.js')}}"></script> 
+        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/jquery.js')}}"></script>
         <script type="text/javascript">
                     $(document).ready(function() {
 
                         LoadMap();
                          cargarPlaces();
                     });
-            </script>
+                    
+           </script>
 
    {% endblock %}
   

@@ -39,7 +39,8 @@
                                             <a href="{{url('front_frontend_actividad_detalle',{id:activity.getId})}}">{{ activity.name }}</a>
                                         {%  endfor %}
                                         </div>
-   
+                                       <input  id="lti" type="hidden" name="latitud" value=""/>
+                                     <input  id="lgi" type="hidden" name="longitud" value=""/>
                                 </div>
                                 <div style="clear:both"></div>
                           </div> <!--list_actividad--> 
@@ -51,15 +52,6 @@
     {% endblock %}
         </section><!--cierre contenido-->
 
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                var places_id = $("#places_id").val();
-                cargarPlaces(places_id);
-            });
-   
-            </script>
-            
             
 {% endblock  %}
             

@@ -70,6 +70,7 @@ class FixturesUsers extends AbstractFixture implements OrderedFixtureInterface, 
             $manager->persist($new_user);
             $this->addReference('user_'.$user['username'], $new_user);
         }
+        
         $manager->flush();
     }
 

@@ -42,14 +42,8 @@ function LoadMap() {
         position: position,
         content: 'You Here'
       });
-   
-//    var circle = new google.maps.Circle({
-//            center: new google.maps.LatLng(latitud,longitud),
-//            radius: 20000,
-//            fillColor: "#blue",
-//            map: map
-//        });
-//      
+
+        
       map.setCenter(position);
     }, function() {
       handleNoGeolocation(true);
@@ -58,16 +52,15 @@ function LoadMap() {
     // Browser doesn't support Geolocation
     handleNoGeolocation(false);
   }
-  
-
 
 }
+
 
 function handleNoGeolocation(errorFlag) {
     if (errorFlag) {
         var content = 'Error: La localizacion fallo.';
     } else {
-        var content = 'Error: Your browser doesn\'t support geolocation.';
+        var content = 'Error: Su navegador no soporta activación de GPS';
     }
 
  

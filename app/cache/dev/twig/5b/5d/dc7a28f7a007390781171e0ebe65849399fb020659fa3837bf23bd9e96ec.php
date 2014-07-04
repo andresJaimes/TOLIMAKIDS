@@ -22,7 +22,7 @@ class __TwigTemplate_5b5ddc7a28f7a007390781171e0ebe65849399fb020659fa3837bf23bd9
     <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>
     <script type=\"text/javascript\" src=\"//maps.google.com/maps/api/js?sensor=false\"></script>
     <script type=\"text/javascript\">
-var width =  \"<div style='width: 300px;></div>\";
+
       var map;
       function initialize() {
         var mapDiv = document.getElementById('maps');
@@ -34,48 +34,12 @@ var width =  \"<div style='width: 300px;></div>\";
       
         google.maps.event.addListenerOnce(map, 'tilesloaded', addMarkers);
       
-      if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
- 
-                        var latitud = position.coords.latitude;
-\t\t\tvar longitud = position.coords.longitude;
-
-\t\t\tvar position = new google.maps.LatLng(latitud,longitud);
-   \t
-        
-   
-      var infowindow = new google.maps.InfoWindow({
-        map: map,
-        position: position,
-        width: width,
-        content: '<h1>Usted esta aqui</h1>'
-      });
-   
-//    var circle = new google.maps.Circle({
-//            center: new google.maps.LatLng(latitud,longitud),
-//            radius: 20000,
-//            fillColor: \"#blue\",
-//            map: map
-//        });
-//      
-      map.setCenter(position);
-    }, function() {
-      handleNoGeolocation(true);
-    });
-  } else {
-    // Browser doesn't support Geolocation
-    handleNoGeolocation(false);
-  }
-      
       }
       
-      
-      
       function addMarkers() {
-              
+          
            var marker = new google.maps.Marker({
-                 
-            position: new  google.maps.LatLng( latitud, longitud),
+                position: new  google.maps.LatLng(),
                 map: map
             });
             

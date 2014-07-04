@@ -19,14 +19,19 @@
       }
       
       function addMarkers() {
-          
+           var latitud = {{ places.getLatitude }};
+			var longitud = {{ places.getLength}};
            var marker = new google.maps.Marker({
-                position: new  google.maps.LatLng({{ places.getLatitude }}, {{ places.getLength}}),
+                position: new  google.maps.LatLng(latitud, longitud),
                 map: map
             });
             
             map.setZoom(14);
             map.setCenter(marker.getPosition());
+            
+                   
+                        $('#lti').val(latitud);
+                        $('#lgi').val(longitud);
       }
       
 

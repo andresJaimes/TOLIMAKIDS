@@ -14,21 +14,15 @@
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>     
         <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/controller.js')}}"></script>
         <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/modernizr.custom.js')}}"></script>
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/api_calls.js')}}"></script>
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/render.js')}}"></script>
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/main.js')}}"></script>
         <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/jquery.js')}}"></script>
         <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/bootstrap.js')}}"></script>
         <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/jquery.cbpFWSlider.min.js')}}"></script>
-        <script type="text/javascript" src="{{ asset ('bundles/frontfrontend/js/Gmap.js')}}"></script>
+      
 
 
     {% endblock %}
     </head>
     <body> 
-
-           
-
 
         <div id="contaniner">
 
@@ -38,6 +32,7 @@
                         {% endblock %}
                       {{ include('::footer.html.twig')}}
         </div>
+        
     </body>
 
 </html>

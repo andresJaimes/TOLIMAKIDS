@@ -132,7 +132,10 @@ class __TwigTemplate_e04ce1452df0833798f12e95ffb8a7eeae8d50400ff15ecf4d6c205e2a9
                 </div>
             </div>
         </div>
-        <p class=\"tc\">¿Crea tu cuenta en Tolima Kids? <a href=\"#\">Registrate</a></p>
+        <p class=\"tc\">¿Crea tu cuenta en Tolima Kids? <a href=\"";
+        // line 63
+        echo $this->env->getExtension('routing')->getUrl("fos_user_registration_register");
+        echo "\">Registrate</a></p>
         <ul class=\"social_log\" align=\"center\">
             <li><a href=\"#\"></a></li>
             <li class=\"f_icon\"><a href=\"";
@@ -161,6 +164,6 @@ class __TwigTemplate_e04ce1452df0833798f12e95ffb8a7eeae8d50400ff15ecf4d6c205e2a9
 
     public function getDebugInfo()
     {
-        return array (  140 => 66,  129 => 58,  118 => 50,  103 => 38,  95 => 33,  90 => 31,  85 => 28,  82 => 27,  78 => 25,  72 => 23,  69 => 22,  66 => 21,  61 => 73,  59 => 27,  56 => 26,  54 => 21,  46 => 17,  39 => 75,  37 => 17,  31 => 15,);
+        return array (  143 => 66,  137 => 63,  129 => 58,  118 => 50,  103 => 38,  95 => 33,  90 => 31,  85 => 28,  82 => 27,  78 => 25,  72 => 23,  69 => 22,  66 => 21,  61 => 73,  59 => 27,  56 => 26,  54 => 21,  46 => 17,  39 => 75,  37 => 17,  31 => 15,);
     }
 }

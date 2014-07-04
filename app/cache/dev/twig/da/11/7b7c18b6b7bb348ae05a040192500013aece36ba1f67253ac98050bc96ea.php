@@ -38,18 +38,9 @@ class __TwigTemplate_da117b7c18b6b7bb348ae05a040192500013aece36ba1f67253ac98050b
        ";
         // line 7
         $this->displayBlock('content', $context, $blocks);
-        // line 52
+        // line 53
         echo "        </section><!--cierre contenido-->
 
-
-        <script type=\"text/javascript\">
-            \$(document).ready(function() {
-                var places_id = \$(\"#places_id\").val();
-                cargarPlaces(places_id)
-            });
-   
-            </script>
-            
             
 ";
     }
@@ -121,14 +112,15 @@ class __TwigTemplate_da117b7c18b6b7bb348ae05a040192500013aece36ba1f67253ac98050b
             $context = array_intersect_key($context, $_parent) + $_parent;
             // line 41
             echo "                                        </div>
-   
+                                       <input  id=\"lti\" type=\"hidden\" name=\"latitud\" value=\"\"/>
+                                     <input  id=\"lgi\" type=\"hidden\" name=\"longitud\" value=\"\"/>
                                 </div>
                                 <div style=\"clear:both\"></div>
                           </div> <!--list_actividad--> 
                     </div><!--content actividades-->
                     ";
         }
-        // line 48
+        // line 49
         echo "                    </div>
                 </section>
             </section><!--colocar_contenido-->
@@ -147,6 +139,6 @@ class __TwigTemplate_da117b7c18b6b7bb348ae05a040192500013aece36ba1f67253ac98050b
 
     public function getDebugInfo()
     {
-        return array (  132 => 48,  123 => 41,  112 => 39,  108 => 38,  101 => 34,  95 => 31,  82 => 21,  76 => 17,  74 => 16,  68 => 12,  66 => 11,  61 => 8,  58 => 7,  42 => 52,  40 => 7,  32 => 3,  29 => 2,);
+        return array (  124 => 49,  114 => 41,  103 => 39,  99 => 38,  92 => 34,  86 => 31,  73 => 21,  67 => 17,  65 => 16,  59 => 12,  57 => 11,  52 => 8,  49 => 7,  42 => 53,  40 => 7,  32 => 3,  29 => 2,);
     }
 }
